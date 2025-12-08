@@ -1,0 +1,24 @@
+---
+import SocialMedia from "../socialMedia/SocialMedia.astro"
+---
+
+<section
+  class="container flex flex-col justify-center items-center mt-1 prose lg:prose-xl"
+>
+  <div
+    class="absolute inset-0 bg-radial-[at_50%_30%] from-slate-800/40 via-transparent to-transparent blur-2xl -z-10"
+  >
+  </div>
+  <img
+    src="/ProfilePicture.png"
+    alt="Profile Picture"
+    class="size-56 md:size-65 lg:size-70 object-cover
+        mask-radial-at-center
+        mask-radial-from-60%
+        mask-radial-to-95%
+        rop-shadow-[0_0_35px_rgba(56,189,248,0.25)]"
+  />
+  <h2 class="text-slate-400">Fabricio Blasich</h2>
+  <h1 class="text-center text-slate-100">Computer Engineer</h1>
+  <SocialMedia />
+</section>

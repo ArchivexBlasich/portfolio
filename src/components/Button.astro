@@ -1,0 +1,57 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface LinkProps extends HTMLAttributes<"a"> {
+  href: string;
+  type?: never;
+}
+
+interface ButtonProps extends HTMLAttributes<"button"> {
+  href?: never;
+}
+
+type Props = LinkProps | ButtonProps;
+
+const { href, class: className, ...rest } = Astro.props;
+
+const commonClasses = [
+  "btn-glow",
+  "inline-block font-semibold no-underline tracking-tighter rounded-md cursor-pointer",
+  "px-4 py-2 text-slate-100 bg-rose-600",
+  "transition-all duration-300 transform",
+  "hover:-translate-y-1",
+  className,
+];
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class:list={commonClasses}
+      {...(rest as HTMLAttributes<"a">)}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button class:list={commonClasses} {...(rest as HTMLAttributes<"button">)}>
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  .btn-glow {
+    box-shadow:
+      0 10px 20px color-mix(in srgb, var(--color-rose-600), transparent 50%),
+      0 6px 6px color-mix(in srgb, var(--color-rose-600), transparent 50%),
+      0 0 100px -10px var(--color-rose-600);
+  }
+
+  .btn-glow:hover {
+    box-shadow:
+      0 14px 28px color-mix(in srgb, var(--color-rose-600), transparent 75%),
+      0 10px 10px color-mix(in srgb, var(--color-rose-600), transparent 78%),
+      0 0 120px -10px var(--color-rose-600);
+  }
+</style>
