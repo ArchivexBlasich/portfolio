@@ -1,16 +1,32 @@
 ---
-import Media from "./Media.astro";
+import SocialPill from "./SocialPill.astro";
 ---
 
-<div class="flex gap-4">
-  <a href="https://github.com/ArchivexBlasich" target="_blank" rel="noopener noreferrer">
-    <Media href="#github_dark" size="size-8" />
-  </a>
-  <a
-    href="https://www.linkedin.com/in/fabricio-lucas-blasich-bb6336399"
-    target="_blank"
-    rel="noopener noreferrer"
+<div class="flex flex-wrap justify-center items-center gap-4">
+  <SocialPill
+    href="#github_dark"
+    size="size-8"
+    svgRef="#github_dark"
+    aria_label="Visit Fabricio's GitHub Profile"
   >
-    <Media href="#linkedin" size="size-8" />
-  </a>
+    Github
+  </SocialPill>
+
+  <SocialPill
+    href="https://www.linkedin.com/in/fabricio-lucas-blasich-bb6336399"
+    size="size-8"
+    svgRef="#linkedin"
+    aria_label="Visit Fabricio's LinkedIn Profile"
+  >
+    Linkedin
+  </SocialPill>
+
+  <SocialPill
+    href="#"
+    size="size-8"
+    svgRef="#message-2-share"
+    aria_label="Fabricio's mail"
+  >
+    fblasich0@gmail.com
+  </SocialPill>
 </div>

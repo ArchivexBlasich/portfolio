@@ -1,0 +1,19 @@
+---
+const { href, size, svgRef, aria_label } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={aria_label}
+  class="rounded-full border border-rose-300/10
+   text-rose-100 flex justify-center items-center bg-zinc-800/10
+   gap-x-2 py-3 px-3 no-underline transition-transform
+   hover:scale-105 hover:border-rose-300/90"
+>
+  <svg class=`icon ${size}`>
+    <use href={`/sprite.svg${svgRef}`}></use>
+  </svg>
+  <slot />
+</a>
