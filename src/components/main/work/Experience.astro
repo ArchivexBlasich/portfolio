@@ -1,0 +1,35 @@
+---
+import type { experience } from "./experience"
+import ExperienceItem from "./ExperienceItem.astro";
+
+const EXPERIENCE: experience[] = [{
+    date: "April 2025 to October 2025",
+    title: "Volunteer DevOps at National University of Tucuman (UNT)",
+    descriptions: [
+        "Led the implementation of a self-hosted PaaS platform using Coolify to automate the deployment of software engineering thesis projects.",
+        "Configured and managed MinIO instances as an object storage solution (S3-compatible) for efficient management of backups and application assets.",
+        "Optimized development workflow through service containerization with Docker."
+    ],
+},
+{
+    date: "August 2023 to August 2025",
+    title: "Teaching Assistant - Computer Science I at UNT",
+    descriptions: [
+        "Mentored students during practical labs and weekly office hours, guiding them through core programming concepts in C.",
+        "Maintained laboratory infrastructure, performing hardware upgrades (SSD installation) and managing Linux Mint workstations (OS updates)."
+    ]
+    
+},]
+---
+<section>
+    <div class="prose lg:prose-xl mt-12 mb-8">
+        <h1 id="work" class="text-rose-500 underline">Work</h1>
+    </div>
+    <ol class="relative border-s border-default">                  
+        {
+            EXPERIENCE.map(experience => (
+                <ExperienceItem {...experience} />
+            ))
+        }
+    </ol>
+</section>
