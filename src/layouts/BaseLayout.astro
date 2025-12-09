@@ -1,0 +1,24 @@
+---
+import Header from "../components/header/Header.astro";
+import "../styles/global.css";
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body
+    class="min-h-dvh
+	bg-linear-to-b from-zinc-900 via-zinc-950 to-black
+				 text-slate-100 font-space-mono antialiased"
+  >
+    <Header />
+    <slot />
+  </body>
+</html>
