@@ -18,12 +18,12 @@ import Link from "../Link.astro";
     id="nav-links" 
     class="
       w-full basis-full border-t border-slate-200 dark:border-slate-800 mt-4 
-      overflow-hidden transition-all duration-300 ease-in-out
-      max-h-0 opacity-0
-      md:block md:w-auto md:basis-auto md:mt-0 md:border-none md:max-h-none md:opacity-100 md:overflow-visible
+      grid transition-all duration-300 ease-in-out
+      grid-rows-[0fr] opacity-0
+      md:block md:w-auto md:basis-auto md:mt-0 md:border-none md:grid-rows-none md:opacity-100
     "
   >
-    <div class="flex flex-col md:flex-row md:gap-8 items-center text-center py-4 md:py-0">
+    <div class="flex flex-col md:flex-row md:gap-8 items-center text-center py-4 md:py-0 overflow-hidden">
       <Link href="#about">About</Link>
       <Link href="#work">Work</Link>
       <Link href="#contact">Contact</Link>
@@ -36,13 +36,13 @@ import Link from "../Link.astro";
   const nav = document.getElementById('nav-links');
 
   btn?.addEventListener('click', () => {
-    nav?.classList.toggle('max-h-0');
-    nav?.classList.toggle('max-h-96'); // Suficiente altura para el contenido
+    nav?.classList.toggle('grid-rows-[0fr]');
+    nav?.classList.toggle('grid-rows-[1fr]');
     
     nav?.classList.toggle('opacity-0');
     nav?.classList.toggle('opacity-100');
 
-    const isExpanded = nav?.classList.contains('max-h-0') ? 'false' : 'true';
+    const isExpanded = nav?.classList.contains('grid-rows-[0fr]') ? 'false' : 'true';
     btn.setAttribute('aria-expanded', isExpanded);
   });
 </script>

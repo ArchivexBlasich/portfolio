@@ -1,5 +1,7 @@
 ---
-import SocialMedia from "../socialMedia/SocialMedia.astro"
+import { Image } from "astro:assets";
+import profileImg from "../../assets/ProfilePicture.png";
+import SocialMedia from "../socialMedia/SocialMedia.astro";
 ---
 
 <section
@@ -9,16 +11,13 @@ import SocialMedia from "../socialMedia/SocialMedia.astro"
     class="absolute inset-0 bg-radial-[at_50%_30%] from-slate-800/40 via-transparent to-transparent blur-2xl -z-10"
   >
   </div>
-  <img
-    src="/ProfilePicture.png"
-    alt="Profile Picture"
-    class="size-56 md:size-65 lg:size-70 object-cover
-        mask-radial-at-center
-        mask-radial-from-60%
-        mask-radial-to-95%
-        rop-shadow-[0_0_35px_rgba(56,189,248,0.25)]"
+  <Image
+    src={profileImg}
+    alt="Fabricio Blasich's Profile Picture"
+    quality="mid"
+    class="size-56 md:size-65 lg:size-70 object-cover mask-radial-at-center mask-radial-from-60% mask-radial-to-95%"
   />
-  <h2 class="text-slate-400">Fabricio Blasich's Porfolio</h2>
+  <h2 class="text-center text-slate-400">Fabricio Blasich</h2>
   <h1 class="text-center text-slate-100">Computer Engineer</h1>
   <SocialMedia />
 </section>

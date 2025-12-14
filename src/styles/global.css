@@ -45,6 +45,10 @@
   }
 }
 
+::selection {
+  @apply bg-rose-500 text-white;
+}
+
 body::-webkit-scrollbar {
   width: 8px;
 }
