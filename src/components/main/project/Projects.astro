@@ -1,0 +1,13 @@
+---
+import { PROJECTS } from "../../../data/projects";
+import ProjectCard from "./ProjectCard.astro";
+---
+
+<section class="mt-12 mb-7" id="projects">
+  <div class="prose lg:prose-xl mt-12 mb-8 text-center md:text-left">
+    <h1 id="work" class="text-rose-500 underline">Projects</h1>
+  </div>
+  <div class="flex flex-col gap-12">
+    {PROJECTS.map((project) => <ProjectCard project={project} />)}
+  </div>
+</section>
