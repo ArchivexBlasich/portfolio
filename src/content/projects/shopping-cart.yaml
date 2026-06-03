@@ -1,0 +1,13 @@
+title: "Shopping Cart"
+description: "A React-based e-commerce UI featuring dynamic cart management, client-side routing with React Router, and real-time product data fetching via the FakeStore API. State is managed at the router level to persist cart contents across page navigation without a global store."
+image: "ShoppingCard.png"
+tags:
+  - React
+  - TypeScript
+  - Vite
+  - React Router
+  - CSS Modules
+githubUrl: "https://github.com/ArchivexBlasich/Shopping-Cart/tree/main"
+liveUrl: "https://archivexblasich.github.io/Shopping-Cart/"
+featured: true
+order: 2

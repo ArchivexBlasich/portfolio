@@ -1,0 +1,9 @@
+company: "National University of Tucuman (UNT)"
+role: "Volunteer DevOps Engineer"
+location: "Tucumán, Argentina"
+startDate: 2025-04-01
+endDate: 2025-10-01
+highlights:
+  - "Led the implementation of a self-hosted PaaS platform using Coolify to automate the deployment of software engineering thesis projects."
+  - "Configured and managed MinIO instances as an S3-compatible object storage solution for efficient management of backups and application assets."
+  - "Optimized development workflow through service containerization with Docker."
