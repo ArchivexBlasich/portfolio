@@ -2,14 +2,25 @@
 
 @plugin "@tailwindcss/typography";
 
+/* ─── Dark mode: activate when <html class="dark"> ────────────────────────── */
+/* Overrides Tailwind v4's default prefers-color-scheme strategy so the        */
+/* ThemeIcon JS toggle is the sole authority over dark mode.                   */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Fonts ────────────────────────────────────────────────────────────────── */
+
 /* space-mono-latin-400-normal */
 @font-face {
   font-family: 'Space Mono';
   font-style: normal;
   font-display: swap;
   font-weight: 400;
-  src: url(@fontsource/space-mono/files/space-mono-latin-400-normal.woff2) format('woff2'), url(@fontsource/space-mono/files/space-mono-latin-400-normal.woff) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  src:
+    url(@fontsource/space-mono/files/space-mono-latin-400-normal.woff2) format('woff2'),
+    url(@fontsource/space-mono/files/space-mono-latin-400-normal.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /* space-mono-latin-700-normal */
@@ -18,23 +29,85 @@
   font-style: normal;
   font-display: swap;
   font-weight: 700;
-  src: url(@fontsource/space-mono/files/space-mono-latin-700-normal.woff2) format('woff2'), url(@fontsource/space-mono/files/space-mono-latin-700-normal.woff) format('woff');
-  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  src:
+    url(@fontsource/space-mono/files/space-mono-latin-700-normal.woff2) format('woff2'),
+    url(@fontsource/space-mono/files/space-mono-latin-700-normal.woff) format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* ─── Static design tokens ──────────────────────────────────────────────────── */
+/* @theme resolves values at build time. Use here for tokens that never         */
+/* change between light and dark mode.                                          */
 @theme {
-  /* Colors */
+  /* Typography
+   * Overrides Tailwind's built-in --font-mono so the `font-mono` utility
+   * always renders Space Mono. Components should use `font-mono`.
+   * NOTE: BaseLayout.astro uses `font-space-mono` — update to `font-mono`
+   * in Phase 3 when all components are migrated.
+   */
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-space-mono: "Space Mono", ui-monospace, monospace; /* backward compat */
 
-  /* Fonts */
-  --font-space-mono: "Space Mono", system-ui, sans-serif;
+  /* Brand — rose accent scale (identical in both modes) */
+  --color-brand:       var(--color-rose-600);
+  --color-brand-hover: var(--color-rose-500);
+  --color-brand-muted: var(--color-rose-400);
+  --color-brand-faint: var(--color-rose-200);
+  --color-brand-text:  var(--color-rose-50);
 }
 
+/* ─── Dynamic (themeable) design tokens ─────────────────────────────────────── */
+/* @theme inline keeps values as var() references at runtime, so .dark          */
+/* overrides propagate through to every generated Tailwind utility.             */
+/* Utilities: bg-surface, text-text, text-text-subtle, border-border, etc.      */
+@theme inline {
+  --color-surface:         var(--color-surface-raw);
+  --color-surface-raised:  var(--color-surface-raised-raw);
+  --color-surface-overlay: var(--color-surface-overlay-raw);
+  --color-text:            var(--color-text-raw);
+  --color-text-subtle:     var(--color-text-subtle-raw);
+  --color-text-muted:      var(--color-text-muted-raw);
+  --color-border:          var(--color-border-raw);
+  --color-border-subtle:   var(--color-border-subtle-raw);
+}
+
+/* ─── Theme tokens — both inside @layer base so .dark can override :root ─────── */
+/* Both must be in the same layer: unlayered styles always beat layered ones,    */
+/* so if :root were outside @layer base, it would always win over .dark.         */
+@layer base {
+  :root {
+    --color-surface-raw:         var(--color-slate-50);
+    --color-surface-raised-raw:  var(--color-white);
+    --color-surface-overlay-raw: color-mix(in srgb, var(--color-slate-900) 10%, transparent);
+    --color-text-raw:            var(--color-zinc-900);
+    --color-text-subtle-raw:     var(--color-zinc-700); /* 8.6:1 on slate-50 — WCAG AAA */
+    --color-text-muted-raw:      var(--color-zinc-500); /* 5.9:1 on slate-50 — WCAG AA  */
+    --color-border-raw:          var(--color-slate-200);
+    --color-border-subtle-raw:   var(--color-slate-100);
+  }
+
+  .dark {
+    --color-surface-raw:         var(--color-zinc-950);
+    --color-surface-raised-raw:  var(--color-zinc-900);
+    --color-surface-overlay-raw: color-mix(in srgb, var(--color-zinc-800) 50%, transparent);
+    --color-text-raw:            var(--color-slate-100);
+    --color-text-subtle-raw:     var(--color-slate-300);
+    --color-text-muted-raw:      var(--color-slate-400);
+    --color-border-raw:          var(--color-slate-700);
+    --color-border-subtle-raw:   var(--color-slate-800);
+  }
+}
+
+/* ─── Layout utilities ──────────────────────────────────────────────────────── */
 @utility container {
   margin-inline: auto;
   padding-inline: 0.5rem;
   width: 100%;
 }
 
+/* ─── Base resets ───────────────────────────────────────────────────────────── */
 @layer base {
   img,
   picture,
@@ -45,10 +118,13 @@
   }
 }
 
+/* ─── Global interactions ───────────────────────────────────────────────────── */
 ::selection {
-  @apply bg-rose-500 text-white;
+  background-color: var(--color-brand-hover);
+  color: var(--color-white);
 }
 
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
 body::-webkit-scrollbar {
   width: 8px;
 }
@@ -58,7 +134,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: theme("--color-rose-600");
+  background-color: var(--color-brand);
   border-radius: 4px;
-  border: 1px solid theme("--color-rose-600");
+  border: 1px solid var(--color-brand);
 }

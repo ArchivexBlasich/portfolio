@@ -7,17 +7,13 @@ import SocialMedia from "../socialMedia/SocialMedia.astro";
 <section
   class="self-center-safe flex flex-col justify-center items-center mt-1 prose lg:prose-xl"
 >
-  <div
-    class="absolute inset-0 bg-radial-[at_50%_30%] from-slate-800/40 via-transparent to-transparent blur-2xl -z-10"
-  >
-  </div>
   <Image
     src={profileImg}
     alt="Fabricio Blasich's Profile Picture"
     quality="mid"
-    class="size-56 md:size-65 lg:size-70 object-cover mask-radial-at-center mask-radial-from-60% mask-radial-to-95%"
+    class="size-56 md:size-65 lg:size-70 object-cover"
   />
-  <h2 class="text-center text-slate-400">Fabricio Blasich</h2>
-  <h1 class="text-center text-slate-100">Computer Engineer</h1>
+  <h2 class="text-center text-text-muted">Fabricio Blasich</h2>
+  <h1 class="text-center text-text">Computer Engineer</h1>
   <SocialMedia />
 </section>
