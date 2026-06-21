@@ -5,15 +5,15 @@ import SocialMedia from "../socialMedia/SocialMedia.astro";
 ---
 
 <section
-  class="self-center-safe flex flex-col justify-center items-center mt-1 prose lg:prose-xl"
+  class="prose lg:prose-xl mt-1 flex flex-col items-center justify-center self-center-safe"
 >
   <Image
     src={profileImg}
     alt="Fabricio Blasich's Profile Picture"
     quality="mid"
-    class="size-56 md:size-65 lg:size-70 object-cover"
+    class="size-56 object-cover md:size-65 lg:size-70"
   />
-  <h2 class="text-center text-text-muted">Fabricio Blasich</h2>
-  <h1 class="text-center text-text">Computer Engineer</h1>
+  <h2 class="text-text-muted text-center">Fabricio Blasich</h2>
+  <h1 class="text-text text-center">Computer Engineer</h1>
   <SocialMedia />
 </section>

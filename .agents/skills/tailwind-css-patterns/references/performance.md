@@ -14,7 +14,7 @@ export default {
   ],
   // Enable JIT for faster builds
   jit: true,
-}
+};
 ```
 
 ### Content Path Best Practices
@@ -34,7 +34,11 @@ export default {
 </div>
 
 <!-- Optimize images with aspect-ratio -->
-<img class="aspect-video w-full object-cover" src="video.jpg" alt="Video thumbnail" />
+<img
+  class="aspect-video w-full object-cover"
+  src="video.jpg"
+  alt="Video thumbnail"
+/>
 
 <!-- Use contain for paint optimization -->
 <div class="contain-layout">
@@ -59,7 +63,7 @@ export default {
 /* Critical CSS for above-the-fold content */
 @layer critical {
   .hero-title {
-    @apply text-4xl md:text-6xl font-bold;
+    @apply text-4xl font-bold md:text-6xl;
   }
 }
 ```
@@ -74,21 +78,17 @@ export default {
 // tailwind.config.js
 module.exports = {
   purge: {
-    enabled: process.env.NODE_ENV === 'production',
-    content: [
-      './src/**/*.html',
-      './src/**/*.jsx',
-      './src/**/*.tsx',
-    ],
+    enabled: process.env.NODE_ENV === "production",
+    content: ["./src/**/*.html", "./src/**/*.jsx", "./src/**/*.tsx"],
     options: {
       safelist: [
-        'bg-red-500',
-        'text-center',
+        "bg-red-500",
+        "text-center",
         // Classes that shouldn't be purged
       ],
     },
   },
-}
+};
 ```
 
 ### Minification

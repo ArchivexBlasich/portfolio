@@ -1,5 +1,5 @@
 export interface experience {
-    date: string,
-    title: string,
-    descriptions: string[]
+  date: string;
+  title: string;
+  descriptions: string[];
 }

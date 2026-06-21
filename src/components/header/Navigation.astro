@@ -2,28 +2,29 @@
 import Link from "../Link.astro";
 ---
 
-<div class="contents"> 
-  <button 
+<div class="contents">
+  <button
     id="menu-btn"
-    aria-expanded="false" 
+    aria-expanded="false"
     aria-label="Open Menu"
-    class="md:hidden block p-2 -mr-2 text-text focus:outline-none ml-auto cursor-pointer"
+    class="text-text -mr-2 ml-auto block cursor-pointer p-2 focus:outline-none md:hidden"
   >
-    <svg class="w-8 h-8 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      class="h-8 w-8 fill-current"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
     </svg>
   </button>
 
-  <div 
-    id="nav-links" 
-    class="
-      w-full basis-full border-t border-border mt-4 
-      grid transition-all duration-300 ease-in-out
-      grid-rows-[0fr] opacity-0
-      md:block md:w-auto md:basis-auto md:mt-0 md:border-none md:grid-rows-none md:opacity-100
-    "
+  <div
+    id="nav-links"
+    class="border-border mt-4 grid w-full basis-full grid-rows-[0fr] border-t opacity-0 transition-all duration-300 ease-in-out md:mt-0 md:block md:w-auto md:basis-auto md:grid-rows-none md:border-none md:opacity-100"
   >
-    <div class="flex flex-col md:flex-row md:gap-8 items-center text-center py-4 md:py-0 overflow-hidden">
+    <div
+      class="flex flex-col items-center overflow-hidden py-4 text-center md:flex-row md:gap-8 md:py-0"
+    >
       <Link href="#about">About</Link>
       <Link href="#work">Work</Link>
       <Link href="#projects">Projects</Link>
@@ -33,17 +34,19 @@ import Link from "../Link.astro";
 </div>
 
 <script>
-  const btn = document.getElementById('menu-btn');
-  const nav = document.getElementById('nav-links');
+  const btn = document.getElementById("menu-btn");
+  const nav = document.getElementById("nav-links");
 
-  btn?.addEventListener('click', () => {
-    nav?.classList.toggle('grid-rows-[0fr]');
-    nav?.classList.toggle('grid-rows-[1fr]');
-    
-    nav?.classList.toggle('opacity-0');
-    nav?.classList.toggle('opacity-100');
+  btn?.addEventListener("click", () => {
+    nav?.classList.toggle("grid-rows-[0fr]");
+    nav?.classList.toggle("grid-rows-[1fr]");
 
-    const isExpanded = nav?.classList.contains('grid-rows-[0fr]') ? 'false' : 'true';
-    btn.setAttribute('aria-expanded', isExpanded);
+    nav?.classList.toggle("opacity-0");
+    nav?.classList.toggle("opacity-100");
+
+    const isExpanded = nav?.classList.contains("grid-rows-[0fr]")
+      ? "false"
+      : "true";
+    btn.setAttribute("aria-expanded", isExpanded);
   });
 </script>

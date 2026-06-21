@@ -68,10 +68,12 @@ Keep Tailwind responsible for static layout and visual style. Keep motion timing
   data-track-index="1"
 >
   <div class="w-[1280px] max-w-[82vw] text-center">
-    <p class="mb-6 text-xl font-medium uppercase tracking-[0.18em] text-cyan-300">
+    <p
+      class="mb-6 text-xl font-medium tracking-[0.18em] text-cyan-300 uppercase"
+    >
       Render-ready Tailwind
     </p>
-    <h1 class="text-7xl font-black leading-none text-balance">
+    <h1 class="text-7xl leading-none font-black text-balance">
       Utility classes, deterministic frames.
     </h1>
   </div>
@@ -81,9 +83,18 @@ Keep Tailwind responsible for static layout and visual style. Keep motion timing
 For repeated items, prefer class lists plus CSS custom properties over generating class names dynamically:
 
 ```html
-<span class="inline-block translate-y-[calc(var(--i)*6px)] opacity-80" style="--i: 0"></span>
-<span class="inline-block translate-y-[calc(var(--i)*6px)] opacity-80" style="--i: 1"></span>
-<span class="inline-block translate-y-[calc(var(--i)*6px)] opacity-80" style="--i: 2"></span>
+<span
+  class="inline-block translate-y-[calc(var(--i)*6px)] opacity-80"
+  style="--i: 0"
+></span>
+<span
+  class="inline-block translate-y-[calc(var(--i)*6px)] opacity-80"
+  style="--i: 1"
+></span>
+<span
+  class="inline-block translate-y-[calc(var(--i)*6px)] opacity-80"
+  style="--i: 2"
+></span>
 ```
 
 ## Dynamic Class Safety

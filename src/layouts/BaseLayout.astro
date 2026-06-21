@@ -16,13 +16,13 @@ const { title } = Astro.props;
          Priority: localStorage > system preference > dark default. -->
     <script is:inline>
       (function () {
-        const stored = localStorage.getItem('theme');
-        const isDark = stored !== 'light';
-        document.documentElement.classList.toggle('dark', isDark);
+        const stored = localStorage.getItem("theme");
+        const isDark = stored !== "light";
+        document.documentElement.classList.toggle("dark", isDark);
       })();
     </script>
   </head>
-  <body class="min-h-dvh bg-surface text-text font-mono antialiased">
+  <body class="bg-surface text-text min-h-dvh font-mono antialiased">
     <Header />
     <slot />
   </body>
