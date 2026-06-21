@@ -1,36 +1,37 @@
 ---
 import { Image } from "astro:assets";
-import type { Project } from "../../../data/projects";
+import type { CollectionEntry } from "astro:content";
 import Button from "../../Button.astro";
 import ProjectPill from "./ProjectPill.astro";
 
 interface Props {
-  project: Project;
+  project: CollectionEntry<"projects">;
 }
 
 const {
-  project: { title, description, image, tags, githubUrl, liveUrl },
+  project: { data },
 } = Astro.props;
+const { title, description, image, tags, githubUrl, liveUrl } = data;
 ---
 
-<article class="grid grid-cols-1 md:grid-cols-5 gap-8">
-  <div class="md:col-span-2 rounded-lg">
-    <div class="relative group">
+<article class="grid grid-cols-1 gap-8 md:grid-cols-5">
+  <div class="rounded-lg md:col-span-2">
+    <div class="group relative">
       <Image
         src={image}
         alt={`Screenshot of ${title}`}
         class="rounded-lg shadow-lg"
       />
       <div
-        class="absolute inset-0 rounded-lg bg-surface/20 group-hover:bg-surface/40 transition-colors"
+        class="bg-surface/20 group-hover:bg-surface/40 absolute inset-0 rounded-lg transition-colors"
       >
       </div>
     </div>
   </div>
-  <div class="md:col-span-3 flex flex-col justify-center">
-    <h3 class="text-2xl font-semibold text-text mb-4">{title}</h3>
+  <div class="flex flex-col justify-center md:col-span-3">
+    <h3 class="text-text mb-4 text-2xl font-semibold">{title}</h3>
     <p class="text-text-subtle mb-6">{description}</p>
-    <div class="flex flex-wrap gap-2 mb-6">
+    <div class="mb-6 flex flex-wrap gap-2">
       {tags.map((tag) => <ProjectPill tag={tag} />)}
     </div>
     <div class="flex gap-4">
@@ -51,24 +52,10 @@ const {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="View source on GitHub"
-        class="group
-    relative
-    flex items-center justify-center
-    p-3
-    rounded-full
-    bg-surface-raised/80
-    border border-border
-    text-text-subtle
-    shadow-sm
-    transition-all duration-300
-    hover:bg-surface-raised
-    hover:border-text-muted
-    hover:text-text
-    hover:shadow-surface/50
-    hover:shadow-md"
+        class="group bg-surface-raised/80 border-border text-text-subtle hover:bg-surface-raised hover:border-text-muted hover:text-text hover:shadow-surface/50 relative flex items-center justify-center rounded-full border p-3 shadow-sm transition-all duration-300 hover:shadow-md"
       >
         <svg
-          class="w-6 h-6 transition-transform duration-300 group-hover:scale-110"
+          class="h-6 w-6 transition-transform duration-300 group-hover:scale-110"
           viewBox="0 0 1024 1024"
           fill="currentColor"
         >

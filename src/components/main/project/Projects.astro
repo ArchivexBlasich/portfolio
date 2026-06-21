@@ -1,6 +1,17 @@
 ---
-import { PROJECTS } from "../../../data/projects";
+import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
+
+const rawProjects = await getCollection("projects");
+
+const projects = rawProjects.sort((a, b) => {
+  // Primary: order ascending
+  const orderA = a.data.order ?? Infinity;
+  const orderB = b.data.order ?? Infinity;
+  if (orderA !== orderB) return orderA - orderB;
+  // Fallback: featured projects first
+  return (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0);
+});
 ---
 
 <section class="mt-12 mb-7" id="projects">
@@ -8,6 +19,6 @@ import ProjectCard from "./ProjectCard.astro";
     <h1 id="work" class="text-rose-500 underline">Projects</h1>
   </div>
   <div class="flex flex-col gap-12">
-    {PROJECTS.map((project) => <ProjectCard project={project} />)}
+    {projects.map((entry) => <ProjectCard project={entry} />)}
   </div>
 </section>

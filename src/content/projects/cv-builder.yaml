@@ -1,6 +1,6 @@
 title: "CV Builder"
 description: "A real-time resume generator built with React and TypeScript, featuring dynamic form state management and client-side PDF export via html2pdf.js. The primary challenge was synchronizing form inputs with a live preview component without prop-drilling, solved by lifting state to a shared parent and passing atomic update callbacks."
-image: "CvBuilder.png"
+image: "../../assets/CvBuilder.png"
 tags:
   - React
   - TypeScript

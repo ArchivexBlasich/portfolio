@@ -5,18 +5,17 @@ import { z } from "astro/zod";
 // ─── Projects ─────────────────────────────────────────────────────────────────
 const projects = defineCollection({
   loader: glob({ base: "./src/content/projects", pattern: "**/*.yaml" }),
-  schema: z.object({
-    title: z.string().min(1),
-    description: z.string().min(1),
-    // Relative path from the YAML file to src/assets/. Resolved at component
-    // level via import.meta.glob() in Phase 2.
-    image: z.string().min(1),
-    tags: z.array(z.string().min(1)).min(1),
-    githubUrl: z.url().optional(),
-    liveUrl: z.url().optional(),
-    featured: z.boolean().default(false),
-    order: z.number().int().positive().optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string().min(1),
+      description: z.string().min(1),
+      image: image(),
+      tags: z.array(z.string().min(1)).min(1),
+      githubUrl: z.string().url().optional(),
+      liveUrl: z.string().url().optional(),
+      featured: z.boolean().default(false),
+      order: z.number().int().positive().optional(),
+    }),
 });
 
 // ─── Experience ───────────────────────────────────────────────────────────────
