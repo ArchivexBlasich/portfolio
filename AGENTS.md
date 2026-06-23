@@ -12,7 +12,9 @@ AI agent instructions for Fabricio Blasich's portfolio. Personal website, conten
 | Package manager | bun                                            | 1.3.13                 |
 | Formatter       | Prettier + prettier-plugin-astro, -tailwindcss | 3.8.4, 0.14.1, 0.8.0   |
 | Deploy          | Docker multi-stage → nginx:1.25-alpine         | —                      |
+
 la IA necesita el "que" y el "no hagas esto"
+
 ## Rules
 
 **Do not:**
