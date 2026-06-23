@@ -8,7 +8,13 @@
     },
     "playwright": {
       "type": "local",
-      "command": ["npx", "-y", "@playwright/mcp", "--executable-path", "/home/fblasich/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"],
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp",
+        "--executable-path",
+        "/home/fblasich/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"
+      ],
       "enabled": true
     }
   }
