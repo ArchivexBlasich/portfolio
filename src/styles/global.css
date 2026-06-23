@@ -138,12 +138,13 @@
   svg {
     @apply block max-w-full select-none;
   }
+}
 
-  /* ─── Focus-visible — WCAG 2.4.7 AA ─────────────────────────────────────── */
-  *:focus-visible {
-    outline: 2px solid var(--color-brand);
-    outline-offset: 2px;
-  }
+/* ─── Focus-visible — WCAG 2.4.7 AA ─────────────────────────────────────────── */
+/* Unlayered so it wins over Tailwind utilities layer outline reset. */
+*:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }
 
 /* ─── Reduced motion — WCAG 2.3 ──────────────────────────────────────────── */
