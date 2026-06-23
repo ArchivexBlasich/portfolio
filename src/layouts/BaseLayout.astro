@@ -10,6 +10,81 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Software Architect, GDE & MVP. Building clean, scalable systems with 15+ years of experience. Specializing in architecture, testing, and developer experience."
+    />
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content="Software Architect, GDE & MVP. Building clean, scalable systems with 15+ years of experience. Specializing in architecture, testing, and developer experience."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:image" content="/og-default.svg" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_AR" />
+    <meta property="og:site_name" content="Fabricio Blasich" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta
+      name="twitter:description"
+      content="Software Architect, GDE & MVP. Building clean, scalable systems with 15+ years of experience. Specializing in architecture, testing, and developer experience."
+    />
+    <meta name="twitter:image" content="/og-default.svg" />
+    <!-- Canonical URL -->
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <!-- Hreflang -->
+    <link
+      rel="alternate"
+      hreflang="en"
+      href={new URL(Astro.url.pathname, Astro.site)}
+    />
+    <link
+      rel="alternate"
+      hreflang="es-AR"
+      href={new URL(Astro.url.pathname, Astro.site)}
+    />
+    <!-- Author and theme-color -->
+    <meta name="author" content="Fabricio Blasich" />
+    <meta name="theme-color" content="#e11d48" />
+    <meta
+      name="theme-color"
+      content="#e11d48"
+      media="(prefers-color-scheme: dark)"
+    />
+    <!-- JSON-LD Person Schema -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Fabricio Blasich",
+        "jobTitle": "Software Architect",
+        "url": "https://fabricioblasich.com",
+        "sameAs": [
+          "https://github.com/ArchivexBlasich",
+          "https://www.linkedin.com/in/fabricio-lucas-blasich"
+        ],
+        "knowsLanguage": ["en", "es"],
+        "knowsAbout": [
+          "Computer Engineering",
+          "Systems Architecture",
+          "Software Engineering",
+          "Computer Networking",
+          "Embedded Systems",
+          "Artificial Intelligence",
+          "TypeScript",
+          "Astro",
+          "Tailwind CSS"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "AR"
+        }
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <!-- FOUC prevention: runs synchronously before first paint.
