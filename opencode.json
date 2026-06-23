@@ -5,6 +5,11 @@
       "type": "remote",
       "url": "https://mcp.docs.astro.build/mcp",
       "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp", "--executable-path", "/home/fblasich/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome"],
+      "enabled": true
     }
   }
 }
