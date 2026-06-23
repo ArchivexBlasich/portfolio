@@ -18,17 +18,17 @@ const { href, class: className, variant = "primary", ...rest } = Astro.props;
 
 const commonClasses = [
   "inline-block font-semibold no-underline tracking-tighter rounded-md cursor-pointer",
-  "px-4 py-2 text-slate-100",
+  "px-4 py-2 text-brand-text",
   "transition-all duration-300 transform",
   "hover:-translate-y-1",
 ];
 
-const primaryClasses = ["btn-glow", "bg-rose-600"];
+const primaryClasses = ["btn-glow", "bg-brand-bg"];
 
 const secondaryClasses = [
   "bg-transparent",
-  "border border-slate-700",
-  "hover:bg-slate-800",
+  "border border-border",
+  "hover:bg-surface-hover",
 ];
 
 const finalClasses = [
@@ -53,15 +53,15 @@ const finalClasses = [
 <style>
   .btn-glow {
     box-shadow:
-      0 2px 5px color-mix(in srgb, var(--color-rose-600), transparent 90%),
-      0 1px 1px color-mix(in srgb, var(--color-rose-600), transparent 90%),
-      0 0 10px 0px var(--color-rose-600);
+      0 2px 5px color-mix(in srgb, var(--color-brand), transparent 90%),
+      0 1px 1px color-mix(in srgb, var(--color-brand), transparent 90%),
+      0 0 10px 0px var(--color-brand);
   }
 
   .btn-glow:hover {
     box-shadow:
-      0 3px 7px color-mix(in srgb, var(--color-rose-600), transparent 95%),
-      0 2px 2px color-mix(in srgb, var(--color-rose-600), transparent 98%),
-      0 0 20px 0px var(--color-rose-600);
+      0 3px 7px color-mix(in srgb, var(--color-brand), transparent 95%),
+      0 2px 2px color-mix(in srgb, var(--color-brand), transparent 98%),
+      0 0 20px 0px var(--color-brand);
   }
 </style>

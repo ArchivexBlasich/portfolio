@@ -8,23 +8,21 @@ const { date, title, descriptions } = Astro.props;
 
 <li class="ms-6 mb-10">
   <div
-    class="bg-brand-faint border-brand absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border"
+    class="bg-brand border-brand absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border"
   >
   </div>
 
   <time
-    class="text-brand-muted mb-1 text-sm leading-none font-normal sm:text-base"
+    class="text-text-muted mb-1 text-sm leading-none font-normal sm:text-base"
   >
     {date}
   </time>
 
-  <h3
-    class="text-brand-faint mt-2 text-lg font-semibold sm:text-xl lg:text-2xl"
-  >
+  <h3 class="text-brand mt-2 text-lg font-semibold sm:text-xl lg:text-2xl">
     {title}
   </h3>
 
-  <ol class="text-brand-text mt-4 ml-5 list-decimal">
+  <ol class="mt-4 ml-5 list-decimal">
     {
       descriptions.map((description) => (
         <li class="text-text-subtle mb-4 text-base font-normal text-pretty sm:text-lg">

@@ -59,8 +59,8 @@
 
   /* Brand — rose accent scale (identical in both modes) */
   --color-brand: var(--color-rose-600);
+  --color-brand-bg: var(--color-rose-600);
   --color-brand-hover: var(--color-rose-500);
-  --color-brand-muted: var(--color-rose-400);
   --color-brand-faint: var(--color-rose-200);
   --color-brand-text: var(--color-rose-50);
 }
@@ -71,6 +71,7 @@
 /* Utilities: bg-surface, text-text, text-text-subtle, border-border, etc.      */
 @theme inline {
   --color-surface: var(--color-surface-raw);
+  --color-surface-hover: var(--color-surface-hover-raw);
   --color-surface-raised: var(--color-surface-raised-raw);
   --color-surface-overlay: var(--color-surface-overlay-raw);
   --color-text: var(--color-text-raw);
@@ -86,6 +87,7 @@
 @layer base {
   :root {
     --color-surface-raw: var(--color-slate-50);
+    --color-surface-hover-raw: var(--color-zinc-200);
     --color-surface-raised-raw: var(--color-white);
     --color-surface-overlay-raw: color-mix(
       in srgb,
@@ -105,6 +107,7 @@
 
   .dark {
     --color-surface-raw: var(--color-zinc-950);
+    --color-surface-hover-raw: var(--color-zinc-800);
     --color-surface-raised-raw: var(--color-zinc-900);
     --color-surface-overlay-raw: color-mix(
       in srgb,
@@ -139,7 +142,7 @@
 
 /* ─── Global interactions ───────────────────────────────────────────────────── */
 ::selection {
-  background-color: var(--color-brand-hover);
+  background-color: var(--color-rose-900);
   color: var(--color-white);
 }
 
