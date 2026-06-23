@@ -7,7 +7,7 @@ import Link from "../Link.astro";
     id="menu-btn"
     aria-expanded="false"
     aria-label="Open Menu"
-    class="text-text -mr-2 ml-auto block cursor-pointer p-2 focus:outline-none md:hidden"
+    class="text-text -mr-2 ml-auto block cursor-pointer p-2 md:hidden"
   >
     <svg
       class="h-8 w-8 fill-current"
@@ -22,14 +22,16 @@ import Link from "../Link.astro";
     id="nav-links"
     class="border-border mt-4 grid w-full basis-full grid-rows-[0fr] border-t opacity-0 transition-all duration-300 ease-in-out md:mt-0 md:block md:w-auto md:basis-auto md:grid-rows-none md:border-none md:opacity-100"
   >
-    <div
-      class="flex flex-col items-center overflow-hidden py-4 text-center md:flex-row md:gap-8 md:py-0"
-    >
-      <Link href="#about">About</Link>
-      <Link href="#work">Work</Link>
-      <Link href="#projects">Projects</Link>
-      <Link href="#contact">Contact</Link>
-    </div>
+    <nav aria-label="Main">
+      <div
+        class="flex flex-col items-center overflow-hidden py-4 text-center md:flex-row md:gap-8 md:py-0"
+      >
+        <Link href="#about">About</Link>
+        <Link href="#work">Work</Link>
+        <Link href="#projects">Projects</Link>
+        <Link href="#contact">Contact</Link>
+      </div>
+    </nav>
   </div>
 </div>
 

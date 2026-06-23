@@ -138,6 +138,58 @@
   svg {
     @apply block max-w-full select-none;
   }
+
+  /* ─── Focus-visible — WCAG 2.4.7 AA ─────────────────────────────────────── */
+  *:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Reduced motion — WCAG 2.3 ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Skip link — visually hidden until focused ─────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--color-brand);
+  padding: 0.5rem 1rem;
+  z-index: 9999;
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 0.1s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* ─── Screen-reader accessible, visually hidden ─────────────────────────── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ─── Global interactions ───────────────────────────────────────────────────── */

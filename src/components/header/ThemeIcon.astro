@@ -47,8 +47,19 @@
 </button>
 
 <script is:inline>
-  document.getElementById("themeToggle").addEventListener("click", function () {
-    const isDark = document.documentElement.classList.toggle("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  });
+  (function () {
+    const btn = document.getElementById("themeToggle");
+    const html = document.documentElement;
+
+    btn.setAttribute(
+      "aria-pressed",
+      html.classList.contains("dark") ? "true" : "false",
+    );
+
+    btn.addEventListener("click", function () {
+      const isDark = html.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      btn.setAttribute("aria-pressed", isDark ? "true" : "false");
+    });
+  })();
 </script>

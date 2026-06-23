@@ -13,16 +13,24 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <!-- FOUC prevention: runs synchronously before first paint.
-         Priority: localStorage > system preference > dark default. -->
+         Priority: localStorage > system preference > dark default.
+         Fixes comment-code divergence (obs #20): code previously hardcoded
+         dark fallback when no localStorage, ignoring prefers-color-scheme. -->
     <script is:inline>
       (function () {
         const stored = localStorage.getItem("theme");
-        const isDark = stored !== "light";
+        let isDark;
+        if (stored !== null) {
+          isDark = stored !== "light";
+        } else {
+          isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        }
         document.documentElement.classList.toggle("dark", isDark);
       })();
     </script>
   </head>
   <body class="bg-surface text-text min-h-dvh font-mono antialiased">
+    <a href="#main" class="skip-link">Skip to content</a>
     <Header />
     <slot />
   </body>
