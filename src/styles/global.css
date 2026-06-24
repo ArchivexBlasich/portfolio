@@ -137,10 +137,19 @@
   }
 }
 
+/* ─── Sticky header fallback — opaque surface when backdrop-filter unavailable ─ */
+@supports not (
+  (-webkit-backdrop-filter: blur(12px)) or (backdrop-filter: blur(12px))
+) {
+  .header-glass {
+    background-color: var(--color-surface);
+  }
+}
+
 /* ─── Layout utilities ──────────────────────────────────────────────────────── */
 @utility container {
   margin-inline: auto;
-  padding-inline: 0.5rem;
+  padding-inline: clamp(1rem, 0.5rem + 2.5vw, 2rem);
   width: 100%;
 }
 

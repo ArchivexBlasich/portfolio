@@ -4,11 +4,15 @@ import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <header
-  class="container flex max-w-screen-2xl flex-wrap items-center justify-between py-4"
+  class="bg-surface/85 header-glass sticky top-0 z-[100] w-full backdrop-blur-[12px]"
 >
-  <div>
-    <ThemeIcon />
-  </div>
+  <div
+    class="container flex max-w-screen-2xl flex-wrap items-center justify-between py-4"
+  >
+    <div>
+      <ThemeIcon />
+    </div>
 
-  <Navigation />
+    <Navigation />
+  </div>
 </header>
