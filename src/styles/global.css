@@ -122,6 +122,18 @@
   }
 }
 
+/* ─── color-mix() fallback — legacy browser robustness ─────────────────── */
+@supports not (color: color-mix(in srgb, red 50%, transparent)) {
+  @layer base {
+    :root {
+      --color-surface-overlay-raw: oklch(0.97 0 0);
+    }
+    .dark {
+      --color-surface-overlay-raw: oklch(0.43 0 0);
+    }
+  }
+}
+
 /* ─── Layout utilities ──────────────────────────────────────────────────────── */
 @utility container {
   margin-inline: auto;
@@ -137,6 +149,14 @@
   canvas,
   svg {
     @apply block max-w-full select-none;
+  }
+}
+
+/* ─── Font smoothing — cross-browser consistency ─────────────────────────── */
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -212,4 +232,10 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--color-brand);
   border-radius: 4px;
   border: 1px solid var(--color-brand);
+}
+
+/* ─── Firefox scrollbar — standard CSS Scrollbar Styling ──────────────────── */
+html {
+  scrollbar-color: var(--color-brand) transparent;
+  scrollbar-width: thin;
 }
