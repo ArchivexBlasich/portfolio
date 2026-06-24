@@ -47,6 +47,9 @@
 /* @theme resolves values at build time. Use here for tokens that never         */
 /* change between light and dark mode.                                          */
 @theme {
+  /* Responsive — enables xs: (475px+) responsive variant */
+  --breakpoint-xs: 475px;
+
   /* Typography
    * Overrides Tailwind's built-in --font-mono so the `font-mono` utility
    * always renders Space Mono. Components should use `font-mono`.

@@ -14,13 +14,13 @@ const {
 const { title, description, image, tags, githubUrl, liveUrl } = data;
 ---
 
-<article class="grid grid-cols-1 gap-8 md:grid-cols-5">
+<article class="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-5">
   <div class="rounded-lg md:col-span-2">
     <div class="group relative">
       <Image
         src={image}
         alt={`Screenshot of ${title}`}
-        class="rounded-lg shadow-lg"
+        class="aspect-video w-full rounded-lg object-cover shadow-lg"
       />
       <div
         class="bg-surface/20 group-hover:bg-surface/40 absolute inset-0 rounded-lg transition-colors"
