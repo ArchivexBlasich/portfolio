@@ -1,9 +1,24 @@
 ---
-import type { experience } from "./experience";
+import type { CollectionEntry } from "astro:content";
 
-type Props = experience;
+type Props = {
+  experience: CollectionEntry<"experience">["data"];
+};
 
-const { date, title, descriptions } = Astro.props;
+const { company, role, startDate, endDate, highlights } =
+  Astro.props.experience;
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+}
+
+function formatDateRange(start: Date, end?: Date): string {
+  const startStr = formatDate(start);
+  if (!end) return startStr;
+  return `${startStr} to ${formatDate(end)}`;
+}
+
+const dateRange = formatDateRange(startDate, endDate);
 ---
 
 <li class="ms-6 mb-6 sm:mb-10">
@@ -15,18 +30,22 @@ const { date, title, descriptions } = Astro.props;
   <time
     class="text-text-muted mb-1 text-sm leading-none font-normal sm:text-base"
   >
-    {date}
+    {dateRange}
   </time>
 
   <h3 class="text-brand mt-2 text-lg font-semibold sm:text-xl lg:text-2xl">
-    {title}
+    {role}
   </h3>
+
+  <p class="text-text-muted mt-1 text-sm leading-none sm:text-base">
+    {company}
+  </p>
 
   <ol class="mt-4 ml-5 list-decimal">
     {
-      descriptions.map((description) => (
+      highlights.map((highlight) => (
         <li class="text-text-subtle mb-4 text-base font-normal text-pretty sm:text-lg">
-          {description}
+          {highlight}
         </li>
       ))
     }

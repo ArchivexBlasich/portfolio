@@ -1,0 +1,30 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { t } from "../../i18n/ui";
+
+const { locale } = Astro.props as { locale: "en" | "es" };
+const targetLocale = locale === "en" ? "es" : "en";
+
+// Strip the locale prefix from current pathname
+//   "/en/"          → ""
+//   "/en/#about"    → "/"  (hash comes from Astro.url.hash separately)
+//   "/en/anything"  → "/anything"
+const currentPath = Astro.url.pathname;
+const pathWithoutLocale = currentPath.replace(/^\/[^\/]+/, "") || "/";
+const cleanPath = pathWithoutLocale === "/" ? "" : pathWithoutLocale;
+
+// Build the target URL and preserve hash fragment
+const hash = Astro.url.hash || "";
+const targetUrl = getRelativeLocaleUrl(targetLocale, cleanPath) + hash;
+
+const label = targetLocale.toUpperCase();
+const ariaLabel = t("toggle.language", locale);
+---
+
+<a
+  href={targetUrl}
+  aria-label={ariaLabel}
+  class="text-text-muted hover:text-text block rounded-md p-2 text-sm font-bold tracking-wider uppercase no-underline transition-colors md:py-0"
+>
+  {label}
+</a>

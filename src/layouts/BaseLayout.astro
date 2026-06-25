@@ -1,53 +1,56 @@
 ---
 import Header from "../components/header/Header.astro";
 import "../styles/global.css";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { t } from "../i18n/ui";
 
-const { title } = Astro.props;
+const { locale = "en", title = t("site.title", locale) } = Astro.props;
+
+// Current path without locale prefix — for hreflang/computation
+const currentPath = Astro.url.pathname;
+const pathWithoutLocale = currentPath.replace(/^\/[^\/]+/, "") || "/";
+const cleanPath = pathWithoutLocale === "/" ? "" : pathWithoutLocale;
+
+// Locale-aware SEO values
+const ogLocale = locale === "en" ? "en_US" : "es_AR";
+const altOgLocale = locale === "en" ? "es_AR" : "en_US";
+const enUrl = new URL(getRelativeLocaleUrl("en", cleanPath), Astro.site);
+const esUrl = new URL(getRelativeLocaleUrl("es", cleanPath), Astro.site);
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const description = t("meta.description", locale);
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang={locale} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta
-      name="description"
-      content="Software Architect, GDE & MVP. Building clean, scalable systems with 15+ years of experience. Specializing in architecture, testing, and developer experience."
-    />
+    <meta name="description" content={description} />
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
-    <meta
-      property="og:description"
-      content="Software Architect, GDE & MVP. Building clean, scalable systems with 15+ years of experience. Specializing in architecture, testing, and developer experience."
-    />
+    <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content="/og-default.png" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:locale:alternate" content="es_AR" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={altOgLocale} />
     <meta property="og:site_name" content="Fabricio Blasich" />
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta
-      name="twitter:description"
-      content="Software Architect, GDE & MVP. Building clean, scalable systems with 15+ years of experience. Specializing in architecture, testing, and developer experience."
-    />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="/og-default.png" />
-    <!-- Canonical URL -->
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-    <!-- Hreflang -->
-    <link
-      rel="alternate"
-      hreflang="en"
-      href={new URL(Astro.url.pathname, Astro.site)}
-    />
-    <link
-      rel="alternate"
-      hreflang="es-AR"
-      href={new URL(Astro.url.pathname, Astro.site)}
-    />
-    <!-- Author and theme-color -->
+
+    <!-- Canonical URL — self-referencing per locale -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Hreflang — exactly two links per spec REQ-i18n-051 -->
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+
+    <!-- Author, theme-color (unchanged) -->
     <meta name="author" content="Fabricio Blasich" />
     <meta name="theme-color" content="#e11d48" />
     <meta
@@ -55,7 +58,8 @@ const { title } = Astro.props;
       content="#e11d48"
       media="(prefers-color-scheme: dark)"
     />
-    <!-- JSON-LD Person Schema -->
+
+    <!-- JSON-LD Person Schema (unchanged) -->
     <script type="application/ld+json" is:inline>
       {
         "@context": "https://schema.org",
@@ -85,12 +89,11 @@ const { title } = Astro.props;
         }
       }
     </script>
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-    <!-- FOUC prevention: runs synchronously before first paint.
-         Priority: localStorage > system preference > dark default.
-         Fixes comment-code divergence (obs #20): code previously hardcoded
-         dark fallback when no localStorage, ignoring prefers-color-scheme. -->
+
+    <!-- FOUC prevention — UNCHANGED (theme only, language is URL-based) -->
     <script is:inline>
       (function () {
         const stored = localStorage.getItem("theme");
@@ -105,8 +108,8 @@ const { title } = Astro.props;
     </script>
   </head>
   <body class="bg-surface text-text min-h-dvh font-mono antialiased">
-    <a href="#main" class="skip-link">Skip to content</a>
-    <Header />
+    <a href="#main" class="skip-link">{t("skip.text", locale)}</a>
+    <Header locale={locale} />
     <slot />
   </body>
 </html>

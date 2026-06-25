@@ -3,13 +3,16 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import Button from "../../Button.astro";
 import ProjectPill from "./ProjectPill.astro";
+import { t } from "../../../i18n/ui";
 
 interface Props {
   project: CollectionEntry<"projects">;
+  locale: "en" | "es";
 }
 
 const {
   project: { data },
+  locale,
 } = Astro.props;
 const { title, description, image, tags, githubUrl, liveUrl } = data;
 ---
@@ -19,7 +22,7 @@ const { title, description, image, tags, githubUrl, liveUrl } = data;
     <div class="group relative">
       <Image
         src={image}
-        alt={`Screenshot of ${title}`}
+        alt={`${t("projectcard.image.altPrefix", locale)}${title}`}
         class="aspect-video w-full rounded-lg object-cover shadow-lg"
       />
       <div
@@ -43,7 +46,7 @@ const { title, description, image, tags, githubUrl, liveUrl } = data;
             rel="noopener noreferrer"
             variant="primary"
           >
-            Live Demo
+            {t("projectcard.liveDemo", locale)}
           </Button>
         )
       }
@@ -51,7 +54,7 @@ const { title, description, image, tags, githubUrl, liveUrl } = data;
         href={githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="View source on GitHub"
+        aria-label={t("projectcard.source.aria", locale)}
         class="group bg-surface-raised/80 border-border text-text-subtle hover:bg-surface-raised hover:border-text-muted hover:text-text hover:shadow-surface/50 relative flex items-center justify-center rounded-full border p-3 shadow-sm transition-all duration-300 hover:shadow-md"
       >
         <svg

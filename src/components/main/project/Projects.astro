@@ -1,8 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
+import { t } from "../../../i18n/ui";
 
-const rawProjects = await getCollection("projects");
+const { locale } = Astro.props;
+
+const rawProjects = await getCollection("projects", (entry) =>
+  entry.id.startsWith(locale + "/"),
+);
 
 const projects = rawProjects.sort((a, b) => {
   // Primary: order ascending
@@ -16,9 +21,11 @@ const projects = rawProjects.sort((a, b) => {
 
 <section class="mt-12 mb-7 scroll-mt-20" id="projects">
   <div class="prose lg:prose-xl mt-12 mb-8 text-center md:text-left">
-    <h1 id="work" class="text-brand underline">Projects</h1>
+    <h1 id="work" class="text-brand underline">
+      {t("projects.heading", locale)}
+    </h1>
   </div>
   <div class="flex flex-col gap-12">
-    {projects.map((entry) => <ProjectCard project={entry} />)}
+    {projects.map((entry) => <ProjectCard project={entry} locale={locale} />)}
   </div>
 </section>

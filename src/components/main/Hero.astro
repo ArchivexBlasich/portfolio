@@ -2,6 +2,9 @@
 import { Image } from "astro:assets";
 import profileImg from "../../assets/ProfilePicture.png";
 import SocialMedia from "../socialMedia/SocialMedia.astro";
+import { t } from "../../i18n/ui";
+
+const { locale } = Astro.props;
 ---
 
 <section
@@ -9,11 +12,11 @@ import SocialMedia from "../socialMedia/SocialMedia.astro";
 >
   <Image
     src={profileImg}
-    alt="Fabricio Blasich's Profile Picture"
+    alt={t("hero.image.alt", locale)}
     quality="mid"
     class="size-56 object-cover md:size-65 lg:size-70"
   />
   <h2 class="text-text-muted text-center">Fabricio Blasich</h2>
-  <h1 class="text-text text-center">Computer Engineer</h1>
-  <SocialMedia />
+  <h1 class="text-text text-center">{t("hero.heading", locale)}</h1>
+  <SocialMedia locale={locale} />
 </section>

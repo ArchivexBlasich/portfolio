@@ -1,6 +1,8 @@
 ---
 import Strong from "../Strong.astro";
+import { t } from "../../i18n/ui";
 
+const { locale } = Astro.props;
 const hrefTheOdinProject = "https://www.theodinproject.com";
 ---
 
@@ -8,21 +10,29 @@ const hrefTheOdinProject = "https://www.theodinproject.com";
   id="about"
   class="prose lg:prose-xl mt-12 scroll-mt-20 text-center md:text-left"
 >
-  <h1 class="text-brand underline">About</h1>
+  <h1 class="text-brand underline">{t("about.heading", locale)}</h1>
+
+  <!-- Paragraph 1 -->
   <p class="text-text-subtle text-pretty">
-    I'm a 23 years old <Strong>Computer Engineering student</Strong> at UNT with an
-    8.9/10 GPA and strong foundations in software and systems. I'm obsessed with understanding
-    how everything works behind the scenes.
+    {t("about.p1.beforeStrong", locale)}<Strong
+      >{t("about.p1.strong", locale)}</Strong
+    >{t("about.p1.afterStrong", locale)}
   </p>
+
+  <!-- Paragraph 2 -->
   <p class="text-text-subtle text-pretty">
-    I developed my <Strong>Full Stack</Strong> skills through <a
+    {t("about.p2.beforeStrong", locale)}<Strong
+      >{t("about.p2.strong", locale)}</Strong
+    >{t("about.p2.afterStrong", locale)}<a
       href={hrefTheOdinProject}
-      class="text-brand no-underline">The Odin Project</a
-    > and now have a growing focus on backend engineering and infrastructure.
+      class="text-brand no-underline">{t("about.p2.link", locale)}</a
+    >{t("about.p2.afterLink", locale)}
   </p>
+
+  <!-- Paragraph 3 -->
   <p class="text-text-subtle text-pretty">
-    Fun fact: I was born in Río Gallegos, <span class="text-brand"
-      >Argentina</span
-    >, so my friends call me 'Pingüino' 🐧.
+    {t("about.p3.beforeSpan", locale)}<span class="text-brand"
+      >{t("about.p3.span", locale)}</span
+    >{t("about.p3.afterSpan", locale)} 🐧
   </p>
 </section>

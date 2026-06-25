@@ -1,0 +1,9 @@
+company: "Universidad Nacional de Tucumán (UNT)"
+role: "Ingeniero DevOps Voluntario"
+location: "Tucumán, Argentina"
+startDate: 2025-04-01
+endDate: 2025-10-01
+highlights:
+  - "Lideré la implementación de una plataforma PaaS autoalojada con Coolify para automatizar el despliegue de proyectos de tesis de ingeniería de software."
+  - "Configuré y gestioné instancias de MinIO como solución de almacenamiento de objetos compatible con S3 para la gestión eficiente de respaldos y activos de aplicaciones."
+  - "Optimicé el flujo de trabajo de desarrollo mediante la contenedorización de servicios con Docker."

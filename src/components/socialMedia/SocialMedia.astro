@@ -1,5 +1,8 @@
 ---
 import SocialPill from "./SocialPill.astro";
+import { t } from "../../i18n/ui";
+
+const { locale } = Astro.props;
 ---
 
 <div class="flex flex-wrap items-center justify-center gap-4">
@@ -7,25 +10,25 @@ import SocialPill from "./SocialPill.astro";
     href="https://github.com/ArchivexBlasich"
     size="size-8"
     svgRef="#github_dark"
-    aria_label="Visit Fabricio's GitHub Profile"
+    aria_label={t("social.github.aria", locale)}
   >
-    Github
+    {t("social.github", locale)}
   </SocialPill>
 
   <SocialPill
     href="https://www.linkedin.com/in/fabricio-lucas-blasich"
     size="size-8"
     svgRef="#linkedin"
-    aria_label="Visit Fabricio's LinkedIn Profile"
+    aria_label={t("social.linkedin.aria", locale)}
   >
-    Linkedin
+    {t("social.linkedin", locale)}
   </SocialPill>
 
   <SocialPill
     href="#"
     size="size-8"
     svgRef="#message-2-share"
-    aria_label="Fabricio's mail"
+    aria_label={t("social.mail.aria", locale)}
   >
     fblasich0@gmail.com
   </SocialPill>

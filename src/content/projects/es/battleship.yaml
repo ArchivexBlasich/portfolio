@@ -1,0 +1,12 @@
+title: "Battleship"
+description: "Juego clásico de Battleship desarrollado en JavaScript vanilla con un oponente de IA heurística, colocación de barcos mediante arrastrar y soltar, y una suite completa de TDD escrita en Jest. El algoritmo de caza y objetivo demuestra lógica de probabilidad aplicada sin utilizar bibliotecas de IA externas."
+image: "../../../assets/Battleship.png"
+tags:
+  - JavaScript
+  - Jest
+  - Webpack
+  - CSS
+githubUrl: "https://github.com/archivexblasich/battleship"
+liveUrl: "https://archivexblasich.github.io/Battleship/"
+featured: true
+order: 3

@@ -1,12 +1,15 @@
 ---
 import Link from "../Link.astro";
+import { t } from "../../i18n/ui";
+
+const { locale } = Astro.props;
 ---
 
 <div class="contents">
   <button
     id="menu-btn"
     aria-expanded="false"
-    aria-label="Open Menu"
+    aria-label={t("nav.menu.aria", locale)}
     class="text-text -mr-2 ml-auto block min-h-[44px] min-w-[44px] cursor-pointer p-3 md:hidden"
   >
     <svg
@@ -22,14 +25,14 @@ import Link from "../Link.astro";
     id="nav-links"
     class="border-border mt-4 grid w-full basis-full grid-rows-[0fr] border-t opacity-0 transition-all duration-300 ease-in-out md:mt-0 md:block md:w-auto md:basis-auto md:grid-rows-none md:border-none md:opacity-100"
   >
-    <nav aria-label="Main">
+    <nav aria-label={t("nav.main.aria", locale)}>
       <div
         class="flex flex-col items-center overflow-hidden py-4 text-center md:flex-row md:gap-8 md:py-0"
       >
-        <Link href="#about">About</Link>
-        <Link href="#work">Work</Link>
-        <Link href="#projects">Projects</Link>
-        <Link href="#contact">Contact</Link>
+        <Link href="#about">{t("nav.about", locale)}</Link>
+        <Link href="#work">{t("nav.work", locale)}</Link>
+        <Link href="#projects">{t("nav.projects", locale)}</Link>
+        <Link href="#contact">{t("nav.contact", locale)}</Link>
       </div>
     </nav>
   </div>

@@ -1,0 +1,12 @@
+title: "CV Builder"
+description: "Un generador de currículums en tiempo real construido con React y TypeScript, con gestión dinámica de estado de formularios y exportación a PDF del lado del cliente mediante html2pdf.js. El desafío principal fue sincronizar los campos del formulario con una vista previa en vivo sin prop-drilling, resuelto elevando el estado a un componente padre compartido y pasando callbacks de actualización atómicos."
+image: "../../../assets/CvBuilder.png"
+tags:
+  - React
+  - TypeScript
+  - Vite
+  - html2pdf.js
+githubUrl: "https://github.com/archivexblasich/cv-application"
+liveUrl: "https://archivexblasich.github.io/CV-Application/"
+featured: true
+order: 1

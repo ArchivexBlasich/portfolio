@@ -1,6 +1,6 @@
 title: "Battleship"
 description: "Classic Battleship game built in vanilla JavaScript with a heuristic AI opponent, drag-and-drop ship placement, and a full TDD suite written in Jest. The hunt-and-target algorithm demonstrates applied probability logic without any external AI libraries."
-image: "../../assets/Battleship.png"
+image: "../../../assets/Battleship.png"
 tags:
   - JavaScript
   - Jest
