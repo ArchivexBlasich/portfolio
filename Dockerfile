@@ -19,9 +19,14 @@ RUN bun run build
 FROM joseluisq/static-web-server:2-alpine AS runner
 
 COPY --from=build /app/dist /public
+# Advanced config: 301 redirects for legacy /en/* URLs (SEO migration).
+# General server options stay driven by the ENV vars below — the TOML only
+# declares the [advanced.redirects] section, so precedence is not an issue.
+COPY sws.toml /public/sws.toml
 
 ENV SERVER_ROOT=/public \
     SERVER_PORT=80 \
+    SERVER_CONFIG_FILE=/public/sws.toml \
     SERVER_COMPRESSION=true \
     SERVER_CACHE_CONTROL_HEADERS=true \
     SERVER_DIRECTORY_LISTING=false \

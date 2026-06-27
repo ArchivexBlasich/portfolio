@@ -1,0 +1,43 @@
+# Static Web Server advanced configuration.
+# Only the [advanced] section is declared here; all general options (root, port,
+# compression, cache-control, error pages, log level) remain driven by the ENV
+# vars in the Dockerfile. Config-file features take precedence over ENV vars,
+# but since this file only defines redirects there is no conflict.
+# https://static-web-server.net/features/url-redirects/
+
+[advanced]
+
+# SEO migration: /en/* used to be the canonical English URLs (prefixDefaultLocale:true).
+# After switching to prefixDefaultLocale:false, English is served at / and these
+# legacy URLs would otherwise 404. 301 preserves any link equity Google collected
+# for /en/* and tells crawlers to update the index.
+#
+# Scope: only /en (root) and /en/<single-segment> are redirected. Deep multi-segment
+# paths (/en/a/b/...) were never canonical URLs (the old site had only 3 sitemap
+# entries: /, /en/, /es/) so they 404, which is acceptable. globset degrades `**`
+# inside `{...}` to `*` (non-cross-slash), so multi-segment capture is not feasible
+# in SWS v2's glob syntax.
+
+# /en  -> /
+[[advanced.redirects]]
+source = "/en"
+destination = "/"
+kind = 301
+
+# /en/ -> /
+[[advanced.redirects]]
+source = "/en/"
+destination = "/"
+kind = 301
+
+# /en/<single-segment> -> /<single-segment>   (e.g. /en/about -> /about)
+[[advanced.redirects]]
+source = "/en/{*}"
+destination = "/$1"
+kind = 301
+
+# /en/<single-segment>/ -> /<single-segment>/  (e.g. /en/404/ -> /404/)
+[[advanced.redirects]]
+source = "/en/{*}/"
+destination = "/$1/"
+kind = 301
