@@ -25,9 +25,12 @@ const { locale } = Astro.props;
     id="nav-links"
     class="border-border mt-4 grid w-full basis-full grid-rows-[0fr] border-t opacity-0 transition-all duration-300 ease-in-out md:mt-0 md:block md:w-auto md:basis-auto md:grid-rows-none md:border-none md:opacity-100"
   >
-    <nav aria-label={t("nav.main.aria", locale)}>
+    <nav
+      aria-label={t("nav.main.aria", locale)}
+      class="grid min-h-0 grid-rows-[1fr] overflow-hidden md:block"
+    >
       <div
-        class="flex flex-col items-center overflow-hidden py-4 text-center md:flex-row md:gap-8 md:py-0"
+        class="flex flex-col items-center py-4 text-center md:flex-row md:gap-8 md:py-0"
       >
         <Link href="#about">{t("nav.about", locale)}</Link>
         <Link href="#work">{t("nav.work", locale)}</Link>
