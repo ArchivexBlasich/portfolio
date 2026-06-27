@@ -1,0 +1,26 @@
+# Build context: keep only what the Astro build needs.
+# Smaller context = faster builds + smaller intermediate images.
+
+node_modules
+dist
+.git
+.astro
+.atl
+.playwright-mcp
+.vscode
+.agents
+
+# Editor / project meta not needed at build time
+AGENTS.md
+README.md
+opencode.json
+skills-lock.json
+.prettierrc
+.prettierignore
+.gitignore
+
+# Docker artifacts themselves
+Dockerfile
+docker-compose.yml
+nginx.conf
+.dockerignore
