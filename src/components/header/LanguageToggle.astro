@@ -6,11 +6,15 @@ const { locale } = Astro.props as { locale: "en" | "es" };
 const targetLocale = locale === "en" ? "es" : "en";
 
 // Strip the locale prefix from current pathname
-//   "/en/"          → ""
-//   "/en/#about"    → "/"  (hash comes from Astro.url.hash separately)
-//   "/en/anything"  → "/anything"
+//   "/es/"          → ""
+//   "/es/#about"    → "/"  (hash comes from Astro.url.hash separately)
+//   "/es/anything"  → "/anything"
+// English pages at /, /404 have no prefix to strip.
 const currentPath = Astro.url.pathname;
-const pathWithoutLocale = currentPath.replace(/^\/[^\/]+/, "") || "/";
+const pathWithoutLocale =
+  currentPath.startsWith("/es/") || currentPath === "/es"
+    ? currentPath.replace(/^\/es/, "") || "/"
+    : currentPath;
 const cleanPath = pathWithoutLocale === "/" ? "" : pathWithoutLocale;
 
 // Build the target URL and preserve hash fragment

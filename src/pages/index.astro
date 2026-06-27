@@ -1,11 +1,11 @@
 ---
+import Main from "../components/main/Main.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { t } from "../i18n/ui";
 
+const locale = "en";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta http-equiv="refresh" content="0;url=/en/" />
-    <link rel="canonical" href="https://fabricioblasich.com/en/" />
-  </head>
-</html>
+<BaseLayout title={t("site.title", locale)} locale={locale}>
+  <Main locale={locale} />
+</BaseLayout>

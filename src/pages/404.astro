@@ -1,16 +1,8 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import { t, getRelativeLocaleUrl } from "../../i18n/ui";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { t, getRelativeLocaleUrl } from "../i18n/ui";
 
-export async function getStaticPaths() {
-  return [{ params: { locale: "es" } }];
-}
-
-const { locale } = Astro.params;
-
-if (!locale || (locale !== "en" && locale !== "es")) {
-  throw new Error(`Invalid locale: ${locale}`);
-}
+const locale = "en";
 ---
 
 <BaseLayout title={t("404.title", locale)} locale={locale}>

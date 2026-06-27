@@ -4,7 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { t } from "../../i18n/ui";
 
 export async function getStaticPaths() {
-  return [{ params: { locale: "en" } }, { params: { locale: "es" } }];
+  return [{ params: { locale: "es" } }];
 }
 
 const { locale } = Astro.params;
