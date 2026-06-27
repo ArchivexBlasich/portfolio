@@ -1,17 +1,17 @@
 # AGENTS.md — Portfolio
 
-AI agent instructions for Fabricio Blasich's portfolio. Personal website, content-driven, fully static (SSG). Currently single-page, planned multi-page with blog. Docker + nginx deploy.
+AI agent instructions for Fabricio Blasich's portfolio. Personal website, content-driven, fully static (SSG). Currently single-page, planned multi-page with blog. Docker + static-web-server deploy via Dokploy (Traefik edge proxy).
 
 ## Tech Stack
 
-| Layer           | Technology                                     | Version                |
-| --------------- | ---------------------------------------------- | ---------------------- |
-| Framework       | Astro (SSG)                                    | ^6.4.3                 |
-| Styling         | Tailwind CSS v4 (CSS-first)                    | ^4.3.0                 |
-| Language        | TypeScript (strict)                            | astro/tsconfigs/strict |
-| Package manager | bun                                            | 1.3.13                 |
-| Formatter       | Prettier + prettier-plugin-astro, -tailwindcss | 3.8.4, 0.14.1, 0.8.0   |
-| Deploy          | Docker multi-stage → nginx:1.25-alpine         | —                      |
+| Layer           | Technology                                      | Version                |
+| --------------- | ----------------------------------------------- | ---------------------- |
+| Framework       | Astro (SSG)                                     | ^6.4.3                 |
+| Styling         | Tailwind CSS v4 (CSS-first)                     | ^4.3.0                 |
+| Language        | TypeScript (strict)                             | astro/tsconfigs/strict |
+| Package manager | bun                                             | 1.3.13                 |
+| Formatter       | Prettier + prettier-plugin-astro, -tailwindcss  | 3.8.4, 0.14.1, 0.8.0   |
+| Deploy          | Docker multi-stage → static-web-server:2-alpine | —                      |
 
 la IA necesita el "que" y el "no hagas esto"
 
@@ -107,4 +107,4 @@ Enable Strict TDD: `bun add -D vitest`, configure `vitest.config.ts`, add test s
 
 Project skills in `.agents/skills/`, registry at `.atl/skill-registry.md`:
 
-`astro`, `tailwind`, `tailwind-css-patterns`, `frontend-design`, `accessibility`, `seo`, `nodejs-backend-patterns`, `nodejs-best-practices`, `typescript-advanced-types`
+`astro`, `tailwind`, `tailwind-css-patterns`, `frontend-design`, `accessibility`, `seo`, `nodejs-backend-patterns`, `nodejs-best-practices`, `typescript-advanced-types`, `responsive-design`, `docker-expert`
