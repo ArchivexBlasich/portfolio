@@ -1,6 +1,7 @@
 services:
   astro-portfolio:
-    build: .
+    image: ghcr.io/archivexblasich/portfolio:latest
+    pull_policy: always
     container_name: astro-portfolio-static
     restart: unless-stopped
     ports:
