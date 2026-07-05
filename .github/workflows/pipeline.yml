@@ -3,6 +3,15 @@ name: Deploy Pipeline
 on:
   push:
     branches: [main]
+    paths:
+      - src/**
+      - public/**
+      - Dockerfile
+      - .dockerignore
+      - package.json
+      - bun.lock
+      - astro.config.mjs
+      - tsconfig.json
   workflow_dispatch:
 
 env:
