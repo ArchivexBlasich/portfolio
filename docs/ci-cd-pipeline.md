@@ -18,7 +18,8 @@ git push a main
 GitHub Actions
   ├── Build Docker image
   ├── Push a ghcr.io/archivexblasich/portfolio:latest
-  └── POST webhook → Dokploy
+  ├── POST webhook → Dokploy
+  └── Prune GHCR (keep last 3 versions)
                         │
                         ▼
                     Dokploy
@@ -31,7 +32,11 @@ GitHub Actions
 
 ### 1. GitHub Actions — `.github/workflows/pipeline.yml`
 
-Trigger: push a `main` o ejecución manual (`workflow_dispatch`).
+Trigger:
+
+- Push a `main` (solo si hay cambios en `src/`, `public/`, `Dockerfile`, `.dockerignore`,
+  `package.json`, `bun.lock`, `astro.config.mjs` o `tsconfig.json`)
+- Ejecución manual (`workflow_dispatch`)
 
 Pasos:
 
@@ -41,6 +46,7 @@ Pasos:
 4. **Metadata** — genera tags: `latest` + `sha-<commit>`
 5. **Build & push** — compila la imagen y la sube a GHCR
 6. **Trigger Dokploy** — llama al webhook para que Dokploy redeploye
+7. **Prune GHCR** — borra versiones viejas de la imagen, conservando las últimas 3
 
 ### 2. GHCR — GitHub Container Registry
 
@@ -63,10 +69,11 @@ un redeploy. Esa URL se guarda como secret `DOKPLOY_WEBHOOK` en GitHub.
 
 ## Secretos de GitHub
 
-| Secret            | Valor                                        | Propósito              |
-| ----------------- | -------------------------------------------- | ---------------------- |
-| `DOKPLOY_WEBHOOK` | URL del webhook (tab Deployments en Dokploy) | Triggerear redeploy    |
-| `GITHUB_TOKEN`    | Automático (no se configura)                 | Autenticar push a GHCR |
+| Secret              | Valor                                              | Propósito                       |
+| ------------------- | -------------------------------------------------- | ------------------------------- |
+| `DOKPLOY_WEBHOOK`   | URL del webhook (tab Deployments en Dokploy)       | Triggerear redeploy             |
+| `GHCR_DELETE_TOKEN` | PAT con scopes `read:packages` + `delete:packages` | Limpiar imágenes viejas de GHCR |
+| `GITHUB_TOKEN`      | Automático (no se configura)                       | Autenticar push a GHCR          |
 
 `GITHUB_TOKEN` es generado automáticamente por Actions en cada ejecución. Tiene
 permiso `packages: write` gracias al bloque `permissions` del workflow. Es más
@@ -91,6 +98,7 @@ seguro que un PAT porque vive solo lo que dura el job.
 
 4. **Settings > Secrets and variables > Actions:**
    - `DOKPLOY_WEBHOOK` → la URL del paso 3
+   - `GHCR_DELETE_TOKEN` → PAT con scopes `read:packages` + `delete:packages`
 
 ### En el código
 
@@ -155,6 +163,17 @@ jobs:
       - name: Trigger Dokploy Deploy
         run: |
           curl -X POST "${{ secrets.DOKPLOY_WEBHOOK }}"
+
+      - name: Prune old GHCR images
+        uses: vlaurin/action-ghcr-prune@v0.6.0
+        with:
+          token: ${{ secrets.GHCR_DELETE_TOKEN }}
+          user: ArchivexBlasich
+          container: portfolio
+          dry-run: false
+          keep-last: 3
+          prune-untagged: true
+          prune-tags-unkept: true
 ```
 
 ### docker-compose.yml
@@ -177,4 +196,5 @@ services:
 3. Actions sube la imagen a `ghcr.io/archivexblasich/portfolio:latest`
 4. Actions hace POST al webhook de Dokploy
 5. Dokploy recibe el webhook, baja la imagen nueva de GHCR, y recrea el container
-6. El VPS nunca ejecutó `bun install` ni `astro build`, solo descargó y ejecutó
+6. Actions limpia imágenes viejas de GHCR, conservando solo las últimas 3 versiones
+7. El VPS nunca ejecutó `bun install` ni `astro build`, solo descargó y ejecutó

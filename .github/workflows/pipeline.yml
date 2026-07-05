@@ -60,3 +60,14 @@ jobs:
       - name: Trigger Dokploy Deploy
         run: |
           curl -X POST "${{ secrets.DOKPLOY_WEBHOOK }}"
+
+      - name: Prune old GHCR images
+        uses: vlaurin/action-ghcr-prune@v0.6.0
+        with:
+          token: ${{ secrets.GHCR_DELETE_TOKEN }}
+          user: ArchivexBlasich
+          container: portfolio
+          dry-run: false
+          keep-last: 3
+          prune-untagged: true
+          prune-tags-unkept: true
