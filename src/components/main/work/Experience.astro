@@ -21,6 +21,10 @@ const sortedEntries = entries.sort(
     </h1>
   </div>
   <ol class="border-default relative border-s">
-    {sortedEntries.map((entry) => <ExperienceItem experience={entry.data} />)}
+    {
+      sortedEntries.map((entry) => (
+        <ExperienceItem experience={entry.data} locale={locale} />
+      ))
+    }
   </ol>
 </section>

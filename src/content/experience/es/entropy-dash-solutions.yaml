@@ -1,0 +1,8 @@
+company: "Entropy - Develop People, Elevate Teams"
+role: "Junior Software Engineer"
+location: "Tucumán, Argentina (Remoto)"
+startDate: 2025-12-01
+highlights:
+  - "Actualicé registros de producción en MySQL para ajustar balances financieros y configurar incentivos, asegurando el cumplimiento estricto de las reglas de negocio de un sistema de incentivos de ventas."
+  - "Resolví escalaciones de Jira analizando logs de Datadog para rastrear errores e identificar causas raíz en un monolito legacy de Java/Spring Boot y Lambdas de AWS en Python (serverless)."
+  - "Desplegué correcciones de bugs y actualizaciones de lógica dentro del equipo de Operaciones, dando soporte al cliente Dash Solutions (Alabama, EE. UU.)."

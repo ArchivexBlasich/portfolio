@@ -1,0 +1,8 @@
+company: "Entropy - Develop People, Elevate Teams"
+role: "Junior Software Engineer"
+location: "Tucumán, Argentina (Remote)"
+startDate: 2025-12-01
+highlights:
+  - "Updated production MySQL records to adjust financial balances and configure incentives, ensuring strict adherence to business rules for a sales incentive system."
+  - "Resolved Jira escalations by analyzing Datadog logs to trace errors and identify root causes across a legacy Java/Spring Boot monolith and serverless AWS Python Lambdas."
+  - "Deployed bug fixes and logic updates within the Operations team, supporting the client Dash Solutions (Alabama, USA)."

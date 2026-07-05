@@ -1,12 +1,15 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { t, type Locale } from "../../../i18n/ui";
 
 type Props = {
   experience: CollectionEntry<"experience">["data"];
+  locale: Locale;
 };
 
 const { company, role, startDate, endDate, highlights } =
   Astro.props.experience;
+const locale = Astro.props.locale;
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
@@ -14,7 +17,7 @@ function formatDate(date: Date): string {
 
 function formatDateRange(start: Date, end?: Date): string {
   const startStr = formatDate(start);
-  if (!end) return startStr;
+  if (!end) return `${startStr} – ${t("experience.present", locale)}`;
   return `${startStr} to ${formatDate(end)}`;
 }
 

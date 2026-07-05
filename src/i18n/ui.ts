@@ -37,6 +37,7 @@ const en = {
 
   // Experience
   "experience.heading": "Work",
+  "experience.present": "Present",
 
   // Social Media
   "social.github": "Github",
@@ -90,6 +91,7 @@ const es = {
   "projectcard.image.altPrefix": "Captura de pantalla de ",
 
   "experience.heading": "Experiencia",
+  "experience.present": "Actualidad",
 
   "social.github": "Github",
   "social.linkedin": "Linkedin",
