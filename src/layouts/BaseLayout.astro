@@ -86,9 +86,9 @@ const jsonLd = JSON.stringify(
     <!-- Canonical URL — self-referencing per locale -->
     <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Hreflang alternates: en, es, x-default -->
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="es" href={esUrl} />
+    <!-- Hreflang alternates: en-US, es-AR, x-default (match sitemap-0.xml) -->
+    <link rel="alternate" hreflang="en-US" href={enUrl} />
+    <link rel="alternate" hreflang="es-AR" href={esUrl} />
     <link rel="alternate" hreflang="x-default" href={enUrl} />
 
     <!-- Author, theme-color (unchanged) -->
