@@ -3,7 +3,6 @@ import Strong from "../Strong.astro";
 import { t } from "../../i18n/ui";
 
 const { locale } = Astro.props;
-const hrefTheOdinProject = "https://www.theodinproject.com";
 ---
 
 <section
@@ -20,16 +19,6 @@ const hrefTheOdinProject = "https://www.theodinproject.com";
   </p>
 
   <!-- Paragraph 2 -->
-  <p class="text-text-subtle text-pretty">
-    {t("about.p2.beforeStrong", locale)}<Strong
-      >{t("about.p2.strong", locale)}</Strong
-    >{t("about.p2.afterStrong", locale)}<a
-      href={hrefTheOdinProject}
-      class="text-brand no-underline">{t("about.p2.link", locale)}</a
-    >{t("about.p2.afterLink", locale)}
-  </p>
-
-  <!-- Paragraph 3 -->
   <p class="text-text-subtle text-pretty">
     {t("about.p3.beforeSpan", locale)}<span class="text-brand"
       >{t("about.p3.span", locale)}</span

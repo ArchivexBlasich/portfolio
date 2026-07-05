@@ -19,16 +19,10 @@ const en = {
 
   // About
   "about.heading": "About",
-  "about.p1.beforeStrong": "I'm a 23 years old ",
-  "about.p1.strong": "Computer Engineering student",
+  "about.p1.beforeStrong": "I am a ",
+  "about.p1.strong": "Computer Engineer (UNT)",
   "about.p1.afterStrong":
-    " at UNT with an 8.9/10 GPA and strong foundations in software and systems. I'm obsessed with understanding how everything works behind the scenes.",
-  "about.p2.beforeStrong": "I developed my ",
-  "about.p2.strong": "Full Stack",
-  "about.p2.afterStrong": " skills through ",
-  "about.p2.link": "The Odin Project",
-  "about.p2.afterLink":
-    " and now have a growing focus on backend engineering and infrastructure.",
+    " with a strong foundation in networks, embedded systems, and software architecture. Currently, I build technical solutions at Entropy for Dash Solutions (US). My approach goes beyond implementing tools: I investigate their internal mechanics to understand their real behavior and build more efficient, robust systems from the ground up.",
   "about.p3.beforeSpan": "Fun fact: I was born in Río Gallegos, ",
   "about.p3.span": "Argentina",
   "about.p3.afterSpan": ", so my friends call me 'Pingüino'.",
@@ -82,15 +76,9 @@ const es = {
 
   "about.heading": "Sobre mí",
   "about.p1.beforeStrong": "Soy ",
-  "about.p1.strong": "estudiante de Ingeniería en Computación",
+  "about.p1.strong": "Ingeniero en Computación (UNT)",
   "about.p1.afterStrong":
-    " de 23 años en la UNT con un promedio de 8.9/10 y bases sólidas en software y sistemas. Me obsesiona entender cómo funciona todo detrás de escena.",
-  "about.p2.beforeStrong": "Desarrollé mis ",
-  "about.p2.strong": "Full Stack",
-  "about.p2.afterStrong": " a través de ",
-  "about.p2.link": "The Odin Project",
-  "about.p2.afterLink":
-    " y ahora tengo un enfoque creciente en ingeniería backend e infraestructura.",
+    " con bases sólidas en redes, sistemas embebidos y arquitectura de software. Actualmente, construyo soluciones técnicas en Entropy para Dash Solutions (EE. UU.). Mi enfoque va más allá de implementar herramientas: investigo su mecánica interna para entender su comportamiento real y construir sistemas más eficientes y robustos desde la base.",
   "about.p3.beforeSpan": "Dato curioso: nací en Río Gallegos, ",
   "about.p3.span": "Argentina",
   "about.p3.afterSpan": ", así que mis amigos me llaman 'Pingüino'.",
