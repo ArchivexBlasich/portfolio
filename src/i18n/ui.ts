@@ -55,7 +55,7 @@ const en = {
   // Meta / Layout
   "site.title": "Fabricio Blasich's Portfolio",
   "meta.description":
-    "Software Architect, GDE & MVP. Building clean, scalable systems with 15+ years of experience. Specializing in architecture, testing, and developer experience.",
+    "Computer Engineer currently working at Entropy. This is my personal portfolio.",
   "skip.text": "Skip to content",
 
   // Language Toggle
@@ -106,7 +106,7 @@ const es = {
 
   "site.title": "Portfolio de Fabricio Blasich",
   "meta.description":
-    "Arquitecto de Software, GDE y MVP. Construyo sistemas limpios y escalables con más de 15 años de experiencia. Especializado en arquitectura, testing y experiencia de desarrollo.",
+    "Ingeniero en Computación trabajando actualmente en Entropy. Esta es mi página personal.",
   "skip.text": "Saltar al contenido",
 
   "toggle.language": "Cambiar a Inglés",
