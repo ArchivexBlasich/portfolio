@@ -1,11 +1,15 @@
 ---
 const { href, size, svgRef, aria_label } = Astro.props;
+
+// target/rel only make sense for external http(s) links — applying
+// target="_blank" to a mailto: opens a dead blank tab in some browsers.
+const isExternal = href.startsWith("http");
 ---
 
 <a
   href={href}
-  target="_blank"
-  rel="noopener noreferrer"
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noopener noreferrer" : undefined}
   aria-label={aria_label}
   class="border-border text-text bg-surface-raised hover:border-brand flex items-center justify-center gap-x-2 rounded-full border px-3 py-3 no-underline transition-transform hover:scale-105"
 >
