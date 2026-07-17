@@ -16,6 +16,9 @@ const pathWithoutLocale =
     ? currentPath.replace(/^\/es/, "") || "/"
     : currentPath;
 const cleanPath = pathWithoutLocale === "/" ? "" : pathWithoutLocale;
+// Homepage detection — section anchor nav links only resolve on the landing
+// page; on blog/404 pages they must point back to the locale homepage.
+const isHome = pathWithoutLocale === "/";
 
 // Locale-aware SEO values
 const ogLocale = locale === "en" ? "en_US" : "es_AR";
@@ -122,7 +125,7 @@ const jsonLd = JSON.stringify(
   </head>
   <body class="bg-surface text-text min-h-dvh font-mono antialiased">
     <a href="#main" class="skip-link">{t("skip.text", locale)}</a>
-    <Header locale={locale} />
+    <Header locale={locale} isHome={isHome} />
     <slot />
   </body>
 </html>

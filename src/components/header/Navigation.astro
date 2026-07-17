@@ -3,7 +3,14 @@ import Link from "../Link.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { t } from "../../i18n/ui";
 
-const { locale } = Astro.props;
+const { locale, isHome = true } = Astro.props;
+
+// On the homepage, section anchors resolve on the same page (smooth scroll,
+// no navigation). On blog/404 pages the sections do not exist, so the links
+// must point back to the locale homepage with the anchor appended — this also
+// gives users a clear way back to the portfolio.
+const sectionHref = (id: string) =>
+  isHome ? `#${id}` : `${getRelativeLocaleUrl(locale, "")}#${id}`;
 ---
 
 <div class="contents">
@@ -33,13 +40,12 @@ const { locale } = Astro.props;
       <div
         class="flex flex-col items-center py-4 text-center md:flex-row md:gap-8 md:py-0"
       >
-        <Link href="#about">{t("nav.about", locale)}</Link>
-        <Link href="#work">{t("nav.work", locale)}</Link>
-        <Link href="#projects">{t("nav.projects", locale)}</Link>
+        <Link href={sectionHref("about")}>{t("nav.about", locale)}</Link>
+        <Link href={sectionHref("work")}>{t("nav.work", locale)}</Link>
+        <Link href={sectionHref("projects")}>{t("nav.projects", locale)}</Link>
         <Link href={getRelativeLocaleUrl(locale, "blog")}>
           {t("nav.blog", locale)}
         </Link>
-        <Link href="#contact">{t("nav.contact", locale)}</Link>
       </div>
     </nav>
   </div>

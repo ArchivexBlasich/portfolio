@@ -10,7 +10,6 @@ const en = {
   "nav.work": "Work",
   "nav.projects": "Projects",
   "nav.blog": "Blog",
-  "nav.contact": "Contact",
   "nav.menu.aria": "Open Menu",
   "nav.main.aria": "Main",
 
@@ -78,7 +77,6 @@ const es = {
   "nav.work": "Experiencia",
   "nav.projects": "Proyectos",
   "nav.blog": "Blog",
-  "nav.contact": "Contacto",
   "nav.menu.aria": "Abrir menú",
   "nav.main.aria": "Principal",
 

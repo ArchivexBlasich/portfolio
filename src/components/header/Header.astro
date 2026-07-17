@@ -3,7 +3,7 @@ import Navigation from "./Navigation.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 import LanguageToggle from "./LanguageToggle.astro";
 
-const { locale } = Astro.props;
+const { locale, isHome = true } = Astro.props;
 ---
 
 <header
@@ -17,6 +17,6 @@ const { locale } = Astro.props;
       <ThemeIcon />
     </div>
 
-    <Navigation locale={locale} />
+    <Navigation locale={locale} isHome={isHome} />
   </div>
 </header>
