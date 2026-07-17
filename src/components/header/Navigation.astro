@@ -1,5 +1,6 @@
 ---
 import Link from "../Link.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { t } from "../../i18n/ui";
 
 const { locale } = Astro.props;
@@ -35,6 +36,9 @@ const { locale } = Astro.props;
         <Link href="#about">{t("nav.about", locale)}</Link>
         <Link href="#work">{t("nav.work", locale)}</Link>
         <Link href="#projects">{t("nav.projects", locale)}</Link>
+        <Link href={getRelativeLocaleUrl(locale, "blog")}>
+          {t("nav.blog", locale)}
+        </Link>
         <Link href="#contact">{t("nav.contact", locale)}</Link>
       </div>
     </nav>

@@ -1,0 +1,44 @@
+---
+import type { ImageMetadata } from "astro";
+import PostMeta from "./PostMeta.astro";
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  heroImage?: ImageMetadata;
+  locale: "en" | "es";
+}
+
+const { href, title, description, pubDate, heroImage, locale } = Astro.props;
+---
+
+<article
+  class="border-border bg-surface-raised rounded-lg border p-4 transition-colors"
+>
+  {
+    heroImage && (
+      <img
+        src={heroImage.src}
+        alt=""
+        class="mb-4 aspect-video w-full rounded-md object-cover"
+      />
+    )
+  }
+
+  <h2 class="text-xl">
+    <a
+      href={href}
+      class="text-text hover:text-brand underline-offset-2 transition-colors"
+    >
+      {title}
+    </a>
+  </h2>
+
+  <p class="text-text-subtle mt-2 text-sm">{description}</p>
+
+  <div class="mt-3">
+    <PostMeta pubDate={pubDate} locale={locale} />
+  </div>
+</article>
