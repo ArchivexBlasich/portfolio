@@ -1,6 +1,6 @@
 # AGENTS.md — Portfolio
 
-AI agent instructions for Fabricio Blasich's portfolio. Personal website, content-driven, fully static (SSG). Currently single-page, planned multi-page with blog. Docker + static-web-server deploy via Dokploy (Traefik edge proxy).
+AI agent instructions for Fabricio Blasich's portfolio. Personal website, content-driven, fully static (SSG). Single-page landing plus a bilingual (EN/ES) blog at `/blog` and `/es/blog`. Docker + static-web-server deploy via Dokploy (Traefik edge proxy).
 
 ## Tech Stack
 
@@ -48,34 +48,51 @@ bun run format:check     # check formatting
 
 ## Content Collections
 
-Data lives in `src/content/` as YAML, schemas in `src/content.config.ts`. Uses `glob()` loader (Astro 5+) and `image()` helper via schema context. Query via `getCollection()`.
+Data lives in `src/content/` as YAML or Markdown, schemas in `src/content.config.ts`. Uses `glob()` loader (Astro 5+) and `image()` helper via schema context. Query via `getCollection()`.
 
 - `projects/` and `experience/` — structured data in `.yml` (no prose body)
-- Future `blog/` collection — use `.md`/`.mdx` (prose content), add `src/pages/blog/` routes
+- `blog/` — prose content in `.md`. EN posts in `src/content/blog/en/<slug>.md`, ES posts in `src/content/blog/es/<slug>.md`. `translationKey` frontmatter pairs the two locales. See `docs/blog-authoring.md` for the authoring workflow. Tag routes and RSS are deferred to future slices.
 
 **image() helper gotcha:** `image()` is a schema context parameter, NOT an import from `astro:content`. Use `schema: ({ image }) => z.object({ image: image() })`. Importing from `astro:content` causes runtime error in Astro 6.
+
+**Astro 6 idioms (do not regress):**
+
+- `render` is a top-level named import from `astro:content`: `import { render } from "astro:content"` then `const { Content } = await render(entry)`. `entry.render()` is the Astro 5 idiom and is broken in 6.
+- `ImageMetadata` type is exported from the `astro` package, NOT from `astro:assets` in Astro 6.4.3: `import type { ImageMetadata } from "astro"`.
+- `getStaticPaths` predicate form: `getCollection("blog", e => e.id.startsWith("en/") && !e.data.draft)`.
+- Slug derivation via regex strip on entry ID: `entry.id.replace(/^en\//, "")`. Do NOT use `entry.slug` (unreliable for glob-loader entries).
 
 ## Project Structure
 
 ```
 src/
-├── assets/              # Project images (PNG)
+├── assets/              # Project + blog images (PNG)
 ├── components/          # Feature-foldered .astro components
 │   ├── header/          # Header, Navigation, ThemeIcon
 │   ├── main/            # Hero, About, Main wrapper
 │   │   ├── project/     # Projects section + ProjectCard, ProjectPill
 │   │   └── work/        # Experience section + ExperienceItem
+│   ├── blog/            # BlogCard, BlogPostLayout, PostMeta
 │   └── socialMedia/     # SocialMedia, SocialPill
 ├── content/             # Content collections
 │   ├── projects/        # Project entries (.yml)
-│   └── experience/      # Work experience entries (.yml)
+│   ├── experience/      # Work experience entries (.yml)
+│   └── blog/            # Blog posts (.md)
+│       ├── en/          # English posts: <slug>.md
+│       └── es/          # Spanish posts: <slug>.md (paired by translationKey)
 ├── content.config.ts    # Collection schemas (glob loader, image() helper)
+├── i18n/                # ui.ts — typed EN/ES dictionary
 ├── layouts/             # BaseLayout.astro
 ├── pages/               # index.astro, 404.astro
-└── styles/              # global.css (Tailwind v4 @theme, design tokens)
+│   ├── blog/            # EN blog: index.astro, [slug].astro
+│   └── [locale]/        # ES routes (existing pattern)
+│       ├── blog/        # ES blog: index.astro, [slug].astro
+│       ├── index.astro
+│       └── ...
+└── styles/              # global.css (Tailwind v4 @theme, design tokens, --tw-prose-* overrides)
 ```
 
-Feature-folder pattern: components grouped by section. Scales to multi-page (add `src/pages/blog/`, `src/components/blog/`, `src/content/blog/` when blog arrives).
+Feature-folder pattern: components grouped by section. The blog follows this pattern: `src/components/blog/` for components, `src/content/blog/{en,es}/` for posts, `src/pages/blog/` + `src/pages/[locale]/blog/` for routes.
 
 ## Design System
 
