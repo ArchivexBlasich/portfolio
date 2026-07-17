@@ -9,6 +9,7 @@ const en = {
   "nav.about": "About",
   "nav.work": "Work",
   "nav.projects": "Projects",
+  "nav.blog": "Blog",
   "nav.contact": "Contact",
   "nav.menu.aria": "Open Menu",
   "nav.main.aria": "Main",
@@ -52,6 +53,14 @@ const en = {
   "404.body": "The page you are looking for does not exist or has been moved.",
   "404.backHome": "Back to home",
 
+  // Blog
+  "blog.emptyStateTitle": "Blog",
+  "blog.emptyStateBody":
+    "No posts yet. Check back soon for technical write-ups.",
+  "blog.postedOn": "Published on",
+  "blog.updatedOn": "Updated on",
+  "blog.backToList": "Back to blog",
+
   // Meta / Layout
   "site.title": "Fabricio Blasich's Portfolio",
   "meta.description":
@@ -68,6 +77,7 @@ const es = {
   "nav.about": "Sobre mí",
   "nav.work": "Experiencia",
   "nav.projects": "Proyectos",
+  "nav.blog": "Blog",
   "nav.contact": "Contacto",
   "nav.menu.aria": "Abrir menú",
   "nav.main.aria": "Principal",
@@ -103,6 +113,13 @@ const es = {
   "404.heading": "Página no encontrada",
   "404.body": "La página que buscas no existe o ha sido movida.",
   "404.backHome": "Volver al inicio",
+
+  "blog.emptyStateTitle": "Blog",
+  "blog.emptyStateBody":
+    "Aún no hay publicaciones. Vuelva pronto para leer artículos técnicos.",
+  "blog.postedOn": "Publicado el",
+  "blog.updatedOn": "Actualizado el",
+  "blog.backToList": "Volver al blog",
 
   "site.title": "Portfolio de Fabricio Blasich",
   "meta.description":

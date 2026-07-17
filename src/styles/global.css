@@ -251,3 +251,53 @@ html {
   scrollbar-color: var(--color-brand) transparent;
   scrollbar-width: thin;
 }
+
+/* ─── Prose theme — bind --tw-prose-* to existing semantic tokens ───────── */
+/* Base (light) prose variables. Semantic tokens auto-flip under .dark.      */
+.prose {
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-lead: var(--color-text-subtle);
+  --tw-prose-links: var(--color-brand);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-counters: var(--color-text-muted);
+  --tw-prose-bullets: var(--color-text-muted);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-quotes: var(--color-text-subtle);
+  --tw-prose-quote-borders: var(--color-brand);
+  --tw-prose-captions: var(--color-text-muted);
+  --tw-prose-code: var(--color-text);
+  --tw-prose-pre-code: var(--color-text);
+  --tw-prose-pre-bg: var(--color-surface-raised);
+  --tw-prose-th-borders: var(--color-border);
+  --tw-prose-td-borders: var(--color-border-subtle);
+}
+
+/* Invert variants used by `dark:prose-invert` — re-bound to the same      */
+/* semantic tokens so dark prose resolves via the existing .dark overrides */
+/* rather than the plugin's fixed dark palette. Matches the project's      */
+/* @custom-variant dark (&:where(.dark, .dark *)) selector.                */
+:where(.dark, .dark *) .prose-invert,
+.prose-invert:where(.dark, .dark *) {
+  --tw-prose-invert-body: var(--color-text);
+  --tw-prose-invert-headings: var(--color-text);
+  --tw-prose-invert-lead: var(--color-text-subtle);
+  --tw-prose-invert-links: var(--color-brand);
+  --tw-prose-invert-bold: var(--color-text);
+  --tw-prose-invert-counters: var(--color-text-muted);
+  --tw-prose-invert-bullets: var(--color-text-muted);
+  --tw-prose-invert-hr: var(--color-border);
+  --tw-prose-invert-quotes: var(--color-text-subtle);
+  --tw-prose-invert-quote-borders: var(--color-brand);
+  --tw-prose-invert-captions: var(--color-text-muted);
+  --tw-prose-invert-code: var(--color-text);
+  --tw-prose-invert-pre-code: var(--color-text);
+  --tw-prose-invert-pre-bg: var(--color-surface-raised);
+  --tw-prose-invert-th-borders: var(--color-border);
+  --tw-prose-invert-td-borders: var(--color-border-subtle);
+}
+
+/* Brand link hover within prose */
+.prose a:hover {
+  color: var(--color-brand-hover);
+}

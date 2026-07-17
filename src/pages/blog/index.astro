@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogCard from "../../components/blog/BlogCard.astro";
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { t } from "../../i18n/ui";
+
+const posts = (await getCollection("blog"))
+  .filter((e) => e.id.startsWith("en/") && !e.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const locale = "en";
+---
+
+<BaseLayout
+  locale={locale}
+  title={t("blog.emptyStateTitle", locale)}
+  description={t("meta.description", locale)}
+>
+  <main id="main" class="container py-16">
+    <h1 class="text-3xl">{t("blog.emptyStateTitle", locale)}</h1>
+
+    {
+      posts.length === 0 ? (
+        <p class="text-text-muted mt-4">{t("blog.emptyStateBody", locale)}</p>
+      ) : (
+        <div class="mt-8 grid gap-6">
+          {posts.map((p) => (
+            <BlogCard
+              href={getRelativeLocaleUrl(
+                locale,
+                `blog/${p.id.replace(/^en\//, "")}`,
+              )}
+              title={p.data.title}
+              description={p.data.description}
+              pubDate={p.data.date}
+              heroImage={p.data.image}
+              locale={locale}
+            />
+          ))}
+        </div>
+      )
+    }
+  </main>
+</BaseLayout>
