@@ -52,6 +52,13 @@ const en = {
   "404.body": "The page you are looking for does not exist or has been moved.",
   "404.backHome": "Back to home",
 
+  // Deploy CTA
+  "deployCta.heading": "How I deploy this site",
+  "deployCta.description":
+    "A look behind the scenes of my deployment pipeline using Docker, Dokploy, and Traefik.",
+  "deployCta.cta": "Read the post",
+  "deployCta.comingSoon": "Coming soon",
+
   // Blog
   "blog.emptyStateTitle": "Blog",
   "blog.emptyStateBody":
@@ -111,6 +118,13 @@ const es = {
   "404.heading": "Página no encontrada",
   "404.body": "La página que buscas no existe o ha sido movida.",
   "404.backHome": "Volver al inicio",
+
+  // Deploy CTA
+  "deployCta.heading": "Cómo deployo este sitio",
+  "deployCta.description":
+    "Una mirada detrás de escena de mi pipeline de deploy con Docker, Dokploy y Traefik.",
+  "deployCta.cta": "Leer el artículo",
+  "deployCta.comingSoon": "Próximamente",
 
   "blog.emptyStateTitle": "Blog",
   "blog.emptyStateBody":

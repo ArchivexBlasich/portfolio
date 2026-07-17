@@ -1,10 +1,29 @@
 ---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import About from "./About.astro";
 import Hero from "./Hero.astro";
 import Experience from "./work/Experience.astro";
 import Projects from "./project/Projects.astro";
 
+interface Props {
+  locale: "en" | "es";
+}
+
 const { locale } = Astro.props;
+
+const entries = await getCollection(
+  "blog",
+  (e) =>
+    e.id.startsWith(`${locale}/`) &&
+    !e.data.draft &&
+    e.data.translationKey === "deploy-this-site",
+);
+
+const match = entries[0];
+const deployHref = match
+  ? getRelativeLocaleUrl(locale, `blog/${match.id.replace(/^${locale}\//, "")}`)
+  : undefined;
 ---
 
 <main
@@ -13,7 +32,7 @@ const { locale } = Astro.props;
   class="container flex max-w-screen-2xl scroll-mt-20 flex-col"
 >
   <Hero locale={locale} />
-  <About locale={locale} />
+  <About locale={locale} deployHref={deployHref} />
   <Experience locale={locale} />
   <Projects locale={locale} />
 </main>

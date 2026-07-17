@@ -1,27 +1,41 @@
 ---
 import Strong from "../Strong.astro";
 import { t } from "../../i18n/ui";
+import DeployCta from "./about/DeployCta.astro";
 
-const { locale } = Astro.props;
+interface Props {
+  locale: "en" | "es";
+  deployHref?: string;
+}
+
+const { locale, deployHref } = Astro.props;
 ---
 
-<section
-  id="about"
-  class="prose lg:prose-xl mt-12 scroll-mt-20 text-center md:text-left"
->
-  <h1 class="text-brand underline">{t("about.heading", locale)}</h1>
+<div class="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
+  <section
+    id="about"
+    class="prose lg:prose-xl max-w-none scroll-mt-20 text-center md:text-left lg:col-span-2"
+  >
+    <h1 class="text-brand underline">{t("about.heading", locale)}</h1>
 
-  <!-- Paragraph 1 -->
-  <p class="text-text-subtle text-pretty">
-    {t("about.p1.beforeStrong", locale)}<Strong
-      >{t("about.p1.strong", locale)}</Strong
-    >{t("about.p1.afterStrong", locale)}
-  </p>
+    <!-- Paragraph 1 -->
+    <p class="text-text-subtle text-pretty">
+      {t("about.p1.beforeStrong", locale)}<Strong
+        >{t("about.p1.strong", locale)}</Strong
+      >{t("about.p1.afterStrong", locale)}
+    </p>
 
-  <!-- Paragraph 2 -->
-  <p class="text-text-subtle text-pretty">
-    {t("about.p3.beforeSpan", locale)}<span class="text-brand"
-      >{t("about.p3.span", locale)}</span
-    >{t("about.p3.afterSpan", locale)} 🐧
-  </p>
-</section>
+    <!-- Paragraph 2 -->
+    <p class="text-text-subtle text-pretty">
+      {t("about.p3.beforeSpan", locale)}<span class="text-brand"
+        >{t("about.p3.span", locale)}</span
+      >{t("about.p3.afterSpan", locale)} 🐧
+    </p>
+  </section>
+
+  <DeployCta
+    deployHref={deployHref}
+    locale={locale}
+    class="lg:col-span-1 lg:self-start"
+  />
+</div>

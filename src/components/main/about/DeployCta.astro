@@ -1,0 +1,46 @@
+---
+import { t } from "../../../i18n/ui";
+
+interface Props {
+  deployHref?: string;
+  locale: "en" | "es";
+  class?: string;
+}
+
+const { deployHref, locale, class: className } = Astro.props;
+---
+
+<article
+  class:list={[
+    "border-border bg-surface-raised rounded-lg border p-4",
+    className,
+  ]}
+>
+  <h3 class="text-xl font-bold">
+    {
+      deployHref ? (
+        <a
+          href={deployHref}
+          class="text-brand hover:text-brand-hover underline underline-offset-2 transition-colors"
+          aria-label={`${t("deployCta.cta", locale)} — ${t("deployCta.heading", locale)}`}
+        >
+          {t("deployCta.heading", locale)}
+        </a>
+      ) : (
+        <span class="text-text">{t("deployCta.heading", locale)}</span>
+      )
+    }
+  </h3>
+
+  <p class="text-text-subtle mt-2 text-sm">
+    {t("deployCta.description", locale)}
+  </p>
+
+  {
+    !deployHref && (
+      <span class="text-text-muted mt-3 inline-block text-sm">
+        {t("deployCta.comingSoon", locale)}
+      </span>
+    )
+  }
+</article>
