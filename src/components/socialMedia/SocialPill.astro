@@ -11,7 +11,7 @@ const isExternal = href.startsWith("http");
   target={isExternal ? "_blank" : undefined}
   rel={isExternal ? "noopener noreferrer" : undefined}
   aria-label={aria_label}
-  class="border-border text-text bg-surface-raised hover:border-brand flex items-center justify-center gap-x-2 rounded-full border px-3 py-3 no-underline transition-transform hover:scale-105"
+  class="border-border text-text bg-surface-raised hover:border-brand hover:text-brand flex items-center justify-center gap-x-2 rounded-full border px-3 py-3 no-underline transition-transform hover:scale-105"
 >
   <svg class=`icon ${size}`>
     <use href={`/sprite.svg${svgRef}`}></use>
