@@ -23,7 +23,7 @@ const { title, description, image, tags, githubUrl, liveUrl } = data;
       <Image
         src={image}
         alt={`${t("projectcard.image.altPrefix", locale)}${title}`}
-        class="aspect-video w-full rounded-lg object-cover shadow-lg"
+        class="bg-surface-raised aspect-video w-full rounded-lg object-contain shadow-lg"
       />
       <div
         class="bg-surface/20 group-hover:bg-surface/40 absolute inset-0 rounded-lg transition-colors"

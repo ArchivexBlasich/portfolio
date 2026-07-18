@@ -89,7 +89,7 @@
 /* so if :root were outside @layer base, it would always win over .dark.         */
 @layer base {
   :root {
-    --color-surface-raw: var(--color-slate-50);
+    --color-surface-raw: var(--color-slate-100);
     --color-surface-hover-raw: var(--color-zinc-200);
     --color-surface-raised-raw: var(--color-white);
     --color-surface-overlay-raw: color-mix(
@@ -100,12 +100,12 @@
     --color-text-raw: var(--color-zinc-900);
     --color-text-subtle-raw: var(
       --color-zinc-700
-    ); /* 8.6:1 on slate-50 — WCAG AAA */
+    ); /* ~8.4:1 on slate-100 — WCAG AAA */
     --color-text-muted-raw: var(
       --color-zinc-500
-    ); /* 5.9:1 on slate-50 — WCAG AA  */
-    --color-border-raw: var(--color-slate-200);
-    --color-border-subtle-raw: var(--color-slate-100);
+    ); /* ~5.7:1 on slate-100 — WCAG AA */
+    --color-border-raw: var(--color-slate-300);
+    --color-border-subtle-raw: var(--color-slate-200);
   }
 
   .dark {
