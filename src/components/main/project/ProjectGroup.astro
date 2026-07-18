@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+import { t } from "../../../i18n/ui";
+
+interface Props {
+  title: string;
+  description?: string;
+  projects: CollectionEntry<"projects">[];
+  locale: "en" | "es";
+}
+
+const { title, description, projects, locale } = Astro.props;
+const count = projects.length;
+---
+
+<details class="group/project border-border-subtle rounded-lg border">
+  <summary
+    class="bg-surface-raised hover:bg-surface-hover flex cursor-pointer items-center justify-between gap-4 rounded-lg p-4 transition-colors md:p-5 [&::-webkit-details-marker]:hidden [&::marker]:hidden"
+  >
+    <div class="min-w-0 flex-1">
+      <h3 class="text-text text-lg font-semibold md:text-xl">{title}</h3>
+      {
+        description && (
+          <p class="text-text-subtle mt-1 text-sm">{description}</p>
+        )
+      }
+    </div>
+    <div class="flex shrink-0 items-center gap-3">
+      <span
+        class="bg-brand-faint/20 text-text-subtle inline-flex items-center rounded-full px-3 py-1 text-sm font-medium"
+      >
+        <span class="tabular-nums">{count}</span>
+        <span class="ml-1">{t("projectGroup.projectCount", locale)}</span>
+      </span>
+      <svg
+        class="project-group-chevron text-text-muted h-5 w-5"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </div>
+  </summary>
+  <div class="project-group-content">
+    <div class="border-border-subtle mt-2 border-l-2 pl-4 md:pl-6">
+      <div class="flex flex-col gap-12 py-4">
+        {
+          projects.map((entry) => (
+            <ProjectCard project={entry} locale={locale} />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</details>

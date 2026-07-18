@@ -30,6 +30,11 @@ const en = {
   // Projects
   "projects.heading": "Projects",
 
+  // ProjectGroup
+  "projectGroup.showProjects": "Show projects",
+  "projectGroup.hideProjects": "Hide projects",
+  "projectGroup.projectCount": "projects",
+
   // ProjectCard
   "projectcard.liveDemo": "Live Demo",
   "projectcard.source.aria": "View source on GitHub",
@@ -100,6 +105,10 @@ const es = {
   "about.p3.afterSpan": ", así que mis amigos me llaman 'Pingüino'.",
 
   "projects.heading": "Proyectos",
+
+  "projectGroup.showProjects": "Mostrar proyectos",
+  "projectGroup.hideProjects": "Ocultar proyectos",
+  "projectGroup.projectCount": "proyectos",
 
   "projectcard.liveDemo": "Demo en vivo",
   "projectcard.source.aria": "Ver código en GitHub",

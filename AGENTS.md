@@ -53,6 +53,8 @@ Data lives in `src/content/` as YAML or Markdown, schemas in `src/content.config
 - `projects/` and `experience/` — structured data in `.yml` (no prose body)
 - `blog/` — prose content in `.md`. EN posts in `src/content/blog/en/<slug>.md`, ES posts in `src/content/blog/es/<slug>.md`. `translationKey` frontmatter pairs the two locales. See `docs/blog-authoring.md` for the authoring workflow. Tag routes and RSS are deferred to future slices.
 
+**Project grouping:** Projects support an optional `group` field (string). Projects without `group` render as standalone cards at the top of the Projects section. Projects with the same `group` value collapse under a `<details>/<summary>` expand via `ProjectGroup.astro`. To add a featured/standalone project (e.g., a thesis), simply omit the `group` field in the YAML.
+
 **image() helper gotcha:** `image()` is a schema context parameter, NOT an import from `astro:content`. Use `schema: ({ image }) => z.object({ image: image() })`. Importing from `astro:content` causes runtime error in Astro 6.
 
 **Astro 6 idioms (do not regress):**
@@ -68,14 +70,20 @@ Data lives in `src/content/` as YAML or Markdown, schemas in `src/content.config
 src/
 ├── assets/              # Project + blog images (PNG)
 ├── components/          # Feature-foldered .astro components
-│   ├── header/          # Header, Navigation, ThemeIcon
+│   ├── Button.astro     # Reusable button (primary/secondary variants)
+│   ├── Link.astro       # Styled anchor link
+│   ├── Strong.astro     # Styled <strong> element
+│   ├── header/          # Header, Navigation, ThemeIcon, LanguageToggle
 │   ├── main/            # Hero, About, Main wrapper
-│   │   ├── project/     # Projects section + ProjectCard, ProjectPill
-│   │   └── work/        # Experience section + ExperienceItem
+│   │   ├── about/       # DeployCta
+│   │   ├── project/     # Projects, ProjectCard, ProjectPill, ProjectGroup
+│   │   └── work/        # Experience, ExperienceItem
 │   ├── blog/            # BlogCard, BlogPostLayout, PostMeta
 │   └── socialMedia/     # SocialMedia, SocialPill
 ├── content/             # Content collections
 │   ├── projects/        # Project entries (.yml)
+│   │   ├── en/          # English: <slug>.yaml
+│   │   └── es/          # Spanish: <slug>.yaml
 │   ├── experience/      # Work experience entries (.yml)
 │   └── blog/            # Blog posts (.md)
 │       ├── en/          # English posts: <slug>.md
@@ -88,7 +96,7 @@ src/
 │   └── [locale]/        # ES routes (existing pattern)
 │       ├── blog/        # ES blog: index.astro, [slug].astro
 │       ├── index.astro
-│       └── ...
+│       └── 404.astro
 └── styles/              # global.css (Tailwind v4 @theme, design tokens, --tw-prose-* overrides)
 ```
 
@@ -101,12 +109,12 @@ Feature-folder pattern: components grouped by section. The blog follows this pat
 - Dark mode: class-based (`@custom-variant dark`), FOUC-prevented via inline script in `<head>`
 - Tokens: `@theme` for static (fonts, brand), `@theme inline` for dynamic semantic colors (surface, text, border) — `.dark` overrides propagate at runtime
 
-### Accessibility gaps (WCAG 2.2 AA — not yet implemented)
+### Accessibility (WCAG 2.2 AA — implemented)
 
-- Focus visible: no `:focus-visible` styles — relies on browser defaults
-- Reduced motion: no `prefers-reduced-motion` — `scroll-smooth` ignores user preference
-- Skip link: no skip-to-content link for keyboard users
-- Selection contrast: `::selection` white on rose-500 — verify 4.5:1
+- Focus visible: `:focus-visible` with brand-colored outline (global.css)
+- Reduced motion: `prefers-reduced-motion` media query disables animations (global.css)
+- Skip link: `.skip-link` visually hidden until focused (global.css)
+- Selection: `::selection` white on rose-900
 
 ## SDD Context
 

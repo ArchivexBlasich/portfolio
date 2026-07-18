@@ -252,6 +252,33 @@ html {
   scrollbar-width: thin;
 }
 
+/* ─── Project group expand animation ──────────────────────────────────────── */
+/* Uses CSS Grid row animation for smooth height transitions without JS.      */
+/* The browser handles <details> open/close natively; we enhance with motion. */
+
+.project-group-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms ease-in-out;
+}
+
+.project-group-content > * {
+  overflow: hidden;
+  min-height: 0;
+}
+
+details[open] > .project-group-content {
+  grid-template-rows: 1fr;
+}
+
+.project-group-chevron {
+  transition: transform 300ms ease-in-out;
+}
+
+details[open] > summary .project-group-chevron {
+  transform: rotate(180deg);
+}
+
 /* ─── Prose theme — bind --tw-prose-* to existing semantic tokens ───────── */
 /* Base (light) prose variables. Semantic tokens auto-flip under .dark.      */
 .prose {

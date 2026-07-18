@@ -10,3 +10,4 @@ githubUrl: "https://github.com/archivexblasich/battleship"
 liveUrl: "https://archivexblasich.github.io/Battleship/"
 featured: true
 order: 3
+group: "The Odin Project"
