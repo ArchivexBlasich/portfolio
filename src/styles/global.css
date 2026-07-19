@@ -328,3 +328,27 @@ details[open] > summary .project-group-chevron {
 .prose a:hover {
   color: var(--color-brand-hover);
 }
+
+/* ─── Code blocks — Shiki (always dark, both themes) ───────────────────── */
+/* Astro outputs <pre class="astro-code" data-language="..." style="...">  */
+/* Shiki's inline styles handle bg + text color; we add chrome on top.     */
+.prose .astro-code {
+  position: relative;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 0.5rem;
+}
+
+/* Language label badge */
+.prose .astro-code[data-language]::after {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-slate-500);
+  user-select: none;
+  pointer-events: none;
+}

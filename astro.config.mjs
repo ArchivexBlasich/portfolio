@@ -6,6 +6,11 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://fabricioblasich.com",
+  markdown: {
+    shikiConfig: {
+      theme: "github-dark",
+    },
+  },
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es"],
