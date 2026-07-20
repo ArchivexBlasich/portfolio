@@ -52,9 +52,7 @@ Structure every post around what the reader is actually wondering, not your inte
 3. **What were the trade-offs or alternatives?** (This separates good from great)
 4. **How do I use/try/implement this?** (Concrete next steps)
 
-For engineering deep-dives, also address:
-5. **What did we try that didn't work?** (Builds trust)
-6. **What are the known limitations?** (Shows intellectual honesty)
+For engineering deep-dives, also address: 5. **What did we try that didn't work?** (Builds trust) 6. **What are the known limitations?** (Shows intellectual honesty)
 
 ## Formatting for Skimmability
 
@@ -63,9 +61,11 @@ People scroll. Shorter paragraphs are almost always better for keeping people re
 **Break paragraphs at contrast points.** When a sentence introduces a "but," "however," or shifts perspective, start a new paragraph. Don't bury the turn inside a block of text.
 
 **Bad:**
+
 > Traditional monitoring tracks requests and latency. That works for stateless HTTP services. AI agents are different. A single run might involve multiple LLM calls, tool executions, and handoffs.
 
 **Good:**
+
 > Traditional monitoring tracks requests and latency. That works for stateless HTTP services.
 >
 > AI agents are different. A single run might involve multiple LLM calls, tool executions, and handoffs.
@@ -93,26 +93,32 @@ When targeting a competitive search query:
 LLM-generated prose has tells. Flag and rewrite these:
 
 **Staccato dramatic fragments.**
+
 - Bad: "No errors. No warnings. Everything green."
 - Good: "There were no errors, no warnings, everything looked fine."
 
 **Bumper-sticker aphorisms.**
+
 - Bad: "You can't fix what you can't see."
 - Good: "Without visibility into the full request lifecycle, you're guessing."
 
 **Three-beat reveals.**
+
 - Bad: "Not a config issue. Not a code bug. The deploy was stale."
 - Good: "It wasn't a config issue or a code bug. The deploy was stale."
 
 **Smug simplicity.**
+
 - Bad: [code block] "That's it. That's all you need."
 - Good: [code block] then explain what the code does, or just move on.
 
 **Parallel structure ad copy.**
+
 - Bad: "Metrics tell you what's broken. Traces tell you why."
 - Good: "Metrics show what's broken, but traces are where you'll actually figure out why."
 
 **Personality only in the bookends.** AI drafts open with a personal anecdote, go impersonal for 80% of the post, then close with a CTA. The author's voice should persist throughout.
+
 - Bad: Personal intro → clinical middle → "Try Sentry for free."
 - Good: First-person asides woven through the post: "this is the part that tripped me up" / "I would have blamed the wrong service."
 
@@ -125,10 +131,11 @@ LLM-generated prose has tells. Flag and rewrite these:
 ## Technical Quality Standards
 
 **Numbers over adjectives.** If you make a performance claim, include the number.
+
 - Bad: "This significantly reduced our error processing time."
 - Good: "This reduced our p99 error processing time from 340ms to 45ms — a 7.5× improvement."
 
-**Code must work.** If a post includes code, test it. Include imports, configuration, and context. Comments should explain *why*, not *what*.
+**Code must work.** If a post includes code, test it. Include imports, configuration, and context. Comments should explain _why_, not _what_.
 
 **Diagrams for systems.** If you describe a system with more than two interacting components, include a diagram. Label with real service names, not generic boxes.
 
@@ -139,11 +146,13 @@ LLM-generated prose has tells. Flag and rewrite these:
 The title is the highest-leverage sentence in the post. It must stop a developer scrolling through their RSS feed or Twitter.
 
 **Strong titles** make a specific claim, tell a story, or promise a specific payoff:
+
 - "The metrics product we built worked. But we killed it and started over anyway"
 - "How we reduced release delays by 5% by fixing Salt"
 - "Your JavaScript bundle has 47% dead code. Here's how to find it."
 
 **Weak titles** are vague announcements:
+
 - "Introducing our new metrics product"
 - "Performance improvements in Sentry"
 - "AI-powered debugging with Seer"
@@ -156,19 +165,20 @@ End with something useful: a link to docs, source code, a way to try it, or a ca
 
 Here's the quick map by post type:
 
-| Type | Goal | Byline |
-|------|------|--------|
-| Engineering Deep Dive | Explain a technical system/decision so other engineers learn | The engineer(s) who built it. Always. |
-| Product Launch | Explain what shipped, why it matters, how to use it | PM, engineer, or DevEx. Not PMM unless marketing built it. |
-| Postmortem | Transparent failure analysis with timeline and fixes | Engineering leadership |
-| Data / Research | Original insights from Sentry's unique data position | Data team, engineering, or research |
-| Tutorial / Guide | Help a developer accomplish something specific | DevEx, engineer, or community contributor |
+| Type                  | Goal                                                         | Byline                                                     |
+| --------------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
+| Engineering Deep Dive | Explain a technical system/decision so other engineers learn | The engineer(s) who built it. Always.                      |
+| Product Launch        | Explain what shipped, why it matters, how to use it          | PM, engineer, or DevEx. Not PMM unless marketing built it. |
+| Postmortem            | Transparent failure analysis with timeline and fixes         | Engineering leadership                                     |
+| Data / Research       | Original insights from Sentry's unique data position         | Data team, engineering, or research                        |
+| Tutorial / Guide      | Help a developer accomplish something specific               | DevEx, engineer, or community contributor                  |
 
 ## The "Would I Share This?" Test
 
 Before publishing, ask: Would a developer share this post? Does it have a shot at getting on Hacker News? If the answer is no, the post either needs more depth, more original insight, or it belongs in the changelog instead.
 
 Posts worth sharing contain at least one of:
+
 - A technical decision explained with trade-offs
 - Original data or research not found elsewhere
 - A real-world debugging story with specific details
@@ -193,6 +203,7 @@ Posts worth sharing contain at least one of:
 Run through both checklists:
 
 **Technical Review:**
+
 - All technical claims accurate
 - Code samples work
 - Architecture descriptions match reality
@@ -200,6 +211,7 @@ Run through both checklists:
 - No oversimplifications that would make an expert cringe
 
 **Editorial Review:**
+
 - Opening hooks reader within 2 sentences
 - Passes the "would I share this?" test
 - No corporate language, filler, or fluff
@@ -208,6 +220,7 @@ Run through both checklists:
 - Title is specific and compelling
 
 **Final Check:**
+
 - Author byline is correct (real person's name)
 - Links to docs/getting-started included
 - Post doesn't duplicate what's in the changelog
