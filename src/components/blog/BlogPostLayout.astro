@@ -26,7 +26,7 @@ const { locale, title, description, pubDate, updatedDate, heroImage } =
           <img
             src={heroImage.src}
             alt=""
-            class="mb-8 aspect-video w-full rounded-lg object-cover"
+            class="mb-8 aspect-video w-full rounded-lg object-contain"
           />
         )
       }
@@ -37,7 +37,9 @@ const { locale, title, description, pubDate, updatedDate, heroImage } =
         <PostMeta pubDate={pubDate} updatedDate={updatedDate} locale={locale} />
       </div>
 
-      <div class="prose dark:prose-invert mt-8 max-w-prose leading-relaxed">
+      <div
+        class="prose dark:prose-invert mx-auto mt-8 max-w-prose leading-relaxed"
+      >
         <slot />
       </div>
 
@@ -49,4 +51,48 @@ const { locale, title, description, pubDate, updatedDate, heroImage } =
       </a>
     </article>
   </main>
+
+  <script is:inline>
+    (() => {
+      const prose = document.querySelector(".prose");
+      if (!prose) return;
+
+      for (const pre of prose.querySelectorAll("pre.astro-code")) {
+        // Wrap <pre> in a container so button/badge stay fixed while code scrolls
+        const wrapper = document.createElement("div");
+        wrapper.className = "code-block-wrapper";
+        wrapper.dataset.language = pre.dataset.language ?? "";
+        pre.parentNode?.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "code-copy-btn";
+        btn.setAttribute("aria-label", "Copy code to clipboard");
+        btn.textContent = "Copy";
+
+        btn.addEventListener("click", async () => {
+          const code = pre.querySelector("code");
+          const text = (code ?? pre).textContent ?? "";
+
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = "Copied!";
+            btn.classList.add("copied");
+            setTimeout(() => {
+              btn.textContent = "Copy";
+              btn.classList.remove("copied");
+            }, 2000);
+          } catch {
+            btn.textContent = "Failed";
+            setTimeout(() => {
+              btn.textContent = "Copy";
+            }, 2000);
+          }
+        });
+
+        wrapper.appendChild(btn);
+      }
+    })();
+  </script>
 </BaseLayout>

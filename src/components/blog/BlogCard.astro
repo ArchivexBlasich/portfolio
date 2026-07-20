@@ -15,14 +15,14 @@ const { href, title, description, pubDate, heroImage, locale } = Astro.props;
 ---
 
 <article
-  class="border-border bg-surface-raised rounded-lg border p-4 transition-colors"
+  class="border-border bg-surface-raised group hover:border-brand/40 relative rounded-lg border p-4 transition-all duration-200 hover:shadow-md"
 >
   {
     heroImage && (
       <img
         src={heroImage.src}
         alt=""
-        class="mb-4 aspect-video w-full rounded-md object-cover"
+        class="mb-4 aspect-video w-full rounded-md object-contain"
       />
     )
   }
@@ -30,7 +30,7 @@ const { href, title, description, pubDate, heroImage, locale } = Astro.props;
   <h2 class="text-xl">
     <a
       href={href}
-      class="text-text hover:text-brand underline-offset-2 transition-colors"
+      class="text-text group-hover:text-brand underline-offset-2 transition-colors after:absolute after:inset-0"
     >
       {title}
     </a>
