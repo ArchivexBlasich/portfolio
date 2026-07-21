@@ -33,9 +33,5 @@ const { locale, deployHref } = Astro.props;
     </p>
   </section>
 
-  <DeployCta
-    deployHref={deployHref}
-    locale={locale}
-    class="lg:col-span-1 lg:self-start"
-  />
+  <DeployCta deployHref={deployHref} locale={locale} class="lg:col-span-1" />
 </div>

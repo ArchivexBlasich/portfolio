@@ -58,9 +58,9 @@ const en = {
   "404.backHome": "Back to home",
 
   // Deploy CTA
-  "deployCta.heading": "How I deploy this site",
+  "deployCta.heading": "How I deployed this site",
   "deployCta.description":
-    "A look behind the scenes of my deployment pipeline using Docker, Dokploy, and Traefik.",
+    "I set up a VPS from scratch, locked it down, installed Dokploy, and wired up GitHub Actions for automated deploys.",
   "deployCta.cta": "Read the post",
   "deployCta.comingSoon": "Coming soon",
 
@@ -129,9 +129,9 @@ const es = {
   "404.backHome": "Volver al inicio",
 
   // Deploy CTA
-  "deployCta.heading": "Cómo deployo este sitio",
+  "deployCta.heading": "Cómo desplegué este sitio",
   "deployCta.description":
-    "Una mirada detrás de escena de mi pipeline de deploy con Docker, Dokploy y Traefik.",
+    "Configuré un VPS desde cero, lo aseguré, instalé Dokploy y conecté GitHub Actions para deploys automáticos.",
   "deployCta.cta": "Leer el artículo",
   "deployCta.comingSoon": "Próximamente",
 

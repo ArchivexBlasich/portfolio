@@ -1,5 +1,6 @@
 ---
 import { t } from "../../../i18n/ui";
+import deployImage from "../../../assets/blog/deploy-vps.png";
 
 interface Props {
   deployHref?: string;
@@ -12,7 +13,7 @@ const { deployHref, locale, class: className } = Astro.props;
 
 <article
   class:list={[
-    "border-border bg-surface-raised rounded-lg border p-4",
+    "border-border bg-surface-raised flex flex-col rounded-lg border p-4",
     className,
   ]}
 >
@@ -43,4 +44,15 @@ const { deployHref, locale, class: className } = Astro.props;
       </span>
     )
   }
+
+  <div class="mt-4 flex flex-1 items-center justify-center">
+    <img
+      src={deployImage.src}
+      alt=""
+      width={deployImage.width}
+      height={deployImage.height}
+      class="max-h-48 w-full object-contain opacity-80"
+      loading="lazy"
+    />
+  </div>
 </article>

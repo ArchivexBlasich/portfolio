@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import { getRelativeLocaleUrl } from "astro:i18n";
 import About from "./About.astro";
 import Hero from "./Hero.astro";
 import Experience from "./work/Experience.astro";
@@ -17,12 +16,15 @@ const entries = await getCollection(
   (e) =>
     e.id.startsWith(`${locale}/`) &&
     !e.data.draft &&
-    e.data.translationKey === "deploy-this-site",
+    e.data.translationKey === "deploy-vps",
 );
 
 const match = entries[0];
+const slug = match ? match.id.replace(/^en\/|^es\//, "") : "";
 const deployHref = match
-  ? getRelativeLocaleUrl(locale, `blog/${match.id.replace(/^${locale}\//, "")}`)
+  ? locale === "en"
+    ? `/blog/${slug}/`
+    : `/${locale}/blog/${slug}/`
   : undefined;
 ---
 
