@@ -1,0 +1,15 @@
+title: "Plataforma de Firma Electrónica para FACET-UNT"
+description: "Sistema autogestionado de firma electrónica de documentos desplegado en infraestructura institucional. Diseñé una arquitectura de 3 capas (borde Nginx, PaaS Coolify sobre LXC en Proxmox, servicios Docker) integrando Documenso, PostgreSQL, almacenamiento de objetos MinIO y SSO con Google OAuth. Eliminé $5.300/año en licencias comerciales logrando soberanía total de los datos. Mi proyecto de tesis universitaria."
+image: "../../../assets/ThesisProject.png"
+tags:
+  - Documenso
+  - Docker
+  - Coolify
+  - PostgreSQL
+  - MinIO
+  - Proxmox
+  - Traefik
+  - OAuth 2.0
+liveUrl: "https://documentos.facet.unt.edu.ar"
+featured: true
+order: 1

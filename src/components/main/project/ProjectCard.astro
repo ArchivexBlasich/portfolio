@@ -23,6 +23,7 @@ const { title, description, image, tags, githubUrl, liveUrl } = data;
       <Image
         src={image}
         alt={`${t("projectcard.image.altPrefix", locale)}${title}`}
+        loading="lazy"
         class="bg-surface-raised aspect-video w-full rounded-lg object-contain shadow-lg"
       />
       <div
@@ -50,21 +51,25 @@ const { title, description, image, tags, githubUrl, liveUrl } = data;
           </Button>
         )
       }
-      <a
-        href={githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={t("projectcard.source.aria", locale)}
-        class="group bg-surface-raised/80 border-border text-text-subtle hover:bg-surface-raised hover:border-text-muted hover:text-text hover:shadow-surface/50 relative flex items-center justify-center rounded-full border p-3 shadow-sm transition-all duration-300 hover:shadow-md"
-      >
-        <svg
-          class="h-6 w-6 transition-transform duration-300 group-hover:scale-110"
-          viewBox="0 0 1024 1024"
-          fill="currentColor"
-        >
-          <use href="/sprite.svg#github_dark"></use>
-        </svg>
-      </a>
+      {
+        githubUrl && (
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t("projectcard.source.aria", locale)}
+            class="group bg-surface-raised/80 border-border text-text-subtle hover:bg-surface-raised hover:border-text-muted hover:text-text hover:shadow-surface/50 relative flex items-center justify-center rounded-full border p-3 shadow-sm transition-all duration-300 hover:shadow-md"
+          >
+            <svg
+              class="h-6 w-6 transition-transform duration-300 group-hover:scale-110"
+              viewBox="0 0 1024 1024"
+              fill="currentColor"
+            >
+              <use href="/sprite.svg#github_dark" />
+            </svg>
+          </a>
+        )
+      }
     </div>
   </div>
 </article>
