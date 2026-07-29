@@ -1,0 +1,3214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Defensa de Tesis — Fabricio Blasich</title>
+
+  <!-- RevealJS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+
+  <!-- Bold Theme Fonts (themes/bold.md §1) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================================================ */
+    /* BOLD THEME — DESIGN TOKENS  (themes/bold.md §1)                 */
+    /* ================================================================ */
+    :root {
+      /* === COLORS — Tema Institucional FACET (Dark Tech) === */
+      --bg-primary:   #0f172a;  /* Slate 900 — fondo principal */
+      --bg-secondary: #1e293b;  /* Slate 800 — cards, filas alternas */
+      --bg-dark:      #0b1120;  /* Slate 950 — section breaks, fondos más profundos */
+      --bg-card:      #162032;  /* intermedio para tarjetas de contenido */
+
+      --text-primary:   #f8fafc;  /* Slate 50 — texto principal */
+      --text-secondary: #94a3b8;  /* Slate 400 — texto secundario */
+      --text-muted:     #8899aa;  /* Slate 450 — texto atenuado (aumentado para 15m) */
+      --text-on-dark:   #f8fafc;
+
+      --accent-1: #38bdf8;  /* Cian brillante — números, viñetas, flechas */
+      --accent-2: #0ea5e9;  /* Azul medio — bordes, gradientes */
+      --accent-3: #7dd3fc;  /* Sky 300 — acentos secundarios, highlight */
+      --accent-4: #0369a1;  /* Sky 700 — fondo section breaks azules */
+
+      /* === TYPOGRAPHY === */
+      --font-display:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-heading:  'Sora', 'Inter', sans-serif;
+      --font-mono:     'JetBrains Mono', monospace;
+
+      /* === SIZE SCALE === */
+      --size-stat-hero:   clamp(6rem, 15vw, 14rem);
+      --size-stat:        clamp(4rem, 10vw, 8rem);
+      --size-impact-hero: clamp(4rem, 12vw, 7rem);
+      --size-impact:      clamp(3rem,  8vw, 5rem);
+      --size-h1:          clamp(6rem,  8vw, 9rem);
+      --size-h2:          clamp(4rem, 12vw, 7rem);
+      --size-h3:          clamp(1.75rem, 3.5vw, 3rem);
+      --size-h4:          clamp(1.5rem,  2.5vw, 2rem);
+      --size-body:        clamp(1.25rem, 2vw, 2rem);
+      --size-body-lg:     clamp(1.5rem,  2.5vw, 2.25rem);
+      --size-body-xl:     clamp(2.5rem,  3vw,   3.5rem);
+      --size-small:       clamp(1rem,    1.25vw, 1.25rem);
+      --size-label:       clamp(1.5rem,  2.5vw, 2.25rem);
+
+      /* === SPACING === */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 3rem;
+      --space-xl: 4rem;
+
+      /* === COMPONENTS === */
+      --bar-width:    120px;
+      --bar-height:   8px;
+      --card-radius:  8px;
+      --card-padding: 2rem;
+
+      /* === LAYOUT === */
+      --content-max-width: 1400px;
+      --slide-padding:     60px;
+
+      /* Table tag colors (dark theme) */
+      --tag-bad-bg:     #450a0a;
+      --tag-bad-fg:     #fca5a5;
+      --tag-good-bg:    #052e16;
+      --tag-good-fg:    #86efac;
+      --tag-neutral-bg: #422006;
+      --tag-neutral-fg: #fcd34d;
+    }
+
+    /* ================================================================ */
+    /* BASE RESET  (SKILL.md §1.3 + bold.md)                           */
+    /* ================================================================ */
+    .reveal-viewport {
+      background: var(--bg-primary);
+    }
+
+    /* No background on .reveal — let data-background-color work */
+    .reveal {
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--text-primary);
+    }
+
+    /* SKILL.md §1.3: text-align + padding only. NO flex, NO height. */
+    .reveal .slides section {
+      text-align:   left;
+      padding:      60px;
+      box-sizing:   border-box;
+    }
+
+    .reveal .slides section.centered {
+      text-align: center;
+    }
+
+    /* ── Headlines ── */
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family:    var(--font-display);
+      font-weight:    700;
+      color:          var(--text-primary);
+      text-transform: none;
+      letter-spacing: -0.02em;
+      line-height:    1.1;
+      margin:         0 0 0.4em 0;
+      text-shadow:    0 2px 20px rgba(0,0,0,0.4);
+    }
+    .reveal h1 { font-size: var(--size-h1); }
+    .reveal h2 { font-size: var(--size-h2); }
+    .reveal h3 { font-size: var(--size-h3); }
+    .reveal h4 { font-size: var(--size-h4); }
+
+    /* ── Body ── */
+    .reveal p {
+      margin:      0 0 0.75em 0;
+      line-height: 1.5;
+      font-size:   var(--size-body);
+    }
+
+    .reveal ul, .reveal ol {
+      margin:               0;
+      padding:              0;
+      list-style-position:  outside;
+      margin-left:          1.5em;
+    }
+
+    .reveal li {
+      margin-bottom: 0.5em;
+      line-height:   1.4;
+      font-size:     var(--size-body);
+    }
+
+    /* ================================================================ */
+    /* BOLD TYPOGRAPHY UTILITIES  (bold.md §2)                         */
+    /* ================================================================ */
+    .reveal .lead {
+      font-size:   var(--size-body-xl);
+      color:       var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .reveal .label {
+      font-family:    var(--font-mono);
+      font-size:      var(--size-label);
+      font-weight:    500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color:          var(--accent-1);
+      margin-bottom:  0;
+    }
+
+    .reveal .stat {
+      font-family:   var(--font-mono);
+      font-size:     var(--size-stat);
+      font-weight:   700;
+      line-height:   1;
+      color:         var(--accent-1);
+      margin-bottom: 0;
+    }
+
+    .reveal .stat-hero {
+      font-family:   var(--font-mono);
+      font-size:     var(--size-stat-hero);
+      font-weight:   700;
+      line-height:   0.9;
+      color:         var(--accent-1);
+      margin-bottom: 0;
+    }
+
+    .reveal .stat-label {
+      font-size:   var(--size-body-lg);
+      font-weight: 500;
+      color:       var(--text-secondary);
+      margin-top:  var(--space-sm);
+    }
+
+    .reveal .impact {
+      font-family:   var(--font-display);
+      font-size:     var(--size-impact);
+      font-weight:   700;
+      line-height:   1.1;
+    }
+
+    .reveal .impact-hero {
+      font-family:   var(--font-display);
+      font-size:     var(--size-impact-hero);
+      font-weight:   700;
+      line-height:   1.05;
+    }
+
+    /* ================================================================ */
+    /* COLOR UTILITIES  (bold.md §3) — prefixed for specificity        */
+    /* ================================================================ */
+    .reveal .text-primary   { color: var(--text-primary);   }
+    .reveal .text-secondary { color: var(--text-secondary); }
+    .reveal .text-muted     { color: var(--text-muted);     }
+    .reveal .text-on-dark   { color: var(--text-on-dark);   }
+    .reveal .text-accent-1  { color: var(--accent-1);       }
+    .reveal .text-accent-2  { color: var(--accent-2);       }
+    .reveal .text-accent-3  { color: var(--accent-3);       }
+    .reveal .text-accent-4  { color: var(--accent-4);       }
+
+    .reveal .highlight-1 { color: var(--accent-1); font-weight: 600; }
+    .reveal .highlight-2 { color: var(--accent-2); font-weight: 600; }
+    .reveal .highlight-3 { color: var(--accent-3); font-weight: 600; }
+    .reveal .highlight-4 { color: var(--accent-4); font-weight: 600; }
+
+    /* ================================================================ */
+    /* CORE COMPONENTS  (SKILL.md §3)                                  */
+    /* ================================================================ */
+
+    /* ── Bar (SKILL.md §3.1) ── */
+    .bar {
+      width:         var(--bar-width);
+      height:        var(--bar-height);
+      background:    var(--accent-1);
+      margin-bottom: var(--space-md);
+      border-radius: 2px;
+      flex-shrink:   0;
+    }
+    .bar-accent-2  { background: var(--accent-2); }
+    .bar-accent-3  { background: var(--accent-1); }
+    .bar-accent-4  { background: var(--accent-4); }
+    .bar-porcelain { background: var(--bg-secondary); }
+    .centered .bar { margin-left: auto; margin-right: auto; }
+
+    /* ── Content wrap (SKILL.md §3.2) ── */
+    .content-wrap              { max-width: var(--content-max-width); width: 100%; }
+    .centered .content-wrap    { margin: 0 auto; }
+
+    /* ── Cards (SKILL.md §3.3 + bold.md) ── */
+    .card {
+      background:    var(--bg-secondary);
+      border:        1px solid rgba(56,189,248,0.15);
+      border-left:   4px solid var(--accent-1);
+      border-radius: var(--card-radius);
+      padding:       var(--card-padding);
+    }
+    .card-accent-2 { border-left-color: var(--accent-2); }
+    .card-accent-3 { border-left-color: var(--accent-3); }
+    .card-accent-4 { border-left-color: var(--accent-4); }
+    .card h3       { font-size: var(--size-h4); margin-bottom: var(--space-xs); }
+    .card p        { font-size: var(--size-body); color: var(--text-secondary); margin: 0; }
+
+    /* ── Grids (SKILL.md §3.4) ── */
+    .grid-2   { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+    .grid-3   { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+    .grid-4   { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); }
+    .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr;        gap: var(--space-lg); }
+    .grid-1-2 { display: grid; grid-template-columns: 1fr 2fr;        gap: var(--space-lg); }
+
+    /* ── Controls & progress ── */
+    .reveal .controls    { color: var(--accent-1); }
+    .reveal .progress    { background: rgba(56,189,248,0.15); color: var(--accent-1); height: 3px; }
+    .reveal .slide-number {
+      font-family: var(--font-body);
+      font-size:   var(--size-small);
+      color:       var(--text-muted);
+      background:  transparent;
+      bottom:      12px;
+      right:       16px;
+    }
+
+    /* SVG text override */
+    .reveal svg text { font-family: var(--font-body); }
+
+    /* ================================================================ */
+    /* SLIDE 1 — PORTADA                                               */
+    /* ================================================================ */
+    /* Portada: subtle cyan radial glow behind content */
+    .slide-portada {
+      display:          flex !important;
+      flex-direction:   column;
+      justify-content:  center;
+      align-items:      center;
+      text-align:       center !important;
+      background-image: radial-gradient(
+        ellipse 75% 60% at 50% 45%,
+        rgba(56,189,248,0.07) 0%,
+        transparent 70%
+      );
+    }
+
+    @property --logos-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes logos-border-spin {
+      to { --logos-angle: 360deg; }
+    }
+
+    .portada-logos {
+      display:          flex;
+      flex-direction:   row;
+      align-items:      center;
+      justify-content:  center;
+      gap:              36px;
+      margin-bottom:    var(--space-lg);
+      border-radius:    14px;
+      padding:          10px 22px;
+      border:           3px solid transparent;
+      background-image: linear-gradient(#f8fafc, #f8fafc),
+        conic-gradient(
+          from var(--logos-angle),
+          #38bdf8 0deg 90deg,
+          #0ea5e9 90deg 180deg,
+          #7dd3fc 180deg 270deg,
+          #0369a1 270deg 360deg
+        );
+      background-origin: border-box;
+      background-clip:   padding-box, border-box;
+      animation:         logos-border-spin 4s linear infinite;
+    }
+
+    .portada-logos img {
+      height:         120px;
+      width:          auto;
+      object-fit:     contain;
+      mix-blend-mode: multiply;
+      border-radius:  6px;
+    }
+
+    .slide-portada h1 {
+      font-size:   clamp(2.5rem, 4.5vw, 5.5rem);
+      max-width:   1500px;
+      margin:      0 auto var(--space-md) auto;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .portada-meta {
+      font-size:   clamp(1.5rem, 2.2vw, 2.25rem);
+      color:       var(--text-secondary);
+      line-height: 2.1;
+      margin-top:  var(--space-sm);
+    }
+
+    .portada-meta .author {
+      font-size:     clamp(2.5rem, 3.5vw, 4rem);
+      font-weight:   600;
+      color:         var(--accent-1);
+      line-height:   1.2;
+      margin-bottom: 0.3em;
+    }
+
+    .portada-meta strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ================================================================ */
+    /* SLIDE 2 — TABLA DE CONTENIDOS                                   */
+    /* ================================================================ */
+    .toc-title {
+      font-family:    var(--font-heading);
+      font-size:      var(--size-h2);
+      font-weight:    800;
+      color:          var(--accent-1);
+      text-align:     center;
+      letter-spacing: -0.02em;
+      margin-bottom:  var(--space-lg);
+    }
+
+    .toc-grid {
+      display:        flex;
+      flex-direction: column;
+      gap:            var(--space-sm);
+    }
+
+    .toc-block {
+      display:       flex;
+      align-items:   center;
+      gap:           var(--space-lg);
+      padding:       var(--space-md) var(--space-xl);
+      background:    var(--bg-secondary);
+      border-radius: var(--card-radius);
+      border:        1px solid rgba(56,189,248,0.12);
+      border-left:   6px solid var(--accent-1);
+    }
+
+    .toc-num {
+      color:       var(--accent-1);
+      font-family: var(--font-display);
+      font-size:   clamp(1.8rem, 2.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1;
+      flex-shrink: 0;
+      min-width:   2ch;
+      text-align:  right;
+    }
+
+    .toc-label {
+      color:       var(--text-primary);
+      font-size:   clamp(1.8rem, 2.5vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    /* Section-specific TOC number colors for visual memory anchors */
+    .toc-block:nth-child(1) .toc-num { color: var(--accent-1); }
+    .toc-block:nth-child(2) .toc-num { color: #a78bfa; }
+    .toc-block:nth-child(3) .toc-num { color: #4ade80; }
+    .toc-block:nth-child(4) .toc-num { color: #60a5fa; }
+    .toc-block:nth-child(5) .toc-num { color: #fb923c; }
+    .toc-block:nth-child(6) .toc-num { color: #34d399; }
+
+    .toc-block:nth-child(1) { border-left-color: var(--accent-1); }
+    .toc-block:nth-child(2) { border-left-color: #a78bfa; }
+    .toc-block:nth-child(3) { border-left-color: #4ade80; }
+    .toc-block:nth-child(4) { border-left-color: #60a5fa; }
+    .toc-block:nth-child(5) { border-left-color: #fb923c; }
+    .toc-block:nth-child(6) { border-left-color: #34d399; }
+    .section-tag {
+      font-family:    var(--font-mono);
+      font-size:      var(--size-label);
+      font-weight:    700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color:          var(--accent-3);
+      margin:         0 0 var(--space-sm) 0;
+    }
+
+    .section-heading {
+      font-family:    var(--font-heading);
+      font-size:      var(--size-h1);
+      font-weight:    800;
+      line-height:    1.05;
+      letter-spacing: -0.03em;
+      margin:         0 0 var(--space-md) 0;
+    }
+
+    /* Radial glow on every section break for depth */
+    .reveal .slides section.centered {
+      background-image: radial-gradient(
+        ellipse 90% 90% at 92% 8%,
+        rgba(255,255,255,0.055) 0%,
+        transparent 60%
+      );
+    }
+
+    /* ================================================================ */
+    /* BULLET LIST — custom style                                       */
+    /* ================================================================ */
+    .reveal ul.styled-list {
+      list-style: none;
+      padding:    0;
+      margin:     0;
+      width:      100%;
+    }
+
+    .reveal ul.styled-list li {
+      font-size:     var(--size-body-lg);
+      font-weight:   400;
+      line-height:   1.45;
+      padding:       0.55em 0 0.55em 1.8em;
+      position:      relative;
+      color:         var(--text-primary);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .reveal ul.styled-list li:last-child { border-bottom: none; }
+
+    .reveal ul.styled-list li::before {
+      content:       '';
+      position:      absolute;
+      left:          0;
+      top:           1.05em;
+      width:         9px;
+      height:        9px;
+      background:    var(--accent-1);
+      border-radius: 50%;
+    }
+
+    /* ================================================================ */
+    /* SLIDE 3 — EL PROBLEMA                                           */
+    /* ================================================================ */
+    .slide-kicker {
+      font-family:    var(--font-mono);
+      font-size:      var(--size-label);
+      font-weight:    600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color:          var(--accent-2);
+      border-left:    4px solid var(--accent-2);
+      padding-left:   0.7em;
+      margin:         0 0 var(--space-sm) 0;
+      line-height:    1.2;
+    }
+
+    .problema-layout {
+      display:               grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap:                   var(--space-lg);
+      align-items:           start;
+      margin-top:            0;
+    }
+
+    /* Prob cards */
+    .prob-card {
+      background:    var(--bg-secondary);
+      border-radius: var(--card-radius);
+      border-left:   6px solid var(--accent-1);
+      border:        1px solid rgba(56,189,248,0.12);
+      border-left:   6px solid var(--accent-1);
+      display:       flex;
+      align-items:   center;
+      padding:       var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .prob-card.fragment.visible {
+      animation: prob-card-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes prob-card-in {
+      from { opacity: 0; transform: translateX(-18px); }
+      to   { opacity: 1; transform: translateX(0);     }
+    }
+
+    .prob-num {
+      color:        var(--accent-1);
+      font-family:  var(--font-display);
+      font-size:    clamp(2rem, 3.5vw, 4.5rem);
+      font-weight:  700;
+      margin-right: var(--space-md);
+      line-height:  1;
+      flex-shrink:  0;
+    }
+
+    .prob-text {
+      color:       var(--text-primary);
+      font-size:   clamp(1.75rem, 2.5vw, 3rem);
+      font-weight: 600;
+      line-height: 1.3;
+      margin:      0;
+    }
+
+    /* Flow arrows */
+    .flow-arrow {
+      stroke-dasharray: 6 4;
+      animation: flow-dash 1.2s linear infinite;
+    }
+
+    @keyframes flow-dash {
+      from { stroke-dashoffset: 20; }
+      to   { stroke-dashoffset:  0; }
+    }
+
+    /* ================================================================ */
+    /* SLIDE: OBJETIVOS ESPECÍFICOS — Animated border circles         */
+    /* ================================================================ */
+    @keyframes obj-pulse {
+      0%, 100% { box-shadow: 0 0  8px 2px var(--obj-color),
+                             0 0 24px 4px color-mix(in srgb, var(--obj-color) 30%, transparent); }
+      50%      { box-shadow: 0 0 22px 6px var(--obj-color),
+                             0 0 55px 14px color-mix(in srgb, var(--obj-color) 45%, transparent); }
+    }
+
+    .obj-slide-title {
+      font-size: clamp(2.8rem, 5vw, 6rem) !important;
+    }
+
+    .obj-grid {
+      display:               grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:                   var(--space-md);
+      margin-top:            var(--space-md);
+      align-items:           center;
+      justify-items:         center;
+    }
+
+    .obj-ring {
+      --obj-color: var(--accent-1);
+      color:         var(--obj-color);   /* enables currentColor for icons */
+      width:         clamp(363px, 29vw, 532px);
+      height:        clamp(363px, 29vw, 532px);
+      border-radius: 50%;
+      border:        4px solid var(--obj-color);
+      background:    var(--bg-secondary);
+      animation:     obj-pulse 3s ease-in-out infinite;
+      display:        flex;
+      flex-direction: column;
+      align-items:    center;
+      justify-content: center;
+      text-align:     center;
+      padding:        var(--space-md);
+      box-sizing:     border-box;
+      gap:            var(--space-xs);
+    }
+
+    .obj-ring-1 { --obj-color: var(--accent-1); animation-duration: 3s;   }
+    .obj-ring-2 { --obj-color: #a78bfa;         animation-duration: 3.8s; animation-delay: -1.2s; }
+    .obj-ring-3 { --obj-color: #4ade80;         animation-duration: 3.3s; animation-delay: -2.1s; }
+    .obj-ring-4 { --obj-color: #fb923c;         animation-duration: 4.1s; animation-delay: -0.7s; }
+
+    .obj-icon {
+      width:  clamp(53px, 6vw, 92px);
+      height: clamp(53px, 6vw, 92px);
+      flex-shrink: 0;
+    }
+    .obj-icon path          { fill: currentColor; }
+    .obj-icon-stroke path   { fill: none; stroke: currentColor; stroke-width: 2;
+                              stroke-linecap: round; stroke-linejoin: round; }
+
+    .obj-num {
+      font-family: var(--font-mono);
+      font-size:   clamp(3rem, 4.2vw, 6rem);
+      font-weight: 700;
+      color:       var(--obj-color);
+      line-height: 1;
+    }
+
+    .obj-title {
+      font-family: var(--font-display);
+      font-size:   clamp(2rem, 2.93vw, 4rem);
+      font-weight: 700;
+      color:       var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .obj-sub {
+      font-family: var(--font-body);
+      font-size:   clamp(1.46rem, 2vw, 2.93rem);
+      font-weight: 400;
+      color:       var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    /* ================================================================ */
+    /* SLIDE 6 — SVG FLOWCHART TOKENS  (bold.md §1)                   */
+    /* ================================================================ */
+    .np-rect          { fill: var(--bg-secondary); stroke: var(--accent-1); stroke-width: 2; }
+    .np-rect-success  { fill: var(--bg-secondary); stroke: #4ade80;        stroke-width: 2.5; }
+    .np-badge         { fill: var(--accent-1); }
+    .np-badge-success { fill: #4ade80; }
+    .np-badge-num     { fill: var(--bg-primary); }
+    .np-node-title    { fill: var(--text-primary); }
+    .np-node-sub      { fill: var(--text-secondary); }
+    .np-node-sub-ok   { fill: var(--tag-good-fg); }
+    .np-arrow         { stroke: var(--accent-1); fill: none; }
+    .np-arrowhead     { fill: var(--accent-1); }
+
+    /* ================================================================ */
+    /* TABLES  (slides 5 & 6)                                          */
+    /* ================================================================ */
+    .reveal table {
+      width:           100%;
+      border-collapse: collapse;
+      font-size:       var(--size-small);
+      margin-top:      var(--space-md);
+    }
+
+    .reveal table thead tr th {
+      background:  var(--accent-2);
+      color:       var(--text-on-dark);
+      font-weight: 700;
+      padding:     var(--space-sm) var(--space-md);
+      text-align:  left;
+      border:      none;
+    }
+
+    .reveal table thead tr th:first-child { border-radius: 4px 0 0 0; }
+    .reveal table thead tr th:last-child  { border-radius: 0 4px 0 0; }
+
+    .reveal table tbody tr td {
+      padding:        0.6em var(--space-md);
+      border-bottom:  1px solid rgba(56,189,248,0.08);
+      vertical-align: middle;
+      line-height:    1.45;
+      color:          var(--text-primary);
+    }
+
+    .reveal table tbody tr:nth-child(odd)  td { background: var(--bg-primary); }
+    .reveal table tbody tr:nth-child(even) td { background: var(--bg-secondary); }
+    .reveal table tbody tr:last-child      td { border-bottom: none; }
+
+    .tag {
+      display:       inline-block;
+      border-radius: 4px;
+      padding:       2px 9px;
+      font-size:     0.9em;
+      font-weight:   600;
+      white-space:   nowrap;
+    }
+    .tag-bad     { background: var(--tag-bad-bg);     color: var(--tag-bad-fg);     }
+    .tag-good    { background: var(--tag-good-bg);    color: var(--tag-good-fg);    }
+    .tag-neutral { background: var(--tag-neutral-bg); color: var(--tag-neutral-fg); }
+
+    /* ================================================================ */
+    /* SLIDE 7 — STACK TECNOLÓGICO                                     */
+    /* ================================================================ */
+    .stack-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   var(--space-md);
+      margin-top:            var(--space-md);
+    }
+
+    .stack-card {
+      background:    var(--bg-secondary);
+      border:        1px solid rgba(56,189,248,0.15);
+      border-top:    3px solid var(--accent-1);
+      border-radius: 0 0 var(--card-radius) var(--card-radius);
+      padding:       var(--card-padding);
+    }
+
+    .stack-card .layer-label {
+      font-family:    var(--font-mono);
+      font-size:      var(--size-label);
+      font-weight:    600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color:          var(--accent-2);
+      margin-bottom:  var(--space-xs);
+    }
+
+    .stack-card .layer-title {
+      font-family: var(--font-body);
+      font-size:   var(--size-body-lg);
+      font-weight: 600;
+      color:       var(--text-primary);
+      margin:      0;
+    }
+
+    /* ================================================================ */
+    /* SLIDE 8 — ARQUITECTURA                                          */
+    /* ================================================================ */
+    .arch-layout {
+      display:               grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap:                   var(--space-lg);
+      align-items:           start;
+      margin-top:            var(--space-md);
+    }
+
+    /* Placeholder */
+    .placeholder {
+      border:          2px dashed var(--accent-3);
+      border-radius:   10px;
+      background:      var(--bg-secondary);
+      display:         flex;
+      flex-direction:  column;
+      align-items:     center;
+      justify-content: center;
+      color:           var(--text-muted);
+      text-align:      center;
+      padding:         var(--space-xl);
+      min-height:      320px;
+    }
+
+    .placeholder .ph-label {
+      font-family:    var(--font-mono);
+      font-size:      var(--size-label);
+      font-weight:    600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color:          var(--accent-2);
+      margin-bottom:  var(--space-xs);
+    }
+
+    .placeholder .ph-desc {
+      font-size:   var(--size-small);
+      color:       var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ================================================================ */
+    /* SLIDE 9 — CONCLUSIÓN                                            */
+    /* ================================================================ */
+    .conclusion-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   var(--space-md);
+      margin-top:            var(--space-md);
+    }
+
+    .conclusion-card {
+      background:    var(--bg-secondary);
+      border:        1px solid rgba(56,189,248,0.15);
+      border-left:   4px solid var(--accent-1);
+      border-radius: 0 var(--card-radius) var(--card-radius) 0;
+      padding:       var(--card-padding);
+    }
+
+    .conclusion-card .c-title {
+      font-size:   var(--size-body-lg);
+      font-weight: 600;
+      color:       var(--text-primary);
+      margin:      0;
+    }
+
+    .demo-banner {
+      grid-column:     1 / -1;
+      background:      var(--accent-1);
+      color:           var(--text-on-dark);
+      border-radius:   var(--card-radius);
+      padding:         var(--space-md) var(--space-lg);
+      text-align:      center;
+      font-size:       var(--size-body-lg);
+      font-weight:     700;
+      letter-spacing:  0.015em;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+    }
+
+    /* ================================================================ */
+    /* SLIDE 10 — GRACIAS                                              */
+    /* ================================================================ */
+    /* ================================================================ */
+    /* SLIDE · DEMO EN VIVO                                             */
+    /* ================================================================ */
+    .slide-demo {
+      display:         flex !important;
+      flex-direction:  column;
+      justify-content: center;
+      align-items:     center;
+      text-align:      center;
+      gap:             var(--space-sm);
+      position:        relative;
+      overflow:        hidden;
+    }
+    .demo-pulse-ring {
+      position:        absolute;
+      top:             50%;
+      left:            50%;
+      transform:       translate(-50%, -50%);
+      border-radius:   50%;
+      border:          1px solid rgba(56,189,248,0.13);
+      animation:       demo-ring-pulse 4s ease-in-out infinite;
+      pointer-events:  none;
+    }
+    .demo-pulse-ring:nth-child(1) { width: 500px;  height: 500px; }
+    .demo-pulse-ring:nth-child(2) { width: 760px;  height: 760px;  animation-delay: 1.3s; }
+    .demo-pulse-ring:nth-child(3) { width: 1020px; height: 1020px; animation-delay: 2.6s; }
+    @keyframes demo-ring-pulse {
+      0%, 100% { opacity: 0.65; transform: translate(-50%, -50%) scale(1); }
+      50%      { opacity: 0.07; transform: translate(-50%, -50%) scale(1.04); }
+    }
+    .demo-bg-glow {
+      position:       absolute;
+      top:            50%;
+      left:           50%;
+      transform:      translate(-50%, -52%);
+      width:          900px;
+      height:         600px;
+      background:     radial-gradient(ellipse at center, rgba(56,189,248,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .demo-badge {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            0.8rem;
+      padding:        0.6rem 1.8rem;
+      border-radius:  100px;
+      background:     rgba(249,115,22,0.12);
+      border:         1px solid rgba(249,115,22,0.45);
+      font-family:    var(--font-mono);
+      font-size:      clamp(1.2rem, 1.4vw, 1.9rem);
+      color:          #f97316;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      position:       relative;
+      z-index:        1;
+    }
+    .demo-badge--hero {
+      font-size:      clamp(3rem, 4.5vw, 7rem);
+      padding:        1.6rem 4.5rem;
+      gap:            1.6rem;
+      letter-spacing: 0.2em;
+      border-width:   2px;
+      box-shadow:     0 0 60px rgba(249,115,22,0.15);
+    }
+    .demo-badge--hero .demo-badge-dot {
+      width:     18px;
+      height:    18px;
+      box-shadow: 0 0 14px rgba(249,115,22,1);
+    }
+    .demo-badge-dot {
+      width:         9px;
+      height:        9px;
+      border-radius: 50%;
+      background:    #f97316;
+      box-shadow:    0 0 6px rgba(249,115,22,0.9);
+      animation:     demo-dot-blink 1.1s ease-in-out infinite;
+    }
+    @keyframes demo-dot-blink {
+      0%, 100% { opacity: 1;    box-shadow: 0 0 6px rgba(249,115,22,0.9); }
+      50%      { opacity: 0.15; box-shadow: none; }
+    }
+    .demo-headline {
+      font-family:    var(--font-display);
+      font-size:      clamp(5rem, 8vw, 12rem);
+      font-weight:    800;
+      color:          var(--text-primary);
+      letter-spacing: -0.03em;
+      line-height:    1.0;
+      margin:         0;
+      position:       relative;
+      z-index:        1;
+      text-align:     center !important;
+      text-shadow:    0 0 120px rgba(56,189,248,0.2);
+    }
+    .demo-lead {
+      display:        block;
+      font-size:      0.38em;
+      font-weight:    400;
+      color:          var(--text-secondary);
+      letter-spacing: 0.05em;
+      line-height:    1.4;
+      margin-bottom:  0.15em;
+      text-transform: none;
+    }
+    .demo-headline em {
+      display:        block;
+      font-style:     normal;
+      color:          var(--accent-1);
+      text-shadow:    0 0 80px rgba(56,189,248,0.35);
+    }
+    .demo-url-pill {
+      display:        inline-flex;
+      align-items:    center;
+      gap:            1.2rem;
+      padding:        1.2rem 2.6rem;
+      border-radius:  var(--card-radius);
+      background:     rgba(14,165,233,0.07);
+      border:         1px solid rgba(56,189,248,0.4);
+      font-family:    var(--font-mono);
+      font-size:      clamp(1.6rem, 2vw, 2.8rem);
+      color:          #38bdf8;
+      position:       relative;
+      z-index:        1;
+      box-shadow:     0 0 40px rgba(56,189,248,0.1), inset 0 0 20px rgba(56,189,248,0.04);
+      letter-spacing: 0.02em;
+    }
+    .demo-steps {
+      display:     flex;
+      align-items: center;
+      gap:         0.8rem;
+      position:    relative;
+      z-index:     1;
+      margin-top:  0.2rem;
+    }
+    .demo-step {
+      display:       flex;
+      align-items:   center;
+      gap:           0.7rem;
+      padding:       0.7rem 1.4rem;
+      border-radius: var(--card-radius);
+      background:    rgba(30,41,59,0.7);
+      border:        1px solid rgba(148,163,184,0.12);
+      font-size:     clamp(1.1rem, 1.3vw, 1.8rem);
+      color:         var(--text-secondary);
+      white-space:   nowrap;
+      backdrop-filter: blur(4px);
+    }
+    .demo-step-n {
+      width:           1.8em;
+      height:          1.8em;
+      border-radius:   50%;
+      background:      rgba(56,189,248,0.12);
+      color:           #38bdf8;
+      font-weight:     700;
+      font-family:     var(--font-mono);
+      font-size:       0.85em;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      flex-shrink:     0;
+      border:          1px solid rgba(56,189,248,0.22);
+    }
+    .demo-step-arrow {
+      color:     rgba(56,189,248,0.3);
+      font-size: clamp(1.4rem, 1.8vw, 2.4rem);
+    }
+
+    /* ================================================================ */
+    /* SLIDE · GRACIAS — elementos adicionales                          */
+    /* ================================================================ */
+    .gracias-thesis-title {
+      font-size:   clamp(1.3rem, 1.6vw, 2.2rem);
+      color:       var(--text-secondary);
+      max-width:   88rem;
+      line-height: 1.45;
+      margin:      0 0 0.5rem 0;
+      font-style:  italic;
+    }
+    .gracias-meta {
+      font-size:   clamp(1.4rem, 1.7vw, 2.4rem);
+      color:       var(--text-secondary);
+      font-weight: 500;
+      margin:      0;
+    }
+    .gracias-tutors {
+      font-size:   clamp(1.1rem, 1.2vw, 1.7rem);
+      color:       var(--text-muted);
+      font-family: var(--font-mono);
+      margin-top:  0.5rem;
+    }
+
+    .slide-gracias {
+      display:         flex !important;
+      flex-direction:  column;
+      justify-content: center;
+      align-items:     center;
+      text-align:      center;
+      padding:         0 !important;
+      overflow:        hidden;
+    }
+
+    .gracias-content {
+      position:       relative;
+      z-index:        1;
+      display:        flex;
+      flex-direction: column;
+      align-items:    center;
+      gap:            var(--space-sm);
+    }
+
+    .gracias-card {
+      padding:    var(--space-md) 0;
+      text-align: center;
+    }
+
+    .gracias-card h1 {
+      font-family:    var(--font-display);
+      font-size:      clamp(7rem, 10vw, 14rem);
+      font-weight:    800;
+      color:          var(--accent-1);
+      margin:         0 0 0.08em 0;
+      letter-spacing: -0.03em;
+      text-shadow:    0 0 60px rgba(56,189,248,0.5), 0 2px 24px rgba(0,0,0,0.8);
+    }
+
+    .gracias-card p {
+      font-size:   var(--size-body);
+      color:       var(--text-primary);
+      margin:      0;
+      font-weight: 500;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.9);
+    }
+
+    /* ================================================================ */
+    /* SLIDE: PANORAMA SAAS — styled table (dcodeyt approach)           */
+    /* ================================================================ */
+    .saas-kw { color: var(--accent-1); }
+
+    /* container clips rounded corners on the table */
+    .saas-wrap {
+      width:         100%;
+      margin-top:    var(--space-sm);
+      border-radius: 0.8rem;
+      overflow:      hidden;
+      box-shadow:    0 0 60px rgba(0,0,0,0.65);
+    }
+
+    .saas-table {
+      border-collapse: collapse;
+      width:           100%;
+    }
+
+    /* ── header ── */
+    /* high-specificity selector to override Reveal.js base table styles */
+    .reveal .slides .saas-table thead tr,
+    .saas-table thead tr {
+      background:    #1e293b !important;
+      color:         var(--text-primary);
+      text-align:    center;
+      border-bottom: 3px solid var(--accent-1);
+    }
+
+    .reveal .slides .saas-table thead th,
+    .saas-table thead th {
+      background:  #1e293b !important;
+      border:      none;
+      padding:     clamp(1.2rem, 1.6vw, 2.2rem) clamp(1.5rem, 2vw, 3rem);
+    }
+
+    .saas-table th,
+    .saas-table td {
+      padding: clamp(1.1rem, 1.4vw, 2rem) clamp(1.5rem, 2vw, 3rem);
+    }
+
+    .saas-table thead th:first-child { text-align: left; }
+
+    .saas-logo-wrap {
+      display:         flex;
+      flex-direction:  column;
+      align-items:     center;
+      justify-content: center;
+      gap:             0.5rem;
+      min-height:      clamp(60px, 7vw, 110px);
+    }
+    .saas-logo-wrap img {
+      display: block;
+      width:   auto;
+    }
+    .saas-logo-label {
+      font-family: var(--font-display);
+      font-size:   clamp(1.4rem, 1.7vw, 2.4rem);
+      font-weight: 600;
+      color:       var(--text-secondary);
+      line-height: 1;
+    }
+
+    /* ── body rows ── */
+    .saas-table tbody tr {
+      border-bottom: 1px solid rgba(148,163,184,0.12);
+    }
+
+    .saas-table tbody tr:nth-of-type(even) {
+      background-color: rgba(30,41,59,0.55);
+    }
+
+    /* ── cells ── */
+    .saas-table td {
+      font-family: var(--font-body);
+      font-size:   clamp(2rem, 2.7vw, 4rem);
+      color:       var(--text-primary);
+      text-align:  center;
+      line-height: 1.3;
+    }
+
+    .saas-table td:first-child {
+      font-family:  var(--font-display);
+      font-weight:  700;
+      color:        var(--text-secondary);
+      text-align:   left;
+      background:   rgba(11,17,32,0.7);
+      border-right: 2px solid rgba(148,163,184,0.14);
+    }
+
+    .saas-table td small {
+      display:    block;
+      font-size:  clamp(1.4rem, 1.8vw, 2.6rem);
+      color:      var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .saas-best {
+      color:       #4ade80;
+      font-weight: 700;
+    }
+
+    /* ── 20 usuarios — highlighted last row ── */
+    .saas-table tbody tr.saas-cost-row {
+      background-color: rgba(251,146,60,0.09);
+      border-top:       2px solid rgba(251,146,60,0.4);
+      border-bottom:    2px solid rgba(251,146,60,0.4);
+    }
+
+    .saas-table tbody tr.saas-cost-row td {
+      font-weight: 700;
+      font-size:   clamp(2rem, 2.8vw, 4.2rem);
+    }
+
+    .saas-table tbody tr.saas-cost-row td:first-child { color: #fb923c; }
+
+    .saas-cheapest { color: #4ade80; }
+
+    .saas-table td small.saas-annual,
+    .saas-annual {
+      color:       #ef4444 !important;
+      font-weight: 700;
+      font-size:   clamp(1.6rem, 2vw, 3rem) !important;
+    }
+
+    /* ================================================================ */
+    /* SLIDE: PANORAMA OPEN SOURCE — Two project cards               */
+    /* ================================================================ */
+    .os-kw { color: #4ade80; }
+
+    .os-grid {
+      display:               grid;
+      grid-template-columns: 1fr 1fr;
+      gap:                   var(--space-md);
+      margin-top:            var(--space-md);
+      align-items:           stretch;
+    }
+
+    .os-card {
+      background:     var(--bg-secondary);
+      border:         2px solid rgba(148,163,184,0.15);
+      border-radius:  1rem;
+      padding:        var(--space-md);
+      display:        flex;
+      flex-direction: column;
+      gap:            var(--space-sm);
+    }
+
+    /* ---- card header: repo + stars ---- */
+    .os-card-head {
+      display:         flex;
+      align-items:     center;
+      justify-content: space-between;
+      padding-bottom:  var(--space-sm);
+      border-bottom:   1px solid rgba(148,163,184,0.15);
+    }
+
+    .os-repo {
+      font-family: var(--font-mono);
+      font-size:   clamp(1.8rem, 2.4vw, 3.4rem);
+      color:       var(--text-secondary);
+      line-height: 1.2;
+    }
+    .os-repo strong {
+      color:       var(--text-primary);
+      font-weight: 700;
+    }
+
+    .os-stars {
+      display:     flex;
+      align-items: center;
+      gap:         0.35rem;
+      font-family: var(--font-mono);
+      font-size:   clamp(1.8rem, 2.4vw, 3.4rem);
+      font-weight: 700;
+      color:       #fbbf24;
+      white-space: nowrap;
+    }
+
+    /* ---- description ---- */
+    .os-desc {
+      font-family:  var(--font-body);
+      font-size:    clamp(1.68rem, 2.16vw, 3.12rem);
+      color:        var(--text-secondary);
+      font-style:   italic;
+      line-height:  1.4;
+      margin:       0;
+    }
+
+    /* ---- logo area ---- */
+    .os-logo {
+      display:         flex;
+      justify-content: center;
+      align-items:     center;
+      padding:         var(--space-sm) 0;
+      border-bottom:   1px solid rgba(148,163,184,0.12);
+    }
+    .os-logo img {
+      display:   block;
+      width:     auto;
+      height:    clamp(120px, 14vw, 220px);
+    }
+
+    /* ---- language / meta row ---- */
+    .os-meta {
+      display:     flex;
+      align-items: center;
+      gap:         0.6rem;
+      font-family: var(--font-body);
+      font-size:   clamp(1.56rem, 2.04vw, 2.88rem);
+      color:       var(--text-secondary);
+    }
+    .os-lang-dot {
+      display:       inline-block;
+      width:         clamp(10px, 1.1vw, 16px);
+      height:        clamp(10px, 1.1vw, 16px);
+      border-radius: 50%;
+      flex-shrink:   0;
+    }
+
+    /* ---- topics ---- */
+    .os-tags {
+      display:    flex;
+      flex-wrap:  wrap;
+      gap:        0.5rem;
+      margin-top: auto;
+      padding-top: var(--space-sm);
+      border-top: 1px solid rgba(148,163,184,0.10);
+    }
+
+    .os-tag {
+      font-family:   var(--font-mono);
+      font-size:     clamp(1.08rem, 1.44vw, 2.04rem);
+      background:    rgba(56,189,248,0.08);
+      color:         var(--accent-3);
+      padding:       0.2rem 0.75rem;
+      border-radius: 999px;
+      border:        1px solid rgba(56,189,248,0.2);
+    }
+
+    /* ================================================================ */
+    /* SLIDE: COMPARATIVA OPEN SOURCE — Documenso vs DocuSeal           */
+    /* ================================================================ */
+    .oss-wrap {
+      width:         100%;
+      margin-top:    var(--space-sm);
+      border-radius: 0.8rem;
+      overflow:      hidden;
+      box-shadow:    0 0 60px rgba(0,0,0,0.65);
+    }
+
+    .oss-table { border-collapse: collapse; width: 100%; }
+
+    .reveal .slides .oss-table thead tr,
+    .oss-table thead tr {
+      background:    #1e293b !important;
+      color:         var(--text-primary);
+      text-align:    center;
+      border-bottom: 3px solid #4ade80;
+    }
+    .reveal .slides .oss-table thead th,
+    .oss-table thead th {
+      background: #1e293b !important;
+      border:     none;
+      padding:    clamp(1rem,1.4vw,2rem) clamp(1.5rem,2vw,3rem);
+    }
+
+    .oss-table th, .oss-table td {
+      padding: clamp(1.1rem,1.4vw,2rem) clamp(1.5rem,2vw,3rem);
+    }
+    .oss-table thead th:first-child { text-align: left; }
+
+    .oss-logo-wrap {
+      display:         flex;
+      flex-direction:  column;
+      align-items:     center;
+      justify-content: center;
+      gap:             0.4rem;
+      min-height:      clamp(60px,6.5vw,100px);
+    }
+    .oss-logo-wrap img   { display: block; width: auto; }
+    .oss-logo-label {
+      font-family: var(--font-display);
+      font-size:   clamp(1.6rem,2vw,2.8rem);
+      font-weight: 700;
+      color:       var(--text-primary);
+      line-height: 1;
+    }
+
+    .oss-table tbody tr { border-bottom: 1px solid rgba(148,163,184,0.12); }
+    .oss-table tbody tr:nth-of-type(even) { background-color: rgba(30,41,59,0.55); }
+
+    .oss-table td {
+      font-family: var(--font-body);
+      font-size:   clamp(2rem,2.5vw,3.6rem);
+      color:       var(--text-primary);
+      text-align:  center;
+      line-height: 1.3;
+    }
+    .oss-table td:first-child {
+      font-family:  var(--font-display);
+      font-weight:  700;
+      color:        var(--text-secondary);
+      text-align:   left;
+      background:   rgba(11,17,32,0.7);
+      border-right: 2px solid rgba(148,163,184,0.14);
+    }
+    .oss-table td small {
+      display:    block;
+      font-size:  clamp(1.4rem,1.7vw,2.4rem);
+      color:      var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    /* check — green circle */
+    .oss-check {
+      display:     inline-flex;
+      align-items: center;
+      gap:         0.6rem;
+      color:       #4ade80;
+      font-weight: 700;
+      font-size:   clamp(2rem,2.5vw,3.6rem);
+    }
+    .oss-check-icon {
+      display:         inline-flex;
+      align-items:     center;
+      justify-content: center;
+      width:           clamp(30px,3vw,48px);
+      height:          clamp(30px,3vw,48px);
+      background:      #4ade80;
+      border-radius:   50%;
+      color:           #0f172a;
+      font-size:       clamp(1.4rem,1.7vw,2.4rem);
+      font-weight:     900;
+      flex-shrink:     0;
+    }
+
+    /* lock — red circle */
+    .oss-lock {
+      display:         inline-flex;
+      flex-direction:  column;
+      align-items:     center;
+      gap:             0.35rem;
+    }
+    .oss-lock-icon {
+      display:         inline-flex;
+      align-items:     center;
+      justify-content: center;
+      width:           clamp(30px,3vw,48px);
+      height:          clamp(30px,3vw,48px);
+      background:      #ef4444;
+      border-radius:   50%;
+      color:           #fff;
+      font-size:       clamp(1.4rem,1.7vw,2.4rem);
+      font-weight:     900;
+      flex-shrink:     0;
+    }
+    .oss-lock-label {
+      font-size:   clamp(1.4rem,1.8vw,2.4rem);
+      color:       #ef4444;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .oss-selected-badge {
+      font-family:   var(--font-display);
+      font-size:     clamp(1.4rem,1.8vw,2.4rem);
+      font-weight:   700;
+      color:         #0f172a;
+      background:    #4ade80;
+      padding:       0.2rem 0.9rem;
+      border-radius: 999px;
+      line-height:   1.6;
+    }
+
+    /* ================================================================ */
+    /* SLIDE 18 — DIMENSIONAMIENTO DEL ALMACENAMIENTO (MinIO)          */
+    /* ================================================================ */
+    .storage-slide {
+      display:               grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap:                   var(--space-xl);
+      align-items:           center;
+      height:                100%;
+    }
+
+    .donut-section {
+      display:        flex;
+      flex-direction: column;
+      align-items:    center;
+      gap:            var(--space-md);
+    }
+
+    .donut-title {
+      font-family: var(--font-display);
+      font-size:   var(--size-body-xl);
+      font-weight: 700;
+      color:       var(--text-secondary);
+      text-align:  center;
+      line-height: 1.3;
+    }
+
+    .donut-legend {
+      display:        flex;
+      flex-direction: column;
+      gap:            1.2rem;
+      width:          100%;
+      max-width:      460px;
+    }
+
+    .donut-legend-item {
+      display:     flex;
+      align-items: center;
+      gap:         var(--space-sm);
+      font-size:   clamp(1.5rem, 2vw, 2.2rem);
+      font-weight: 600;
+    }
+
+    .donut-dot {
+      width:        24px;
+      height:       24px;
+      border-radius: 50%;
+      flex-shrink:  0;
+    }
+    .donut-dot-cyan  { background: var(--accent-1); }
+    .donut-dot-dark  { background: #1e293b; border: 2px solid #475569; }
+
+    .calc-section {
+      display:        flex;
+      flex-direction: column;
+      gap:            var(--space-sm);
+    }
+
+    .calc-step {
+      display:       flex;
+      align-items:   center;
+      gap:           var(--space-md);
+      background:    var(--bg-secondary);
+      border-radius: var(--card-radius);
+      padding:       clamp(0.8rem,1vw,1.4rem) var(--space-md);
+      border-left:   4px solid var(--accent-2);
+    }
+
+    .calc-step.cs-result {
+      border-left-color: #4ade80;
+      background:        rgba(74,222,128,0.09);
+    }
+
+    .cs-num {
+      font-family: var(--font-mono);
+      font-size:   clamp(2.2rem, 3vw, 4.4rem);
+      font-weight: 800;
+      color:       var(--accent-1);
+      white-space: nowrap;
+      min-width:   9rem;
+      line-height: 1.1;
+    }
+
+    .calc-step.cs-result .cs-num {
+      color:     #4ade80;
+      font-size: clamp(2.8rem, 3.8vw, 5.4rem);
+    }
+
+    .cs-label {
+      font-size:   clamp(1.5rem, 2vw, 2.4rem);
+      color:       #cbd5e1;
+      line-height: 1.35;
+    }
+
+    .cs-label strong {
+      color: var(--text-primary);
+    }
+
+    .calc-arrow-row {
+      padding-left: var(--space-md);
+      color:        #94a3b8;
+      font-size:    clamp(2rem, 2.6vw, 3.6rem);
+      line-height:  1;
+    }
+
+    /* ================================================================ */
+    /* SLIDE 19 — RENDIMIENTO DEL SISTEMA                              */
+    /* ================================================================ */
+    .perf-slide {
+      display:               grid;
+      grid-template-columns: 1.4fr 0.6fr;
+      gap:                   1.5rem;
+      align-items:           start;
+      height:                100%;
+    }
+
+    .perf-image-panel {
+      display:        flex;
+      flex-direction: column;
+      gap:            var(--space-sm);
+    }
+
+    .perf-img {
+      width:         100%;
+      border-radius: var(--card-radius);
+      border:        1px solid #1e293b;
+      display:       block;
+    }
+
+    .perf-img-caption {
+      font-size:      clamp(1.5rem, 2vw, 2.6rem);
+      color:          var(--text-muted);
+      text-align:     center;
+      font-family:    var(--font-mono);
+      letter-spacing: 0.02em;
+    }
+
+    .perf-stats-panel {
+      display:        flex;
+      flex-direction: column;
+      gap:            var(--space-md);
+    }
+
+    .perf-card {
+      background:    var(--bg-secondary);
+      border-radius: var(--card-radius);
+      padding:       1.4rem 1.6rem;
+      border-left:   4px solid var(--accent-2);
+      display:       flex;
+      flex-direction:column;
+      gap:           1rem;
+    }
+
+    .perf-card-title {
+      font-family:    var(--font-mono);
+      font-size:      clamp(1.5rem, 2vw, 2.6rem);
+      font-weight:    700;
+      color:          var(--accent-1);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .perf-metrics-row {
+      display:     grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:         0.6rem;
+      align-items: end;
+    }
+
+    .perf-metric {
+      display:        flex;
+      flex-direction: column;
+      gap:            0.3rem;
+    }
+
+    .perf-metric-label {
+      font-size:      clamp(1.3rem, 1.6vw, 2.2rem);
+      color:          #8899aa;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .perf-metric-val        { font-family: var(--font-mono); font-size: clamp(1.6rem,2.2vw,3rem); font-weight:700; color:var(--text-primary); white-space:nowrap; }
+    .perf-metric-val.peak   { color: var(--accent-3); }
+    .perf-metric-val.free   { font-size: clamp(2rem,2.7vw,3.6rem); color: #4ade80; }
+
+    .perf-bar-wrap {
+      height:        14px;
+      background:    #0f172a;
+      border-radius: 999px;
+      overflow:      hidden;
+    }
+    .perf-bar-fill {
+      height:        100%;
+      border-radius: 999px;
+    }
+
+    /* ================================================================ */
+    /* SLIDE 19 — RESPALDOS Y DIMENSIONAMIENTO                         */
+    /* ================================================================ */
+    .backup-grid {
+      display:               grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:                   var(--space-md);
+      align-items:           stretch;
+    }
+
+    .backup-card {
+      background:     var(--bg-secondary);
+      border-radius:  var(--card-radius);
+      padding:        3rem 3.4rem;
+      display:        flex;
+      flex-direction: column;
+      gap:            1.4rem;
+    }
+    .backup-card--db   { border-top: 4px solid #60a5fa; }
+    .backup-card--cfg  { border-top: 4px solid #c084fc; }
+    .backup-card--docs { border-top: 4px solid var(--accent-1); }
+
+    .backup-card-header {
+      display:     flex;
+      align-items: center;
+      gap:         1rem;
+    }
+    .backup-icon-group {
+      display:     flex;
+      gap:         0.5rem;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .backup-icon-wrap {
+      width:       clamp(60px, 5.5vw, 88px);
+      height:      clamp(60px, 5.5vw, 88px);
+      flex-shrink: 0;
+    }
+    .backup-icon-wrap img,
+    .backup-icon-wrap svg { width: 100%; height: 100%; }
+
+    .backup-domain {
+      font-family:    var(--font-mono);
+      font-size:      clamp(2rem, 2.6vw, 3.4rem);
+      font-weight:    700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .backup-card--db   .backup-domain { color: #60a5fa; }
+    .backup-card--cfg  .backup-domain { color: #c084fc; }
+    .backup-card--docs .backup-domain { color: var(--accent-1); }
+
+    .backup-service {
+      font-size:   clamp(2.8rem, 3.6vw, 5.2rem);
+      font-weight: 700;
+      color:       var(--text-primary);
+    }
+
+    .backup-policies {
+      list-style:     none;
+      padding:        0;
+      margin:         0;
+      display:        flex;
+      flex-direction: column;
+      gap:            0.9rem;
+      flex:           1;
+    }
+    .backup-policies li {
+      font-size:    clamp(2rem, 2.5vw, 3.4rem);
+      color:        #94a3b8;
+      padding-left: 1.2em;
+      position:     relative;
+      line-height:  1.3;
+    }
+    .backup-policies li::before {
+      content:  '›';
+      position: absolute;
+      left:     0;
+      color:    #475569;
+    }
+    .backup-policies li strong { color: var(--text-primary); }
+
+    .backup-kpi {
+      margin-top:    0.4rem;
+      padding:       1rem 1.4rem;
+      border-radius: calc(var(--card-radius) - 4px);
+      font-size:     clamp(1.5rem, 2vw, 2.6rem);
+      font-family:   var(--font-mono);
+      text-align:    center;
+      line-height:   1.3;
+    }
+    .backup-card--db   .backup-kpi { background: rgba(96,165,250,0.1);  color: #93c5fd; }
+    .backup-card--cfg  .backup-kpi { background: rgba(192,132,252,0.1); color: #d8b4fe; }
+    .backup-card--docs .backup-kpi { background: rgba(56,189,248,0.1);  color: var(--accent-1); }
+    .backup-kpi strong { font-size: 1.25em; color: var(--text-primary); }
+
+    /* ================================================================ */
+    /* SLIDE 21 — ENCUADRE LEGAL — Ley 25.506                          */
+    /* ================================================================ */
+    .legal-q-slide {
+      display:               grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap:                   var(--space-lg);
+      align-items:           center;
+      margin-top:            var(--space-sm);
+    }
+
+    .legal-cert-col {
+      display:         flex;
+      justify-content: center;
+      align-items:     center;
+    }
+
+    .legal-cert-glow {
+      filter:  drop-shadow(0 0 48px rgba(56,189,248,0.35))
+               drop-shadow(0 0 120px rgba(56,189,248,0.14));
+      width:   clamp(260px, 27vw, 430px);
+      height:  auto;
+    }
+    .legal-cert-glow svg {
+      width:   100%;
+      height:  auto;
+      display: block;
+    }
+
+    .legal-facts-col {
+      display:        flex;
+      flex-direction: column;
+      gap:            1.6rem;
+    }
+
+    .legal-check-item {
+      display:     flex;
+      align-items: flex-start;
+      gap:         1.2rem;
+    }
+
+    .lci-icon {
+      width:           clamp(32px, 3.2vw, 50px);
+      height:          clamp(32px, 3.2vw, 50px);
+      border-radius:   50%;
+      display:         flex;
+      align-items:     center;
+      justify-content: center;
+      font-weight:     900;
+      flex-shrink:     0;
+      font-size:       clamp(1.4rem, 1.8vw, 2.4rem);
+      margin-top:      0.15em;
+    }
+    .lci-icon--ok { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+    .lci-icon--no { background: rgba(239,68,68,0.12);  color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+
+    .lci-text {
+      font-size:   clamp(1.7rem, 2.3vw, 3.2rem);
+      color:       var(--text-primary);
+      line-height: 1.3;
+    }
+    .lci-text small {
+      display:     block;
+      font-size:   0.62em;
+      color:       var(--text-muted);
+      font-family: var(--font-mono);
+      margin-top:  0.2em;
+    }
+    .lci-text strong { color: #38bdf8; }
+
+    .legal-group {
+      display:        flex;
+      flex-direction: column;
+      gap:            1rem;
+      padding:        1.2rem 1.6rem;
+      border-radius:  var(--card-radius);
+      background:     rgba(74,222,128,0.05);
+      border:         1px solid rgba(74,222,128,0.18);
+    }
+    .legal-group-label {
+      font-family:    var(--font-mono);
+      font-size:      clamp(1.3rem, 1.5vw, 2rem);
+      color:          #4ade80;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity:        0.9;
+    }
+    .legal-disqualifier {
+      display:     flex;
+      align-items: flex-start;
+      gap:         1.2rem;
+      padding:     1rem 1.4rem;
+      border-radius: var(--card-radius);
+      background:  rgba(239,68,68,0.05);
+      border:      1px solid rgba(239,68,68,0.2);
+    }
+
+    .legal-result-pill {
+      display:       flex;
+      align-items:   center;
+      gap:           1.8rem;
+      padding:       1.8rem 2.6rem;
+      border-radius: var(--card-radius);
+      background:    rgba(56,189,248,0.13);
+      border:        2px solid rgba(56,189,248,0.5);
+      margin-top:    0.4rem;
+      box-shadow:    0 0 32px rgba(56,189,248,0.12);
+    }
+    .legal-result-name {
+      font-family: var(--font-display);
+      font-size:   clamp(2.8rem, 3.6vw, 5.2rem);
+      font-weight: 800;
+      color:       #38bdf8;
+      line-height: 1;
+      white-space: nowrap;
+      text-shadow: 0 0 24px rgba(56,189,248,0.45);
+    }
+    .legal-result-sub {
+      font-size:   clamp(1.6rem, 2vw, 2.8rem);
+      color:       var(--text-primary);
+      line-height: 1.3;
+    }
+    .legal-result-sub strong { color: #38bdf8; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ============================================================ -->
+    <!-- SLIDE 1 · PORTADA  (§4.1 Title Slide)                       -->
+    <!-- ============================================================ -->
+    <section class="slide-portada">
+
+      <div class="portada-logos">
+        <img src="figuras/facet.jpg" alt="FACET — Facultad de Ciencias Exactas y Tecnología">
+        <img src="figuras/unt.png"   alt="Universidad Nacional de Tucumán">
+      </div>
+
+      <h1>Diseño, Implementación y Despliegue de un Sistema de Firma Electrónica On-Premise para la FACET</h1>
+
+      <div class="bar" style="margin: var(--space-sm) auto var(--space-md) auto;"></div>
+
+      <div class="portada-meta">
+        <div class="author">Fabricio Blasich</div>
+        Trabajo Final de Graduación &nbsp;·&nbsp; Ingeniería en Computación<br>
+        <strong>Facultad de Ciencias Exactas y Tecnología — UNT</strong><br><br>
+        Tutores: Mg. Carlos Albaca Paraván &nbsp;·&nbsp; Mg. Esteban Daniel Volentini<br>
+        26 de mayo de 2026
+      </div>
+
+      <aside class="notes">
+Bueno, jurado, autoridades, familia, amigos y público en general, bienvenidos a la defensa de mi trabajo de graduación titulado "Diseño, Implementación y Despliegue de un Sistema de Firma Electrónica de Documentos On-Premise para la FACET". [PAUSE]
+
+Este proyecto fue realizado bajo la tutoría del Magíster Carlos Albaca Paraván y el Magíster Esteban Daniel Volentini. Muchas gracias a todos por estar acá. Para arrancar, quiero ponerlos un poco en contexto sobre cuál fue la situación que motivó todo este desarrollo.
+      </aside>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE 2 · TABLA DE CONTENIDOS  (§4.9 structure)             -->
+    <!-- ============================================================ -->
+    <section>
+
+      <h1 class="toc-title">Tabla de Contenidos</h1>
+
+      <div class="toc-grid">
+        <div class="toc-block">
+          <div class="toc-num">01</div>
+          <div class="toc-label">Contexto y Problemática</div>
+        </div>
+        <div class="toc-block">
+          <div class="toc-num">02</div>
+          <div class="toc-label">Objetivos del Trabajo</div>
+        </div>
+        <div class="toc-block">
+          <div class="toc-num">03</div>
+          <div class="toc-label">Estado del Arte y Selección de Plataforma</div>
+        </div>
+        <div class="toc-block">
+          <div class="toc-num">04</div>
+          <div class="toc-label">Infraestructura y Arquitectura de Despliegue</div>
+        </div>
+        <div class="toc-block">
+          <div class="toc-num">05</div>
+          <div class="toc-label">Demostración en Vivo</div>
+        </div>
+        <div class="toc-block">
+          <div class="toc-num">06</div>
+          <div class="toc-label">Conclusiones</div>
+        </div>
+      </div>
+
+      <aside class="notes">
+La presentación está organizada en cuatro secciones. Primero vamos a ver el contexto y la problemática que motivó este trabajo. Luego el estado del arte y la selección de plataforma. Después la infraestructura y arquitectura de despliegue. Y finalmente una demostración en vivo del sistema funcionando.
+      </aside>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION BREAK 01 · CONTEXTO Y PROBLEMÁTICA  (§4.2)          -->
+    <!-- ============================================================ -->
+    <section class="centered" data-background-color="#0b1120" data-transition="zoom">
+      <p class="section-tag">Sección 01</p>
+      <h1 class="section-heading text-on-dark">Contexto y<br>Problemática</h1>
+      <div class="bar bar-accent-3"></div>
+      <aside class="notes">Pasamos a la primera sección. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE 3 · EL PROBLEMA  (§4.9 Assertion + Evidence)          -->
+    <!-- ============================================================ -->
+    <section>
+
+      <p class="slide-kicker" style="font-size:clamp(2rem,2.8vw,4rem)">Proceso de firma actual en la FACET</p>
+
+      <div class="problema-layout">
+
+        <div style="display:flex; align-items:center; justify-content:center;">
+                              <!-- SVG FLOWCHART — proceso manual de firma (estático) -->
+          <svg viewBox="0 0 540 700" preserveAspectRatio="xMidYMid meet"
+               xmlns="http://www.w3.org/2000/svg"
+               style="width:100%;max-height:820px;display:block;">
+            <defs>
+              <marker id="fa" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L0,8 L10,4 z" fill="#38bdf8"/>
+              </marker>
+            </defs>
+            <!-- NODE 1 · Inicio -->
+            <rect x="60" y="14" width="400" height="55" rx="27" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
+            <text x="260" y="47" text-anchor="middle" font-family="Inter,sans-serif" font-size="22" font-weight="600" fill="#f8fafc">Inicio: Doc. Requerido</text>
+            <!-- NODE 2 · Descargar Documento -->
+            <rect x="60" y="109" width="400" height="55" rx="5" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="260" y="141" text-anchor="middle" font-family="Inter,sans-serif" font-size="22" font-weight="500" fill="#f8fafc">Descargar Documento</text>
+            <!-- NODE 3 · Firmar -->
+            <rect x="60" y="204" width="400" height="70" rx="5" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="260" y="232" text-anchor="middle" font-family="Inter,sans-serif" font-size="22" font-weight="500" fill="#f8fafc">Firmar en Herramienta</text>
+            <text x="260" y="258" text-anchor="middle" font-family="Inter,sans-serif" font-size="22" font-weight="500" fill="#f8fafc">Web Externa</text>
+            <!-- NODE 4 · Descargar Firmado -->
+            <rect x="60" y="314" width="400" height="55" rx="5" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="260" y="346" text-anchor="middle" font-family="Inter,sans-serif" font-size="22" font-weight="500" fill="#f8fafc">Descargar Doc. Firmado</text>
+            <!-- NODE 5 · Enviar Email -->
+            <rect x="60" y="409" width="400" height="55" rx="5" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="260" y="441" text-anchor="middle" font-family="Inter,sans-serif" font-size="22" font-weight="500" fill="#f8fafc">Enviar Email al Siguiente</text>
+            <!-- NODE 6 · ¿Todos firmaron? -->
+            <polygon points="260,504 340,544 260,584 180,544" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="260" y="537" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="500" fill="#f8fafc">¿Todos</text>
+            <text x="260" y="557" text-anchor="middle" font-family="Inter,sans-serif" font-size="19" font-weight="500" fill="#f8fafc">firmaron?</text>
+            <!-- NODE 7 · Fin -->
+            <rect x="280" y="624" width="230" height="55" rx="27" fill="#0ea5e9" stroke="#38bdf8" stroke-width="2.5"/>
+            <text x="395" y="656" text-anchor="middle" font-family="Inter,sans-serif" font-size="21" font-weight="600" fill="#f8fafc">Fin: Doc. Completado</text>
+            <!-- ARROWS (40px gaps) -->
+            <line x1="260" y1="69"  x2="260" y2="107" stroke="#38bdf8" stroke-width="2.5" class="flow-arrow" style="animation-delay:0s"   marker-end="url(#fa)"/>
+            <line x1="260" y1="164" x2="260" y2="202" stroke="#38bdf8" stroke-width="2.5" class="flow-arrow" style="animation-delay:.15s" marker-end="url(#fa)"/>
+            <line x1="260" y1="274" x2="260" y2="312" stroke="#38bdf8" stroke-width="2.5" class="flow-arrow" style="animation-delay:.3s"  marker-end="url(#fa)"/>
+            <line x1="260" y1="369" x2="260" y2="407" stroke="#38bdf8" stroke-width="2.5" class="flow-arrow" style="animation-delay:.45s" marker-end="url(#fa)"/>
+            <line x1="260" y1="464" x2="260" y2="502" stroke="#38bdf8" stroke-width="2.5" class="flow-arrow" style="animation-delay:.6s"  marker-end="url(#fa)"/>
+            <!-- Sí: right of diamond → Fin node -->
+            <path d="M 340,544 L 520,544 L 520,622" stroke="#38bdf8" stroke-width="2.5" fill="none" class="flow-arrow" style="animation-delay:.75s" marker-end="url(#fa)"/>
+            <text x="430" y="536" text-anchor="middle" font-family="Inter,sans-serif" font-size="18" font-weight="600" fill="#38bdf8">Sí</text>
+            <!-- No: left of diamond → back to Node 2 -->
+            <path d="M 180,544 L 16,544 L 16,141 L 57,141" stroke="#38bdf8" stroke-width="2.5" fill="none" class="flow-arrow" style="animation-delay:.9s" marker-end="url(#fa)"/>
+            <text x="24" y="130" text-anchor="start" font-family="Inter,sans-serif" font-size="18" font-weight="600" fill="#38bdf8">No</text>
+          </svg>
+        </div>
+
+        <div>
+          <p class="label" style="margin-bottom: var(--space-md);">Problemáticas</p>
+
+          <div class="prob-card fragment">
+            <div class="prob-num">01</div>
+            <div class="prob-text">Tiempo administrativo</div>
+          </div>
+          <div class="prob-card fragment">
+            <div class="prob-num">02</div>
+            <div class="prob-text">Errores humanos</div>
+          </div>
+          <div class="prob-card fragment">
+            <div class="prob-num">03</div>
+            <div class="prob-text">Falta de trazabilidad</div>
+          </div>
+          <div class="prob-card fragment">
+            <div class="prob-num">04</div>
+            <div class="prob-text">Ocupa espacio innecesario</div>
+          </div>
+        </div>
+
+      </div>
+
+      <aside class="notes">
+¿Cómo funciona hoy el proceso de firma? Un usuario necesita firmar un PDF, lo descarga, busca una herramienta externa en internet, lo firma, lo guarda, abre su correo, lo adjunta y se lo manda a la siguiente persona. Este ciclo se repite por cada firmante. [PAUSE]
+
+Esto trae cuatro problemas claros: pérdida de tiempo administrativo enorme en tareas repetitivas; errores humanos como correos que se pierden o archivos que no se adjuntan; falta de trazabilidad — no tenemos registro centralizado de quién firmó ni cuándo; y un almacenamiento ineficiente porque el mismo archivo se replica en decenas de computadoras.
+      </aside>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE 21 · ENCUADRE LEGAL — Ley 25.506  (§2.4)             -->
+    <!-- ============================================================ -->
+    <section>
+      <h2 class="slide-title">&iquest;Firma Electr&oacute;nica&ensp;o&ensp;Firma Digital?</h2>
+
+      <div class="legal-q-slide">
+
+        <!-- big certificate SVG -->
+        <div class="legal-cert-col">
+          <div class="legal-cert-glow">
+            <svg fill="#38bdf8" viewBox="0 0 412.886 412.886" xmlns="http://www.w3.org/2000/svg">
+              <g><g><g><g><path d="M73.172,133.367c0-2.691,2.201-4.895,4.893-4.895h252.824c2.693,0,4.893,2.203,4.893,4.895v3.261c0,2.691-2.2,4.894-4.893,4.894H78.065c-2.691,0-4.893-2.202-4.893-4.894V133.367z"/></g><g><path d="M73.316,231.856c0-2.691,2.201-4.895,4.893-4.895h98.188c2.693,0,4.894,2.203,4.894,4.895v3.261c0,2.691-2.2,4.894-4.894,4.894H78.209c-2.691,0-4.893-2.202-4.893-4.894V231.856z"/></g><g><path d="M73.172,182.612c0-2.691,2.201-4.895,4.893-4.895h252.824c2.693,0,4.893,2.203,4.893,4.895v3.262c0,2.691-2.2,4.893-4.893,4.893H78.065c-2.691,0-4.893-2.201-4.893-4.893V182.612z"/></g><path d="M406.909,325.395c-2.585-4.297-5.516-9.163-7.157-15.339c-1.418-5.338-0.261-7.245,2.535-11.855c2.893-4.77,6.853-11.301,6.853-21.899c0-11.024-3.153-16.988-5.687-21.782c-2.058-3.895-3.545-6.708-3.545-13.153c0-6.444,1.487-9.259,3.545-13.153c2.534-4.793,5.687-10.759,5.687-21.781c0-11.023-3.153-16.989-5.687-21.782c-2.058-3.895-3.545-6.709-3.545-13.153c0-6.443,1.487-9.258,3.545-13.153c2.534-4.792,5.687-10.756,5.687-21.78c0-11.021-3.153-16.987-5.687-21.78c-2.058-3.893-3.545-6.706-3.545-13.147c0-4.732,2.796-9.293,5.754-14.121c4.481-7.307,12.818-20.905-2.147-31.951c-5.871-4.332-11.597-6.438-17.51-6.438c-7.513,0-13.437,3.348-19.167,6.586c-5.801,3.28-11.28,6.377-18.868,6.377c-10.094,0-14.826-1.846-20.305-3.984c-6.305-2.46-13.45-5.248-27.019-5.248c-13.565,0-20.71,2.788-27.014,5.25c-5.477,2.137-10.208,3.982-20.299,3.982c-10.092,0-14.824-1.846-20.303-3.984c-6.303-2.46-13.447-5.248-27.014-5.248c-13.567,0-20.711,2.788-27.014,5.25c-5.479,2.137-10.21,3.982-20.301,3.982c-10.091,0-14.823-1.846-20.302-3.984c-6.304-2.46-13.447-5.248-27.013-5.248c-13.565,0-20.707,2.788-27.011,5.25c-5.477,2.137-10.207,3.982-20.297,3.982c-7.587,0-13.066-3.097-18.866-6.377c-5.73-3.238-11.653-6.588-19.166-6.588c-5.912,0-11.64,2.107-17.509,6.44C-6.426,66.619,1.911,80.217,6.391,87.522c2.96,4.83,5.757,9.391,5.757,14.124c0,6.446-1.488,9.261-3.547,13.155c-2.534,4.795-5.686,10.76-5.686,21.786c0,11.022,3.153,16.988,5.686,21.78c2.059,3.896,3.547,6.711,3.547,13.154c0,6.444-1.488,9.258-3.546,13.152c-2.533,4.795-5.687,10.759-5.687,21.783c0,11.023,3.153,16.988,5.686,21.78c2.059,3.895,3.547,6.71,3.547,13.153s-1.488,9.258-3.547,13.153c-2.532,4.793-5.686,10.758-5.686,21.78c0,11.023,3.153,16.988,5.687,21.78c2.058,3.894,3.546,6.707,3.546,13.148c0,4.732-2.796,9.292-5.756,14.12c-4.48,7.308-12.817,20.906,2.148,31.951c5.871,4.333,11.599,6.439,17.512,6.438c7.511,0,13.436-3.35,19.164-6.588c5.802-3.279,11.281-6.376,18.869-6.376c10.092,0,14.826,1.846,20.305,3.984c6.305,2.459,13.45,5.248,27.018,5.248c13.567,0,20.711-2.789,27.013-5.248c5.48-2.139,10.211-3.984,20.302-3.984c10.092,0,14.824,1.846,20.302,3.984c6.305,2.459,13.449,5.248,27.016,5.248s20.711-2.789,27.013-5.248c5.48-2.139,10.211-3.984,20.302-3.984c10.091,0,14.822,1.846,20.302,3.984c6.302,2.459,13.447,5.248,27.013,5.248c13.565,0,20.707-2.789,27.01-5.248c5.478-2.139,10.209-3.984,20.298-3.984c7.587,0,13.064,3.097,18.864,6.376c5.729,3.239,11.654,6.589,19.168,6.589c5.912,0,11.64-2.107,17.508-6.439C419.172,345.762,411.497,333.01,406.909,325.395z M382.45,316.873c0,5.713-4.675,10.387-10.387,10.387H39.991c-5.713,0-10.387-4.674-10.387-10.387V96.013c0-5.713,4.674-10.387,10.387-10.387h332.072c5.712,0,10.387,4.674,10.387,10.387V316.873z"/><path d="M329.782,254.915c0,2.911-4.73,5.252-5.348,7.975c-0.64,2.813,2.591,6.969,1.367,9.506c-1.246,2.579-6.521,2.637-8.291,4.853c-1.777,2.225-0.667,7.381-2.892,9.158c-2.216,1.768-6.993-0.454-9.571,0.791c-2.538,1.224-3.769,6.355-6.581,6.995c-2.723,0.618-6.052-3.457-8.963-3.457s-6.24,4.076-8.963,3.457c-2.813-0.64-4.043-5.772-6.581-6.995c-2.579-1.245-7.356,0.977-9.571-0.791c-2.227-1.777-1.116-6.933-2.893-9.159c-1.769-2.215-7.045-2.272-8.29-4.852c-1.224-2.537,2.007-6.693,1.367-9.506c-0.619-2.723-5.348-5.064-5.348-7.975c0-2.911,4.729-5.252,5.348-7.976c0.64-2.813-2.591-6.969-1.367-9.507c1.245-2.578,6.521-2.637,8.29-4.852c1.778-2.227,0.667-7.381,2.893-9.158c2.215-1.77,6.992,0.453,9.572-0.791c2.537-1.225,3.768-6.355,6.58-6.996c2.723-0.617,6.052,3.458,8.963,3.458s6.24-4.075,8.963-3.458c2.812,0.641,4.043,5.771,6.581,6.997c2.58,1.244,7.357-0.979,9.571,0.79c2.226,1.777,1.116,6.933,2.892,9.159c1.77,2.216,7.046,2.273,8.291,4.851c1.224,2.538-2.007,6.694-1.367,9.507C325.052,249.663,329.782,252.004,329.782,254.915z"/></g></g></g>
+            </svg>
+          </div>
+        </div><!-- /legal-cert-col -->
+
+        <!-- checklist column -->
+        <div class="legal-facts-col">
+
+          <div class="legal-group">
+            <span class="legal-group-label">Cumple</span>
+            <div class="legal-check-item">
+              <span class="lci-icon lci-icon--ok">&#10003;</span>
+              <span class="lci-text">Todas las condiciones t&eacute;cnicas y legales de la Ley 25.506 para ser <strong>Firma Digital</strong></span>
+            </div>
+          </div>
+
+          <div class="legal-disqualifier">
+            <span class="lci-icon lci-icon--no">&#10007;</span>
+            <span class="lci-text">Excepto: el certificado no fue emitido por una Autoridad Certificante licenciada por el Estado</span>
+          </div>
+
+          <div class="legal-result-pill">
+            <span class="legal-result-name">Firma Electr&oacute;nica</span>
+            <span class="legal-result-sub"><strong>V&aacute;lida</strong> en el &aacute;mbito administrativo interno de la FACET</span>
+          </div>
+
+        </div><!-- /legal-facts-col -->
+      </div><!-- /legal-q-slide -->
+
+      <aside class="notes">
+Antes de pasar a la demostración, quiero dejar claro el encuadre legal del sistema.
+
+Documenso hace todo lo que la ley exige técnicamente: aplica un procedimiento matemático que identifica unívocamente al firmante, y garantiza la integridad del documento — cualquier alteración posterior invalida la firma.
+
+Pero la Ley 25.506 tiene un requisito adicional para considerar algo Firma Digital: el artículo 9 exige que el certificado haya sido emitido por una Autoridad Certificante licenciada por el Estado. Nosotros usamos un certificado autofirmado, generado dentro de la institución — sin ese respaldo externo.
+
+Eso significa que el sistema emite Firma Electrónica, no Firma Digital. Pero eso no lo invalida: tiene plena validez administrativa dentro del ámbito de la FACET, para todos sus circuitos internos.
+      </aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION BREAK 02 · OBJETIVOS DEL TRABAJO  (§4.2)            -->
+    <!-- ============================================================ -->
+    <section class="centered" data-background-color="#1e1b4b" data-transition="zoom">
+      <p class="section-tag text-on-dark">Sección 02</p>
+      <h1 class="section-heading text-on-dark">Objetivos del<br>Trabajo</h1>
+      <div class="bar"></div>
+      <aside class="notes">Pasamos a la segunda sección — objetivos del trabajo. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE · OBJETIVO GENERAL — FLOWCHART                        -->
+    <!-- ============================================================ -->
+    <section>
+
+      <h3 style="font-size:clamp(1.8rem,2.2vw,3.2rem);">Diseñar, implementar y desplegar una solución <span style="color:var(--accent-1)">“llave en mano”</span> para la gestión y firma electrónica de documentos PDF en la facultad</h3>
+      <div class="bar"></div>
+
+      <!-- SVG FLOWCHART HORIZONTAL — Nuevo Proceso Automatizado -->
+      <svg viewBox="0 0 1480 465" preserveAspectRatio="xMidYMid meet"
+           xmlns="http://www.w3.org/2000/svg"
+           style="width:100%; max-height:780px; display:block; margin-top:var(--space-sm)">
+        <defs>
+          <marker id="obj-main-arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+            <polygon points="0 0, 10 4, 0 8" fill="#38bdf8"/>
+          </marker>
+        </defs>
+
+        <!-- ── PASO 1 · Carga Única ─────────────────────────────── -->
+        <g class="fragment" data-fragment-index="0">
+          <rect x="40" y="40" width="310" height="360" rx="10"
+                fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
+          <circle cx="80" cy="83" r="28" fill="#38bdf8"/>
+          <text x="80"  y="92" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="26" font-weight="700" fill="#0f172a">1</text>
+          <text x="195" y="228" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="50" font-weight="700" fill="#f8fafc">Carga</text>
+          <text x="195" y="284" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="50" font-weight="700" fill="#f8fafc">&#218;nica</text>
+          <text x="195" y="337" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="35" fill="#94a3b8">Docente / Alumno</text>
+          <text x="195" y="380" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="35" fill="#94a3b8">sube el PDF</text>
+        </g>
+
+        <!-- ── FLECHA 1 + PASO 2 · Configuración Visual ─────────── -->
+        <g class="fragment" data-fragment-index="1">
+          <line x1="354" y1="220" x2="397" y2="220"
+                stroke="#38bdf8" stroke-width="3" stroke-dasharray="7 4"
+                marker-end="url(#obj-main-arr)"/>
+          <rect x="400" y="40" width="310" height="360" rx="10"
+                fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
+          <circle cx="440" cy="83" r="28" fill="#38bdf8"/>
+          <text x="440" y="92" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="26" font-weight="700" fill="#0f172a">2</text>
+          <text x="555" y="195" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="50" font-weight="700" fill="#f8fafc">Config.</text>
+          <text x="555" y="251" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="50" font-weight="700" fill="#f8fafc">Visual</text>
+          <text x="555" y="316" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="35" fill="#94a3b8">Firmantes y</text>
+          <text x="555" y="360" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="35" fill="#94a3b8">posici&#243;n en PDF</text>
+        </g>
+
+        <!-- ── FLECHA 2 + PASO 3 · Motor de Automatización ──────── -->
+        <g class="fragment" data-fragment-index="2">
+          <line x1="714" y1="220" x2="757" y2="220"
+                stroke="#38bdf8" stroke-width="3" stroke-dasharray="7 4"
+                marker-end="url(#obj-main-arr)"/>
+          <rect x="760" y="40" width="310" height="360" rx="10"
+                fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"/>
+          <circle cx="800" cy="83" r="28" fill="#38bdf8"/>
+          <text x="800" y="92" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="26" font-weight="700" fill="#0f172a">3</text>
+          <text x="915" y="195" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="50" font-weight="700" fill="#f8fafc">Motor</text>
+          <text x="915" y="251" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="50" font-weight="700" fill="#f8fafc">Autom.</text>
+          <text x="915" y="316" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="35" fill="#94a3b8">Turnos y</text>
+          <text x="915" y="360" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="35" fill="#94a3b8">notificaciones</text>
+        </g>
+
+        <!-- ── FLECHA 3 + PASO 4 · Salida Trazable (éxito) ──────── -->
+        <g class="fragment" data-fragment-index="3">
+          <line x1="1074" y1="220" x2="1117" y2="220"
+                stroke="#38bdf8" stroke-width="3" stroke-dasharray="7 4"
+                marker-end="url(#obj-main-arr)"/>
+          <rect x="1120" y="40" width="310" height="360" rx="10"
+                fill="#1e293b" stroke="#4ade80" stroke-width="3"/>
+          <circle cx="1160" cy="83" r="28" fill="#4ade80"/>
+          <text x="1160" y="92" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="26" font-weight="700" fill="#0f172a">4</text>
+          <text x="1275" y="215" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="50" font-weight="700" fill="#f8fafc">Salida</text>
+          <text x="1275" y="271" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="50" font-weight="700" fill="#f8fafc">Trazable</text>
+          <text x="1275" y="337" text-anchor="middle"
+                font-family="Inter,sans-serif" font-size="35" fill="#86efac">Doc. firmado</text>
+        </g>
+
+      </svg>
+
+      <aside class="notes">
+La propuesta reemplaza ese proceso manual de siete pasos por uno automatizado de cuatro. [PAUSE]
+
+Paso uno: carga única. El docente o alumno sube el PDF una sola vez al sistema. Nada de descargas ni reenvíos por email. [PAUSE]
+
+Paso dos: configuración visual. Directamente en la interfaz web, define quiénes deben firmar y en qué lugar físico del documento va la firma de cada uno. [PAUSE]
+
+Paso tres: el motor de automatización de Documenso se encarga del resto — notifica a cada firmante en su turno y gestiona el flujo sin intervención manual. [PAUSE]
+
+Paso cuatro: salida trazable. El documento final queda firmado, con sello criptográfico, validable públicamente, y almacenado en la infraestructura de la FACET.
+      </aside>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE · OBJETIVOS ESPECÍFICOS                                -->
+    <!-- ============================================================ -->
+    <section>
+
+      <h3 class="obj-slide-title">Objetivos Específicos del Trabajo</h3>
+      <div class="bar"></div>
+
+      <div class="obj-grid">
+
+        <div class="obj-ring obj-ring-1">
+          <svg class="obj-icon" viewBox="0 0 37.166 37.166" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M35.829,32.045l-6.833-6.833c-0.513-0.513-1.167-0.788-1.836-0.853c2.06-2.567,3.298-5.819,3.298-9.359c0-8.271-6.729-15-15-15c-8.271,0-15,6.729-15,15c0,8.271,6.729,15,15,15c3.121,0,6.021-0.96,8.424-2.598c0.018,0.744,0.305,1.482,0.872,2.052l6.833,6.833c0.585,0.586,1.354,0.879,2.121,0.879s1.536-0.293,2.121-0.879C37.001,35.116,37.001,33.217,35.829,32.045z M15.458,25c-5.514,0-10-4.484-10-10c0-5.514,4.486-10,10-10c5.514,0,10,4.486,10,10C25.458,20.516,20.972,25,15.458,25z"/>
+          </svg>
+          <div class="obj-num">01</div>
+          <div class="obj-title">Relevamiento<br>&amp; Selección</div>
+        </div>
+
+        <div class="obj-ring obj-ring-2">
+          <svg class="obj-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M18.5,9 C19.3357785,9 20.0073514,8.32842712 20.0073514,7.5 L20.0073514,6.5 C20.0073514,5.67157288 19.3357785,5 18.5073514,5 L5.5,5 C4.67157288,5 4,5.67157288 4,6.5 L4,7.5 C4,8.32842712 4.67157288,9 5.5,9 L18.5000001,9 L18.5,9 Z M3,16.5 C3,15.1192881 4.11928813,14 5.5,14 L18.5073514,14 C19.8880632,14 21.0073514,15.1192881 21.0073514,16.5 L21.0073514,17.5 C21.0073514,18.8807119 19.8880632,20 18.5073514,20 L5.5,20 C4.11928813,20 3,18.8807119 3,17.5 L3,16.5 Z M3.99975627,9.5 C3.39267155,9.0438856 3,8.31779948 3,7.5 L3,6.5 C3,5.11928813 4.11928813,4 5.5,4 L18.5073514,4 C19.8880632,4 21.0073514,5.11928813 21.0073514,6.5 L21.0073514,7.5 C21.0073514,8.31779948 20.6146798,9.0438856 20.0075951,9.5 C20.6146798,9.9561144 21.0073514,10.6822005 21.0073514,11.5 L21.0073514,12.5 C21.0073514,13.8807119 19.8880632,15 18.5073514,15 C18.2238576,15 18,14.7761424 18,14.5 C18,14.2238576 18.2238576,14 18.5,14 C19.3357785,14 20.0073514,13.3284271 20.0073514,12.5 L20.0073514,11.5 C20.0073514,10.6715729 19.3357785,10 18.5073514,10 L5.5,10 C4.67157288,10 4,10.6715729 4,11.5 L4,12.5 C4,13.3284271 4.67157288,14 5.5,14 C5.77614237,14 6,14.2238576 6,14.5 C6,14.7761424 5.77614237,15 5.5,15 C4.11928813,15 3,13.8807119 3,12.5 L3,11.5 C3,10.6822005 3.39267155,9.9561144 3.99975627,9.5 Z M4,16.5 L4,17.5 C4,18.3284271 4.67157288,19 5.5,19 L18.5073514,19 C19.3357785,19 20.0073514,18.3284271 20.0073514,17.5 L20.0073514,16.5 C20.0073514,15.6715729 19.3357785,15 18.5073514,15 L5.5,15 C4.67157288,15 4,15.6715729 4,16.5 Z M5.5,8 C5.22385763,8 5,7.77614237 5,7.5 C5,7.22385763 5.22385763,7 5.5,7 L7.5,7 C7.77614237,7 8,7.22385763 8,7.5 C8,7.77614237 7.77614237,8 7.5,8 L5.5,8 Z M5.5,13 C5.22385763,13 5,12.7761424 5,12.5 C5,12.2238576 5.22385763,12 5.5,12 L7.5,12 C7.77614237,12 8,12.2238576 8,12.5 C8,12.7761424 7.77614237,13 7.5,13 L5.5,13 Z M5.5,18 C5.22385763,18 5,17.7761424 5,17.5 C5,17.2238576 5.22385763,17 5.5,17 L7.5,17 C7.77614237,17 8,17.2238576 8,17.5 C8,17.7761424 7.77614237,18 7.5,18 L5.5,18 Z"/>
+          </svg>
+          <div class="obj-num">02</div>
+          <div class="obj-title">Arquitectura<br>&amp; Políticas</div>
+        </div>
+
+        <div class="obj-ring obj-ring-3">
+          <svg class="obj-icon obj-icon-stroke" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M17 12C15.8757 13.1243 11.5 16.5 11.5 16.5M17 12C20 9 20 7 20 4C17 4 15 4 12 7M17 12L17.4752 14.376C17.8031 16.0153 17.29 17.71 16.1078 18.8922L14.9374 20.0626C14.4676 20.5324 13.6788 20.4219 13.3562 19.8411L11.5 16.5M12 7L7.5 12.5M12 7L9.62395 6.52479C7.98465 6.19693 6.28996 6.71004 5.10784 7.89216L3.93743 9.06257C3.46765 9.53235 3.57813 10.3212 4.1589 10.6438L7.5 12.5M7.5 12.5L11.5 16.5M15.5 8.50049L14.5 9.50049M3 21L6.39223 20.3216C7.32708 20.1346 8 19.3138 8 18.3604L8 18C8 16.8954 7.10457 16 6 16L5.63961 16C4.68625 16 3.86542 16.6729 3.67845 17.6078L3 21Z" fill="none"/>
+          </svg>
+          <div class="obj-num">03</div>
+          <div class="obj-title">Implementación<br>Piloto</div>
+        </div>
+
+        <div class="obj-ring obj-ring-4">
+          <svg class="obj-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill-rule="evenodd" d="M4 1a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V7.414A2 2 0 0017.414 6L13 1.586A2 2 0 0011.586 1H4zm0 2h7.586L16 7.414V17H4V3zm2 2a1 1 0 000 2h5a1 1 0 100-2H6zm-1 5a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h8a1 1 0 100-2H6z"/>
+          </svg>
+          <div class="obj-num">04</div>
+          <div class="obj-title">Documentación<br>&amp; Transferencia</div>
+        </div>
+
+      </div>
+
+      <aside class="notes">
+Ahora sí, los cuatro objetivos específicos que guiaron este trabajo. [PAUSE]
+
+Primero: relevamiento y selección. Identificar y evaluar herramientas open source que resuelvan la problemática en modalidad on-premise. [PAUSE]
+
+Segundo: arquitectura y políticas. Definir cómo se despliega el sistema, cómo se respaldan los datos y cómo se administran los usuarios. [PAUSE]
+
+Tercero: implementación piloto. Poner el sistema en marcha y validar viabilidad técnica y usabilidad con usuarios reales. [PAUSE]
+
+Cuarto: documentación y transferencia. Generar manuales tanto para usuarios finales como para el mantenimiento a largo plazo del sistema.
+      </aside>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION BREAK 03 · ESTADO DEL ARTE  (§4.2)                  -->
+    <!-- ============================================================ -->
+    <section class="centered" data-background-color="#0369a1" data-transition="zoom">
+      <p class="section-tag text-on-dark">Sección 03</p>
+      <h1 class="section-heading text-on-dark">Estado del Arte y<br>Selección de Plataforma</h1>
+      <div class="bar bar-accent-3"></div>
+      <aside class="notes">Pasamos a la tercera sección — estado del arte y selección de plataforma. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE · PANORAMA SAAS — Comparison table  (§3.1)            -->
+    <!-- ============================================================ -->
+    <section data-background-color="#0f172a">
+      <h3>Panorama del Mercado: Soluciones <span class="saas-kw">SaaS</span></h3>
+      <div class="bar"></div>
+      <div class="saas-wrap">
+        <table class="saas-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                <div class="saas-logo-wrap">
+                  <img src="figuras/docusign.svg"
+                       alt="Docusign"
+                       style="height:clamp(40px,4.2vw,68px)">
+                </div>
+              </th>
+              <th>
+                <div class="saas-logo-wrap">
+                  <img src="figuras/dropbox-sign.svg"
+                       alt="Dropbox Sign"
+                       style="height:clamp(42px,4.4vw,70px)">
+                </div>
+              </th>
+              <th>
+                <div class="saas-logo-wrap">
+                  <img src="figuras/adobe-sign.svg"
+                       alt="Adobe Sign"
+                       style="height:clamp(52px,5.2vw,84px)">
+                  <span class="saas-logo-label">Adobe Sign</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Costo x Usuario<small>plan anual</small></td>
+              <td>25 USD/mes</td>
+              <td>25 USD/mes</td>
+              <td>24 USD/mes</td>
+            </tr>
+            <tr>
+              <td>Límite de Envíos</td>
+              <td>100 sobres/año<small>x usuario</small></td>
+              <td class="saas-best">Ilimitado</td>
+              <td>150 sobres/año<small>x usuario</small></td>
+            </tr>
+            <tr>
+              <td>Residencia de Datos</td>
+              <td>Infra propia<small>AWS · Azure</small></td>
+              <td>AWS</td>
+              <td>AWS · Azure</td>
+            </tr>
+            <tr class="saas-cost-row">
+              <td>20 Usuarios<small>costo estimado</small></td>
+              <td>500 USD/mes<small class="saas-annual">6&#8239;000 USD/año</small></td>
+              <td>500 USD/mes<small class="saas-annual">6&#8239;000 USD/año</small></td>
+              <td class="saas-cheapest">480 USD/mes<small class="saas-annual">5&#8239;760 USD/año</small></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="notes">Antes de elegir la plataforma, relevé las tres soluciones SaaS más usadas del mercado. Docusign, Dropbox Sign y Adobe Sign tienen precios similares — entre 24 y 25 dólares por usuario por mes. Para 20 usuarios eso representa entre 480 y 500 dólares mensuales, es decir casi 6 000 dólares al año. Y además, ninguna de estas opciones cumple con el requisito de soberanía de datos: todas dependen de infraestructura cloud en servidores del exterior. Esto justifica buscar una alternativa open source desplegable en la propia institución. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE · OPEN SOURCE — Documenso vs DocuSeal  (§3.2)         -->
+    <!-- ============================================================ -->
+    <section data-background-color="#0f172a">
+      <h3>Panorama del Mercado: Soluciones <span class="os-kw">Open Source</span></h3>
+      <div class="bar"></div>
+      <div class="os-grid">
+
+        <!-- DOCUMENSO -->
+        <div class="os-card">
+          <div class="os-logo">
+            <img src="figuras/documenso.svg" alt="Documenso">
+          </div>
+          <div class="os-card-head">
+            <div class="os-repo">documenso / <strong>documenso</strong></div>
+            <div class="os-stars">&#9733; 13.1k</div>
+          </div>
+          <p class="os-desc">&ldquo;The open source DocuSign alternative.&rdquo;</p>
+          <div class="os-meta">
+            <span class="os-lang-dot" style="background:#3178c6"></span>
+            TypeScript
+          </div>
+          <div class="os-tags">
+            <span class="os-tag">nextjs</span>
+            <span class="os-tag">postgresql</span>
+            <span class="os-tag">self-hosted</span>
+            <span class="os-tag">pades-standard</span>
+            <span class="os-tag">pdf-signature</span>
+            <span class="os-tag">document-signing</span>
+          </div>
+        </div>
+
+        <!-- DOCUSEAL -->
+        <div class="os-card">
+          <div class="os-logo">
+            <img src="figuras/docuseal.svg" alt="DocuSeal">
+          </div>
+          <div class="os-card-head">
+            <div class="os-repo">docusealco / <strong>docuseal</strong></div>
+            <div class="os-stars">&#9733; 16.9k</div>
+          </div>
+          <p class="os-desc">&ldquo;Open source DocuSign alternative. Create, fill, and sign digital documents.&rdquo;</p>
+          <div class="os-meta">
+            <span class="os-lang-dot" style="background:#701516"></span>
+            Ruby
+          </div>
+          <div class="os-tags">
+            <span class="os-tag">ruby-on-rails</span>
+            <span class="os-tag">vue</span>
+            <span class="os-tag">self-hosted</span>
+            <span class="os-tag">e-signature</span>
+            <span class="os-tag">pdf-signature</span>
+            <span class="os-tag">document-signing</span>
+          </div>
+        </div>
+
+      </div>
+      <aside class="notes">Al descartar las opciones SaaS, relevé las alternativas open source más destacadas del mercado. Documenso y DocuSeal son los dos proyectos con mayor adopción — ambos con más de 12 mil stars en GitHub, self-hosted, y con API REST. La diferencia principal está en el stack: Documenso usa TypeScript con Next.js y PostgreSQL, mientras que DocuSeal usa Ruby on Rails con Vue.js y soporta SQLite además de PostgreSQL. Ambos cumplen los requisitos de soberanía de datos al poder desplegarse en infraestructura propia. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE · COMPARATIVA OPEN SOURCE  (§3.3)                       -->
+    <!-- ============================================================ -->
+    <section data-background-color="#0f172a">
+      <h3>Comparativa: <span class="os-kw">Documenso</span> vs <span style="color:var(--accent-1)">DocuSeal</span></h3>
+      <div class="bar"></div>
+      <div class="oss-wrap">
+        <table class="oss-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                <div class="oss-logo-wrap">
+                  <img src="figuras/documenso.svg" alt="Documenso" style="height:clamp(48px,5vw,80px)">
+                  <span class="oss-logo-label">Documenso</span>
+                  <span class="oss-selected-badge">&#10003;&nbsp;Seleccionado</span>
+                </div>
+              </th>
+              <th>
+                <div class="oss-logo-wrap">
+                  <img src="figuras/docuseal.svg" alt="DocuSeal" style="height:clamp(48px,5vw,80px)">
+                  <span class="oss-logo-label">DocuSeal</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gestión de Roles (RBAC)</td>
+              <td><span class="oss-check"><span class="oss-check-icon">✓</span> Community Ed.</span></td>
+              <td><span class="oss-lock"><span class="oss-lock-icon">✕</span><span class="oss-lock-label">Enterprise Edition</span></span></td>
+            </tr>
+            <tr>
+              <td>Login con Google (SSO)</td>
+              <td><span class="oss-check"><span class="oss-check-icon">✓</span> Community Ed.</span></td>
+              <td><span class="oss-lock"><span class="oss-lock-icon">✕</span><span class="oss-lock-label">Enterprise Edition</span></span></td>
+            </tr>
+            <tr>
+              <td>Branding Personalizado</td>
+              <td><span class="oss-check"><span class="oss-check-icon">✓</span> Community Ed.</span></td>
+              <td><span class="oss-lock"><span class="oss-lock-icon">✕</span><span class="oss-lock-label">Enterprise Edition</span></span></td>
+            </tr>
+            <tr>
+              <td>Stack Tecnológico</td>
+              <td>Remix (full-stack)<small>PostgreSQL</small></td>
+              <td>Ruby on Rails + Vue.js<small>PostgreSQL</small></td>
+            </tr>
+            <tr>
+              <td>Licencia</td>
+              <td>AGPL-3.0</td>
+              <td>AGPL-3.0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="notes">Al comparar ambas soluciones open source en detalle, emerge una diferencia crítica: DocuSeal bloquea funcionalidades esenciales para una institución — la gestión de roles, el inicio de sesión con Google y el branding personalizado — detrás de un plan de pago. Documenso las incluye en su versión libre con licencia AGPL-3.0. Esto, sumado a su stack moderno en TypeScript con Next.js, fue el criterio definitivo para elegir Documenso como base del sistema. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE · POR QUÉ DOCUMENSO — Alineación organizacional        -->
+    <!-- ============================================================ -->
+    <section data-background-color="#0f172a">
+      <p class="slide-kicker">¿Por qué Documenso?</p>
+      <h2 class="slide-title" style="margin-bottom:var(--space-sm);font-size:clamp(2.4rem,3.8vw,5.6rem);">Modelo Organizacional Alineado a la FACET</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 80px 1fr;gap:clamp(.8rem,1.5vw,2rem);align-items:center;margin-top:var(--space-sm);">
+
+        <!-- LEFT: Documenso -->
+        <div style="background:var(--bg-secondary);border:2px solid rgba(56,189,248,0.22);border-radius:1.2rem;
+                    padding:clamp(1.2rem,2vw,2.8rem);
+                    box-shadow:0 0 24px rgba(56,189,248,0.07),0 4px 16px rgba(0,0,0,0.3);
+                    position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#38bdf8,transparent);"></div>
+          <p style="font-family:var(--font-mono);font-size:clamp(1.4rem,1.9vw,2.8rem);color:var(--accent-1);font-weight:700;text-align:center;margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.12em;">Documenso</p>
+          <svg viewBox="0 0 440 285" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+            <defs>
+              <marker id="a1" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#38bdf8"/></marker>
+              <filter id="glow-blue" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect x="120" y="10" width="200" height="62" rx="8" fill="rgba(56,189,248,0.07)" stroke="#38bdf8" stroke-width="2" filter="url(#glow-blue)"/>
+            <text x="220" y="48" text-anchor="middle" font-family="Inter,sans-serif" font-size="24" fill="#f8fafc" font-weight="700">Organización</text>
+            <line x1="183" y1="72" x2="113" y2="110" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a1)"/>
+            <line x1="257" y1="72" x2="327" y2="110" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a1)"/>
+            <rect x="20" y="110" width="186" height="62" rx="7" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="113" y="148" text-anchor="middle" font-family="Inter,sans-serif" font-size="24" fill="#7dd3fc" font-weight="600">Team A</text>
+            <rect x="234" y="110" width="186" height="62" rx="7" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="327" y="148" text-anchor="middle" font-family="Inter,sans-serif" font-size="24" fill="#7dd3fc" font-weight="600">Team B</text>
+            <line x1="113" y1="172" x2="113" y2="218" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a1)"/>
+            <line x1="327" y1="172" x2="327" y2="218" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#a1)"/>
+            <rect x="20" y="220" width="186" height="52" rx="6" fill="rgba(56,189,248,0.06)" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6,3"/>
+            <text x="113" y="251" text-anchor="middle" font-family="Inter,sans-serif" font-size="18" fill="#7dd3fc">Docs / Templates</text>
+            <rect x="234" y="220" width="186" height="52" rx="6" fill="rgba(56,189,248,0.06)" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6,3"/>
+            <text x="327" y="251" text-anchor="middle" font-family="Inter,sans-serif" font-size="18" fill="#7dd3fc">Docs / Templates</text>
+          </svg>
+        </div>
+
+        <!-- ARROW (fixed width column, always visible) -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:.5rem;">
+          <svg viewBox="0 0 56 48" xmlns="http://www.w3.org/2000/svg" style="width:56px;overflow:visible;">
+            <defs><marker id="aw" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L0,8 L10,4 z" fill="#4ade80"/></marker></defs>
+            <line x1="4" y1="24" x2="44" y2="24" stroke="#4ade80" stroke-width="4" marker-end="url(#aw)"/>
+          </svg>
+          <span style="font-family:var(--font-mono);font-size:clamp(.9rem,1.1vw,1.6rem);color:#4ade80;font-weight:700;white-space:nowrap;">análogo</span>
+        </div>
+
+        <!-- RIGHT: FACET -->
+        <div style="background:var(--bg-secondary);border:2px solid rgba(74,222,128,0.28);border-radius:1.2rem;
+                    padding:clamp(1.2rem,2vw,2.8rem);
+                    box-shadow:0 0 24px rgba(74,222,128,0.07),0 4px 16px rgba(0,0,0,0.3);
+                    position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#4ade80,transparent);"></div>
+          <p style="font-family:var(--font-mono);font-size:clamp(1.4rem,1.9vw,2.8rem);color:#4ade80;font-weight:700;text-align:center;margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.12em;">FACET</p>
+          <svg viewBox="0 0 460 285" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+            <defs>
+              <marker id="a3" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L0,7 L9,3.5 z" fill="#4ade80"/></marker>
+              <filter id="glow-green" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect x="130" y="10" width="200" height="62" rx="8" fill="rgba(74,222,128,0.07)" stroke="#4ade80" stroke-width="2" filter="url(#glow-green)"/>
+            <text x="230" y="48" text-anchor="middle" font-family="Inter,sans-serif" font-size="24" fill="#f8fafc" font-weight="700">FACET</text>
+            <line x1="193" y1="72" x2="123" y2="110" stroke="#4ade80" stroke-width="2.5" marker-end="url(#a3)"/>
+            <line x1="267" y1="72" x2="337" y2="110" stroke="#4ade80" stroke-width="2.5" marker-end="url(#a3)"/>
+            <rect x="30" y="110" width="186" height="62" rx="7" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+            <text x="123" y="148" text-anchor="middle" font-family="Inter,sans-serif" font-size="24" fill="#86efac" font-weight="600">DEEC</text>
+            <rect x="244" y="110" width="186" height="62" rx="7" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+            <text x="337" y="148" text-anchor="middle" font-family="Inter,sans-serif" font-size="24" fill="#86efac" font-weight="600">Dep. Física</text>
+            <line x1="123" y1="172" x2="123" y2="218" stroke="#4ade80" stroke-width="2.5" marker-end="url(#a3)"/>
+            <line x1="337" y1="172" x2="337" y2="218" stroke="#4ade80" stroke-width="2.5" marker-end="url(#a3)"/>
+            <rect x="30" y="220" width="186" height="52" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="6,3"/>
+            <text x="123" y="251" text-anchor="middle" font-family="Inter,sans-serif" font-size="18" fill="#86efac">Docs / Templates</text>
+            <rect x="244" y="220" width="186" height="52" rx="6" fill="rgba(74,222,128,0.06)" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="6,3"/>
+            <text x="337" y="251" text-anchor="middle" font-family="Inter,sans-serif" font-size="18" fill="#86efac">Docs / Templates</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- bottom note -->
+      <p style="margin-top:var(--space-sm);font-size:clamp(1.6rem,2vw,3rem);color:var(--text-secondary);text-align:center;line-height:1.5;">
+        Un usuario puede pertenecer a <strong style="color:#f8fafc;">múltiples departamentos</strong> y accede <strong style="color:#4ade80;">solo</strong> a los documentos de cada uno.
+      </p>
+
+      <aside class="notes">El modelo de organizaciones y teams de Documenso es un mapeo casi exacto de la estructura de la FACET. La facultad es la organización raíz. Cada departamento — DEEC, Física, Matemática — se convierte en un team con su propio espacio de documentos aislado. Un docente que da clases en dos departamentos simplemente pertenece a ambos teams, y la plataforma gestiona automáticamente qué documentos puede ver en cada contexto. Esto elimina configuración personalizada y hace la adopción inmediata. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE · DOCUMENSO — Integraciones externas                   -->
+    <!-- ============================================================ -->
+    <section data-background-color="#0f172a">
+      <p class="slide-kicker">¿Por qué Documenso?</p>
+      <h2 class="slide-title" style="font-size:clamp(2.4rem,3.8vw,5.6rem);margin-bottom:var(--space-md);">Integraciones con Servicios Externos</h2>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,4rem);align-items:start;margin-top:var(--space-sm);">
+
+        <!-- MinIO -->
+        <div class="fragment fade-up" data-fragment-index="1"
+             style="display:flex;flex-direction:column;align-items:center;gap:var(--space-sm);text-align:center;
+                    background:var(--bg-secondary);border:2px solid rgba(199,46,73,0.35);border-radius:1.2rem;
+                    padding:clamp(1.5rem,2.5vw,3.5rem);
+                    box-shadow:0 0 40px rgba(199,46,73,0.12),0 4px 24px rgba(0,0,0,0.4);">
+          <!-- hex wrapper with red glow -->
+          <div style="position:relative;width:clamp(130px,13vw,210px);height:clamp(150px,15vw,242px);
+                      filter:drop-shadow(0 0 18px rgba(199,46,73,0.55));">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#2d1219,#1e293b);
+                        clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+                        display:flex;align-items:center;justify-content:center;
+                        border:2px solid rgba(199,46,73,0.6);">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#C72E49" viewBox="0 0 24 24" style="width:48%;height:48%;"><path d="M13.207.006a2.16 2.16 0 0 0-1.62.582 2.15 2.15 0 0 0-.095 3.035l3.408 3.55a3.042 3.042 0 0 1-.663 4.688l-.463.239V7.285a15.42 15.42 0 0 0-8.018 10.487v.017l6.549-3.328v7.621L13.779 24V13.682l.897-.463a4.443 4.443 0 0 0 1.22-7.03l-3.37-3.525a.75.75 0 0 1 .037-1.055.75.75 0 0 1 1.056.038l.467.486-.006.006 4.07 4.244a.057.057 0 0 0 .082 0 .06.06 0 0 0 0-.07l-3.14-5.143-.149.143.149-.145C14.494.393 13.829.054 13.207.006m-.902 9.865v2.994l-4.152 2.149a14 14 0 0 1 2.767-3.928 14 14 0 0 1 1.385-1.215"/></svg>
+            </div>
+          </div>
+          <p style="font-family:var(--font-heading);font-size:clamp(2.4rem,3.2vw,4.8rem);font-weight:700;color:#f8fafc;margin:0;">MinIO</p>
+          <div style="width:3rem;height:3px;background:#C72E49;border-radius:2px;"></div>
+          <p style="font-size:clamp(1.7rem,2.2vw,3.2rem);color:var(--text-secondary);line-height:1.5;margin:0;">Almacenamiento S3-compatible para los PDFs firmados.</p>
+        </div>
+
+        <!-- Brevo -->
+        <div class="fragment fade-up" data-fragment-index="2"
+             style="display:flex;flex-direction:column;align-items:center;gap:var(--space-sm);text-align:center;
+                    background:var(--bg-secondary);border:2px solid rgba(11,153,110,0.35);border-radius:1.2rem;
+                    padding:clamp(1.5rem,2.5vw,3.5rem);
+                    box-shadow:0 0 40px rgba(11,153,110,0.12),0 4px 24px rgba(0,0,0,0.4);">
+          <div style="position:relative;width:clamp(130px,13vw,210px);height:clamp(150px,15vw,242px);
+                      filter:drop-shadow(0 0 18px rgba(11,153,110,0.55));">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#0b2720,#1e293b);
+                        clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+                        display:flex;align-items:center;justify-content:center;
+                        border:2px solid rgba(11,153,110,0.6);">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#0B996E" viewBox="0 0 24 24" style="width:48%;height:48%;"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0M7.2 4.8h5.747c2.34 0 3.895 1.406 3.895 3.516 0 1.022-.348 1.862-1.09 2.588C17.189 11.812 18 13.22 18 14.785c0 2.86-2.64 5.016-6.164 5.016H7.199v-15zm2.085 1.952v5.537h.07c.233-.432.858-.796 2.249-1.226 2.039-.659 3.037-1.52 3.037-2.655 0-.998-.766-1.656-1.924-1.656zm4.87 5.266c-.766.385-1.67.748-2.76 1.11-1.229.387-2.11 1.386-2.11 2.407v2.315h2.365c2.387 0 4.149-1.34 4.149-3.155 0-1.067-.625-2.087-1.645-2.677z"/></svg>
+            </div>
+          </div>
+          <p style="font-family:var(--font-heading);font-size:clamp(2.4rem,3.2vw,4.8rem);font-weight:700;color:#f8fafc;margin:0;">Brevo</p>
+          <div style="width:3rem;height:3px;background:#0B996E;border-radius:2px;"></div>
+          <p style="font-size:clamp(1.7rem,2.2vw,3.2rem);color:var(--text-secondary);line-height:1.5;margin:0;">Relay SMTP para notificaciones. Capa gratuita: hasta 300 mails/día.</p>
+        </div>
+
+        <!-- Google -->
+        <div class="fragment fade-up" data-fragment-index="3"
+             style="display:flex;flex-direction:column;align-items:center;gap:var(--space-sm);text-align:center;
+                    background:var(--bg-secondary);border:2px solid rgba(66,133,244,0.35);border-radius:1.2rem;
+                    padding:clamp(1.5rem,2.5vw,3.5rem);
+                    box-shadow:0 0 40px rgba(66,133,244,0.12),0 4px 24px rgba(0,0,0,0.4);">
+          <div style="position:relative;width:clamp(130px,13vw,210px);height:clamp(150px,15vw,242px);
+                      filter:drop-shadow(0 0 18px rgba(66,133,244,0.55));">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#0f1f3d,#1e293b);
+                        clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+                        display:flex;align-items:center;justify-content:center;
+                        border:2px solid rgba(66,133,244,0.6);">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1556 1587" style="width:48%;height:48%;"><path fill="#4285f4" d="M1555.26 810.89c0-65.22-5.3-112.82-16.75-162.17H793.5V943.1h437.3c-8.81 73.16-56.42 183.34-162.22 257.37l-1.49 9.86 235.56 182.43 16.32 1.63c149.88-138.39 236.29-341.99 236.29-583.5"/><path fill="#34a853" d="M793.5 1586.53c214.24 0 394.1-70.51 525.47-192.14l-250.39-193.92c-67.01 46.72-156.94 79.33-275.08 79.33-209.84 0-387.93-138.38-451.42-329.64l-9.3.79-244.94 189.5-3.2 8.9c130.48 259.13 398.51 437.18 708.86 437.18"/><path fill="#fbbc05" d="M342.08 950.16c-16.75-49.36-26.44-102.25-26.44-156.89 0-54.65 9.69-107.54 25.56-156.9l-.44-10.51L92.75 433.32l-8.11 3.85C30.86 544.71 0 665.46 0 793.27c0 127.8 30.86 248.55 84.64 356.08z"/><path fill="#eb4335" d="M793.5 306.73c149 0 249.51 64.34 306.82 118.11l223.94-218.59C1186.72 78.45 1007.74 0 793.5 0 483.15 0 215.12 178.04 84.64 437.17l256.56 199.2c64.37-191.26 242.46-329.64 452.3-329.64"/></svg>
+            </div>
+          </div>
+          <p style="font-family:var(--font-heading);font-size:clamp(2.4rem,3.2vw,4.8rem);font-weight:700;color:#f8fafc;margin:0;">Login con Google</p>
+          <div style="width:3rem;height:3px;background:linear-gradient(90deg,#4285f4,#34a853,#fbbc05,#eb4335);border-radius:2px;"></div>
+          <p style="font-size:clamp(1.7rem,2.2vw,3.2rem);color:var(--text-secondary);line-height:1.5;margin:0;">OAuth 2.0 con Google Workspace UNT: acceso con cuenta institucional.</p>
+        </div>
+
+      </div>
+
+      <aside class="notes">Documenso también está diseñado para integrarse con servicios externos. En nuestra implementación aprovechamos tres de ellas. Para el almacenamiento de documentos, en lugar de guardar los PDFs en el disco del servidor, los delegamos a MinIO — un servidor de objetos compatible con el protocolo S3 de Amazon — que corre en la propia infraestructura de la FACET. Para las notificaciones por email, usamos Brevo como relay SMTP, con su capa gratuita que cubre ampliamente nuestro volumen de envíos. Y para la autenticación, habilitamos OAuth 2.0 con Google, lo que significa que los docentes entran al sistema directamente con su cuenta de Google de la UNT, sin tener que crear ni recordar otra contraseña. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION BREAK 04 · INFRAESTRUCTURA  (§4.2)                  -->
+    <!-- ============================================================ -->
+    <section class="centered" data-background-color="#132f4c" data-transition="zoom">
+      <p class="section-tag">Sección 04</p>
+      <h1 class="section-heading text-on-dark">Infraestructura y<br>Arquitectura de Despliegue</h1>
+      <div class="bar bar-accent-3"></div>
+      <aside class="notes">Tercera sección — cómo construimos todo esto. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE · CONCEPTOS CLAVE DE LA INFRAESTRUCTURA               -->
+    <!-- ============================================================ -->
+    <section data-background-color="#0f172a">
+      <p class="slide-kicker">Infraestructura y Arquitectura de Despliegue</p>
+      <h2 class="slide-title" style="font-size:clamp(2.4rem,3.8vw,5.6rem);margin-bottom:var(--space-sm);">Conceptos Clave de la Infraestructura</h2>
+
+      <!-- OUTER GRID: dos servidores físicos -->
+      <div style="display:grid;grid-template-columns:3fr 1.15fr;gap:clamp(.8rem,1.2vw,1.8rem);margin-top:clamp(.4rem,.6vw,.9rem);">
+
+        <!-- ── SERVIDOR 1 (siempre visible, borde punteado ámbar) ────────── -->
+        <div style="border:3px dashed rgba(251,146,60,0.70);border-radius:1.2rem;
+                    padding:clamp(.7rem,1.1vw,1.6rem);position:relative;">
+          <span style="position:absolute;top:-.75rem;left:1.1rem;background:#0f172a;
+                       padding:0 .6rem;font-family:var(--font-mono);
+                       font-size:clamp(1.25rem,1.5vw,2.2rem);color:#fb923c;
+                       letter-spacing:.12em;text-transform:uppercase;font-weight:700;">Servidor 1</span>
+
+          <!-- Proxmox card -->
+          <div style="background:var(--bg-secondary);border:2px solid rgba(229,112,0,0.28);border-radius:1rem;
+                      padding:clamp(.8rem,1.4vw,2rem);position:relative;overflow:hidden;margin-bottom:clamp(.5rem,.8vw,1.2rem);">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#e57000,transparent);"></div>
+            <div style="display:flex;align-items:center;gap:clamp(.8rem,1.6vw,2.4rem);margin-bottom:clamp(.6rem,1vw,1.6rem);">
+              <img src="figuras/proxmox.svg" alt="Proxmox"
+                   style="height:clamp(46px,5.8vw,82px);flex-shrink:0;filter:drop-shadow(0 0 10px rgba(229,112,0,0.35));">
+              <div>
+                <p style="font-family:var(--font-heading);font-size:clamp(2rem,2.7vw,4.2rem);font-weight:700;color:#fb923c;margin:0 0 .15rem;">Proxmox VE</p>
+                <p style="font-size:clamp(1.5rem,2vw,3rem);color:var(--text-secondary);margin:0;">Ambiente de virtualización <em>open source</em></p>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(.6rem,1.2vw,2rem);">
+              <div style="background:rgba(229,112,0,0.06);border:1.5px solid rgba(229,112,0,0.22);border-radius:.8rem;
+                          padding:clamp(.6rem,.9vw,1.4rem);display:flex;align-items:center;gap:clamp(.6rem,1vw,1.5rem);">
+                <svg viewBox="0 0 44 38" style="width:clamp(34px,3.9vw,58px);flex-shrink:0;">
+                  <rect x="3" y="4" width="38" height="24" rx="3" fill="none" stroke="#e57000" stroke-width="2.5"/>
+                  <line x1="7" y1="34" x2="16" y2="28" stroke="#e57000" stroke-width="2"/>
+                  <line x1="37" y1="34" x2="28" y2="28" stroke="#e57000" stroke-width="2"/>
+                  <line x1="5" y1="34" x2="39" y2="34" stroke="#e57000" stroke-width="2.5" stroke-linecap="round"/>
+                  <rect x="14" y="9" width="16" height="11" rx="1.5" fill="#e57000" opacity=".18"/>
+                  <text x="22" y="18" text-anchor="middle" font-family="monospace" font-size="7" fill="#e57000" font-weight="bold">VM</text>
+                </svg>
+                <div>
+                  <p style="font-family:var(--font-mono);font-size:clamp(1.5rem,1.85vw,2.8rem);color:#fb923c;font-weight:700;margin:0 0 .1rem;">Full Virtualization</p>
+                  <p style="font-size:clamp(1.25rem,1.6vw,2.3rem);color:var(--text-muted);margin:0;">KVM / QEMU</p>
+                </div>
+              </div>
+              <div style="background:rgba(221,72,20,0.08);border:2px solid rgba(221,72,20,0.40);border-radius:.8rem;
+                          padding:clamp(.6rem,.9vw,1.4rem);display:flex;align-items:center;gap:clamp(.6rem,1vw,1.5rem);
+                          box-shadow:0 0 18px rgba(221,72,20,0.10);">
+                <img src="figuras/lxc-cube.svg" alt="LXC"
+                     style="height:clamp(28px,3.2vw,48px);flex-shrink:0;filter:drop-shadow(0 0 6px rgba(221,72,20,0.40));">
+                <div style="flex:1;">
+                  <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;">
+                    <p style="font-family:var(--font-mono);font-size:clamp(1.5rem,1.85vw,2.8rem);color:#f87171;font-weight:700;margin:0;">Containers</p>
+                    <span style="font-size:clamp(.8rem,1vw,1.5rem);background:rgba(221,72,20,0.22);color:#fca5a5;
+                                 border:1px solid rgba(221,72,20,0.38);border-radius:.3rem;padding:.1em .5em;font-weight:600;">← usamos</span>
+                  </div>
+                  <p style="font-size:clamp(1.25rem,1.6vw,2.3rem);color:var(--text-muted);margin:.1rem 0 0;">LXC: Linux Container</p>
+                  <p style="font-family:var(--font-mono);font-size:clamp(.9rem,1.1vw,1.6rem);color:#f87171;opacity:.75;margin:.3rem 0 0;letter-spacing:.04em;">8&nbsp;vCPU &middot; 8&nbsp;GB RAM &middot; 50&nbsp;GB disco</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LXC inner stack (fragment 1) -->
+          <div class="fragment fade-up" data-fragment-index="1"
+               style="background:rgba(221,72,20,0.05);border:2px solid rgba(221,72,20,0.26);border-radius:1rem;
+                      padding:clamp(.6rem,1vw,1.5rem);position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#dd4814,transparent);"></div>
+            <p style="font-family:var(--font-mono);font-size:clamp(1.5rem,1.8vw,2.4rem);color:#f87171;font-weight:700;
+                      margin:0 0 clamp(.4rem,.7vw,1rem);text-transform:uppercase;letter-spacing:.1em;">Dentro del LXC</p>
+            <div style="display:flex;align-items:center;gap:0;">
+              <div style="background:var(--bg-secondary);border:1.5px solid rgba(140,82,255,0.30);border-radius:.8rem;
+                          padding:clamp(.8rem,1.1vw,1.8rem) clamp(.7rem,1.2vw,2rem);text-align:center;flex-shrink:0;">
+                <img src="figuras/coolify.svg" alt="Coolify"
+                     style="height:clamp(32px,4vw,60px);display:block;margin:0 auto .35rem;filter:drop-shadow(0 0 7px rgba(140,82,255,0.40));">
+                <p style="font-family:var(--font-heading);font-size:clamp(1.6rem,2vw,3rem);font-weight:700;color:#c4b5fd;margin:0 0 .15rem;">Coolify</p>
+                <p style="font-size:clamp(1.2rem,1.5vw,2.2rem);color:var(--text-muted);margin:0;">PaaS</p>
+              </div>
+              <div style="display:flex;align-items:center;padding:0 clamp(.4rem,.6vw,.9rem);flex-shrink:0;">
+                <svg viewBox="0 0 44 14" style="width:clamp(24px,2.8vw,42px);">
+                  <line x1="2" y1="7" x2="35" y2="7" stroke="#475569" stroke-width="2.5"/>
+                  <path d="M29,2 L42,7 L29,12" fill="#475569"/>
+                </svg>
+              </div>
+              <div style="background:var(--bg-secondary);border:1.5px solid rgba(55,171,200,0.30);border-radius:.8rem;
+                          padding:clamp(.8rem,1.1vw,1.8rem) clamp(.7rem,1.2vw,2rem);text-align:center;flex-shrink:0;">
+                <img src="figuras/traefik-1.svg" alt="Traefik"
+                     style="height:clamp(32px,4vw,60px);display:block;margin:0 auto .35rem;filter:drop-shadow(0 0 7px rgba(55,171,200,0.40));">
+                <p style="font-family:var(--font-heading);font-size:clamp(1.6rem,2vw,3rem);font-weight:700;color:#67e8f9;margin:0 0 .15rem;">Traefik</p>
+                <p style="font-size:clamp(1.2rem,1.5vw,2.2rem);color:var(--text-muted);margin:0;">Reverse Proxy</p>
+              </div>
+              <div style="flex:1;display:flex;align-items:center;gap:0;padding-left:clamp(.3rem,.5vw,.8rem);">
+                <svg viewBox="0 0 60 275" xmlns="http://www.w3.org/2000/svg"
+                     style="width:50px;height:275px;flex-shrink:0;overflow:visible;">
+                  <defs>
+                    <marker id="af2" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                      <path d="M0,0 L0,7 L9,3.5 z" fill="#37abc8"/>
+                    </marker>
+                  </defs>
+                  <line x1="0" y1="137" x2="14" y2="137" stroke="#37abc8" stroke-width="2.5"/>
+                  <line x1="14" y1="42"  x2="14" y2="232" stroke="#37abc8" stroke-width="2"/>
+                  <line x1="14" y1="42"  x2="52" y2="42"  stroke="#37abc8" stroke-width="2" marker-end="url(#af2)"/>
+                  <line x1="14" y1="137" x2="52" y2="137" stroke="#37abc8" stroke-width="2" marker-end="url(#af2)"/>
+                  <line x1="14" y1="232" x2="52" y2="232" stroke="#37abc8" stroke-width="2" marker-end="url(#af2)"/>
+                </svg>
+                <div style="flex:1;display:flex;flex-direction:column;gap:10px;">
+                  <div style="background:var(--bg-secondary);border:1.5px solid rgba(35,150,237,0.26);border-radius:.7rem;
+                              padding:clamp(.4rem,.6vw,1rem);text-align:center;min-height:85px;
+                              display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                    <img src="figuras/docker.svg" alt="Docker"
+                         style="height:clamp(27px,2.9vw,44px);display:block;margin:0 auto .3rem;filter:drop-shadow(0 0 5px rgba(35,150,237,0.38));">
+                    <p style="font-family:var(--font-heading);font-size:clamp(1.5rem,1.9vw,2.6rem);font-weight:600;color:#7dd3fc;margin:0;">Frontend</p>
+                  </div>
+                  <div style="background:var(--bg-secondary);border:1.5px solid rgba(35,150,237,0.26);border-radius:.7rem;
+                              padding:clamp(.4rem,.6vw,1rem);text-align:center;min-height:85px;
+                              display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                    <img src="figuras/docker.svg" alt="Docker"
+                         style="height:clamp(27px,2.9vw,44px);display:block;margin:0 auto .3rem;filter:drop-shadow(0 0 5px rgba(35,150,237,0.38));">
+                    <p style="font-family:var(--font-heading);font-size:clamp(1.5rem,1.9vw,2.6rem);font-weight:600;color:#7dd3fc;margin:0;">Backend</p>
+                  </div>
+                  <div style="background:var(--bg-secondary);border:1.5px solid rgba(35,150,237,0.26);border-radius:.7rem;
+                              padding:clamp(.4rem,.6vw,1rem);text-align:center;min-height:85px;
+                              display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                    <img src="figuras/docker.svg" alt="Docker"
+                         style="height:clamp(27px,2.9vw,44px);display:block;margin:0 auto .3rem;filter:drop-shadow(0 0 5px rgba(35,150,237,0.38));">
+                    <p style="font-family:var(--font-heading);font-size:clamp(1.5rem,1.9vw,2.6rem);font-weight:600;color:#7dd3fc;margin:0;">Base de datos</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SERVIDOR NAS (fragment 2, borde punteado teal) ──────────── -->
+        <div class="fragment fade-up" data-fragment-index="2"
+             style="border:3px dashed rgba(49,190,236,0.70);border-radius:1.2rem;
+                    padding:clamp(.7rem,1.1vw,1.6rem);position:relative;
+                    display:flex;flex-direction:column;justify-content:center;gap:clamp(.5rem,.8vw,1.2rem);">
+          <span style="position:absolute;top:-.75rem;left:1.1rem;background:#0f172a;
+                       padding:0 .6rem;font-family:var(--font-mono);
+                       font-size:clamp(1.25rem,1.5vw,2.2rem);color:#31beec;
+                       letter-spacing:.12em;text-transform:uppercase;font-weight:700;">Servidor 2</span>
+
+          <!-- TrueNAS -->
+          <div style="background:var(--bg-secondary);border:1.5px solid rgba(49,190,236,0.30);border-radius:.8rem;
+                      padding:clamp(.5rem,.8vw,1.3rem);text-align:center;">
+            <img src="figuras/truenas.svg" alt="TrueNAS"
+                 style="height:clamp(36px,4.2vw,60px);display:block;margin:0 auto .4rem;filter:drop-shadow(0 0 7px rgba(49,190,236,0.40));">
+            <p style="font-family:var(--font-heading);font-size:clamp(2rem,2.6vw,4rem);font-weight:700;color:#7dd3fc;margin:0 0 .2rem;">TrueNAS</p>
+            <p style="font-size:clamp(1.6rem,2vw,3rem);color:var(--text-muted);margin:0;">Gesti&oacute;n de discos</p>
+          </div>
+
+          <div style="display:flex;justify-content:center;">
+            <svg viewBox="0 0 14 30" style="width:18px;height:30px;">
+              <line x1="7" y1="2" x2="7" y2="22" stroke="#475569" stroke-width="2.5"/>
+              <path d="M2,17 L7,28 L12,17" fill="#475569"/>
+            </svg>
+          </div>
+
+          <!-- MinIO -->
+          <div style="background:var(--bg-secondary);border:1.5px solid rgba(199,46,73,0.35);border-radius:.8rem;
+                      padding:clamp(.5rem,.8vw,1.3rem);text-align:center;">
+            <img src="figuras/MinIO Symbol SVG.svg" alt="MinIO"
+                 style="height:clamp(36px,4.2vw,60px);display:block;margin:0 auto .4rem;filter:drop-shadow(0 0 7px rgba(199,46,73,0.40));">
+            <p style="font-family:var(--font-heading);font-size:clamp(2rem,2.6vw,4rem);font-weight:700;color:#fda4af;margin:0 0 .2rem;">MinIO</p>
+            <p style="font-size:clamp(1.6rem,2vw,3rem);color:var(--text-muted);margin:0;">Object Storage S3</p>
+          </div>
+        </div>
+
+      </div>
+
+      <aside class="notes">La infraestructura de la FACET ya contaba con Proxmox VE — un hipervisor open source. Proxmox permite dos tipos de virtualización: máquinas virtuales completas con KVM, y contenedores ligeros con LXC. Nosotros utilizamos un contenedor LXC por su bajo overhead. [CLICK] Dentro de ese contenedor instalamos Coolify, una plataforma PaaS open source que gestiona todo el ciclo de vida de los servicios. Coolify incluye Traefik como reverse proxy integrado: se encarga de los certificados TLS y el enrutamiento HTTP automático. Cada componente del sistema — Documenso, MinIO, la base de datos — corre en su propio contenedor Docker completamente aislado. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE 16 · DIAGRAMA GENERAL DE ARQUITECTURA                 -->
+    <!-- ============================================================ -->
+    <section data-background-image="figuras/diagrama_general.svg"
+             data-background-size="135%"
+             data-background-position="64% 70%"
+             data-background-color="#0f172a">
+      <div style="height:1080px;display:flex;align-items:flex-start;padding:2.5rem 3rem;pointer-events:none;">
+        <p style="font-family:var(--font-heading);font-size:clamp(1.4rem,1.8vw,2.6rem);font-weight:700;color:#94a3b8;background:rgba(15,23,42,0.72);padding:.35em .9em;border-radius:.5rem;letter-spacing:.06em;text-transform:uppercase;margin:0;">Arquitectura General</p>
+      </div>
+      <aside class="notes">Aquí vemos el diagrama completo de la infraestructura: cómo se conectan todos los componentes del sistema desde Internet hasta los contenedores internos.</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE 17 · STACK DE DOCUMENSO                               -->
+    <!-- ============================================================ -->
+    <section data-background-image="figuras/documenso_stack.svg"
+             data-background-size="170%"
+             data-background-position="82% 30%"
+             data-background-color="#1a3a5c">
+      <div style="height:1080px;display:flex;align-items:flex-start;padding:2.5rem 3rem;pointer-events:none;">
+        <p style="font-family:var(--font-heading);font-size:clamp(1.4rem,1.8vw,2.6rem);font-weight:700;color:#94a3b8;background:rgba(26,58,92,0.72);padding:.35em .9em;border-radius:.5rem;letter-spacing:.06em;text-transform:uppercase;margin:0;">Stack de Documenso</p>
+      </div>
+      <aside class="notes">Acá se puede ver el stack completo de Documenso y cómo interactúan sus capas internas.</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE 18 · DIMENSIONAMIENTO DEL ALMACENAMIENTO (MinIO)      -->
+    <!-- ============================================================ -->
+    <section data-background-color="#0f172a">
+      <div style="padding: var(--slide-padding);">
+        <h2 style="font-size:var(--size-h3); margin-bottom: var(--space-xs);">Dimensionamiento del Almacenamiento</h2>
+        <div class="bar"></div>
+
+        <div class="storage-slide">
+
+          <!-- ── COLUMNA IZQ: Donut SVG ── -->
+          <div class="donut-section">
+            <svg viewBox="0 0 300 300" width="460" height="460" style="overflow:visible;">
+              <!-- pista de fondo (100%) -->
+              <circle cx="150" cy="150" r="112"
+                      fill="none" stroke="#1e293b" stroke-width="42"/>
+              <!-- 11% ocupado: circumference = 2π×112 ≈ 703.7 · 0.11 ≈ 77.4 -->
+              <circle cx="150" cy="150" r="112"
+                      fill="none" stroke="#38bdf8" stroke-width="42"
+                      stroke-dasharray="77.4 703.7"
+                      stroke-linecap="round"
+                      transform="rotate(-90 150 150)"/>
+              <!-- Número central — dominante-baseline centra verticalmente -->
+              <text x="150" y="143" text-anchor="middle"
+                    dominant-baseline="central"
+                    fill="#38bdf8" font-size="72" font-weight="800"
+                    font-family="JetBrains Mono, monospace">11%</text>
+              <text x="150" y="196" text-anchor="middle"
+                    fill="#94a3b8" font-size="23"
+                    font-family="Inter, sans-serif">de 18 TB</text>
+            </svg>
+
+            <div class="donut-legend">
+              <div class="donut-legend-item">
+                <div class="donut-dot donut-dot-cyan"></div>
+                <span style="color:var(--accent-1);">2 TB — cuota asignada</span>
+              </div>
+              <div class="donut-legend-item">
+                <div class="donut-dot donut-dot-dark"></div>
+                <span style="color:#94a3b8;">16 TB — espacio restante (TrueNAS)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── COLUMNA DER: Cadena de cálculo ── -->
+          <div class="calc-section">
+
+            <div class="calc-step">
+              <div class="cs-num">300</div>
+              <div class="cs-label"><strong>mails/día</strong> · límite Brevo</div>
+            </div>
+
+            <div class="calc-arrow-row">÷ 6 notificaciones por trámite</div>
+
+            <div class="calc-step">
+              <div class="cs-num">50</div>
+              <div class="cs-label"><strong>trámites/día</strong></div>
+            </div>
+
+            <div class="calc-arrow-row">× 2 PDFs × 10 MB</div>
+
+            <div class="calc-step">
+              <div class="cs-num">1 GB/día</div>
+              <div class="cs-label">crecimiento diario proyectado</div>
+            </div>
+
+            <div class="calc-arrow-row">× 1 825 días · 5 años</div>
+
+            <div class="calc-step">
+              <div class="cs-num">1.825 TB</div>
+              <div class="cs-label">volumen máximo proyectado</div>
+            </div>
+
+            <div class="calc-step cs-result">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="52" height="52" fill="#4ade80" style="flex-shrink:0;opacity:0.85"><g><path d="M453.821,30.5H115.726c-32.116,0-58.248,26.132-58.248,58.179c0,16.343,6.618,31.346,17.891,42.048l2.463,29.371l1.197,15.078l-0.846-0.991c-22.679,20.148-41.766,42.124-55.572,63.888c-6.83,10.916-12.396,21.764-16.344,32.543c-3.942,10.778-6.266,21.413-6.266,32.047c-0.069,11.342,2.889,22.96,9.857,32.611c6.906,9.72,17.403,16.695,29.653,20.636c4.726,1.554,9.513,2.119,14.163,2.119c11.762-0.076,23.243-3.453,35.5-8.454c21.413-8.873,45.289-23.6,70.01-41.21c30.362-21.688,75.3-60.641,107.767-90.576c-11.405-4.437-20.285-14.019-23.876-25.85c-26.978,25.073-59.444,53.674-82.763,71.702c-22.397,17.258-44.587,32.542-63.813,43.177c-9.582,5.352-18.386,9.513-25.85,12.189c-7.401,2.744-13.53,3.872-16.976,3.804c-1.692,0-2.752-0.214-3.171-0.358c-6.831-2.318-10.07-5-12.045-7.745c-1.974-2.82-3.239-6.342-3.239-12.044c-0.069-5.214,1.197-12.114,4.154-19.934c4.223-11.831,12.044-25.705,22.754-39.868c5.984-7.959,12.884-16.055,20.491-24.02l1.624,19.088l4.787,56.913l0.633-0.351c9.162-5.069,19.302-11.411,30.218-18.875l-5.703-68.957l-1.196-14.301l-5.427-65.367h356.619l-22.115,267.171c-2.607,31.064-28.526,54.939-59.727,54.939h-192.93c-31.132,0-57.12-23.875-59.658-54.939L127,361.194l-1.204-14.294c-11.198,6.48-21.482,11.694-31.201,15.704l0.144,1.273l2.676,32.962c3.942,47.476,44.374,84.661,91.988,84.661h192.93c47.683,0,88.115-37.186,91.987-84.661l22.26-268.718C506.366,117.555,512,103.612,512,88.679C512,56.632,485.944,30.5,453.821,30.5z M468.052,110.092H101.356c-6.899-4.65-11.48-12.471-11.48-21.413c0-14.232,11.549-25.781,25.849-25.781h338.095c14.232,0,25.781,11.55,25.781,25.781C479.602,97.621,474.952,105.442,468.052,110.092z"/><circle cx="281.788" cy="180.15" r="21.131"/></g></svg>
+              <div class="cs-num">2 TB</div>
+              <div class="cs-label"><strong>Cuota asignada en MinIO</strong><br><span style="color:#86efac;font-weight:400;">margen de seguridad ~10 %</span></div>
+            </div>
+
+          </div><!-- /calc-section -->
+        </div><!-- /storage-slide -->
+      </div>
+      <aside class="notes">
+Una vez resuelta la arquitectura de servicios, el siguiente paso fue dimensionar el almacenamiento de objetos en MinIO. No asignamos recursos 'a ojo': el cálculo parte del límite operativo real del proveedor de correos. Brevo permite 300 correos diarios. Un trámite promedio requiere 6 notificaciones, lo que da un techo de 50 documentos por día. Cada trámite genera 2 PDFs de 10 MB en promedio, o sea 20 MB por trámite, lo que da 1 GB de crecimiento diario. Configuré una política ILM de retención de 5 años por cuestiones normativas — 1825 días por 1 GB nos da 1.825 TB proyectados. Por eso asigné una cuota estricta de 2 TB, con un margen del 10%. Y como ven en el gráfico, esos 2 TB representan apenas el 11% de los más de 18 TiB del servidor TrueNAS de la facultad.
+      </aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE 19 · RESPALDOS Y DIMENSIONAMIENTO                     -->
+    <!-- ============================================================ -->
+    <section data-background-color="#0f172a">
+      <div style="padding: 38px 60px 32px;">
+        <h2 style="font-size:var(--size-h3); margin-bottom:0.4rem;">Políticas de Backup y Retención</h2>
+        <div class="bar" style="margin-bottom:1.6rem;"></div>
+
+        <div class="backup-grid">
+
+          <!-- ── BASE DE DATOS ── -->
+          <div class="backup-card backup-card--db">
+            <div class="backup-card-header">
+              <div class="backup-icon-wrap">
+                <img src="figuras/postgresql.svg" alt="PostgreSQL">
+              </div>
+              <span class="backup-domain">Base de Datos</span>
+            </div>
+            <div class="backup-service">PostgreSQL</div>
+            <ul class="backup-policies">
+              <li>Frecuencia: diaria — <strong>3:00 AM</strong></li>
+              <li>Contenido: archivo <strong>.dmp</strong> de PostgreSQL</li>
+              <li>Retención: <strong>30 días</strong></li>
+            </ul>
+          </div>
+
+          <!-- ── CONFIGURACIÓN ── -->
+          <div class="backup-card backup-card--cfg">
+            <div class="backup-card-header">
+              <div class="backup-icon-group">
+                <div class="backup-icon-wrap">
+                  <img src="figuras/docker.svg" alt="Docker">
+                </div>
+                <div class="backup-icon-wrap">
+                  <img src="figuras/dotenv.svg" alt=".env">
+                </div>
+                <div class="backup-icon-wrap">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412.886 412.886" fill="#e2e8f0" width="100%" height="100%"><g><g><g><g><path d="M73.172,133.367c0-2.691,2.201-4.895,4.893-4.895h252.824c2.693,0,4.893,2.203,4.893,4.895v3.261c0,2.691-2.2,4.894-4.893,4.894H78.065c-2.691,0-4.893-2.202-4.893-4.894V133.367z"/></g><g><path d="M73.316,231.856c0-2.691,2.201-4.895,4.893-4.895h98.188c2.693,0,4.894,2.203,4.894,4.895v3.261c0,2.691-2.2,4.894-4.894,4.894H78.209c-2.691,0-4.893-2.202-4.893-4.894V231.856z"/></g><g><path d="M73.172,182.612c0-2.691,2.201-4.895,4.893-4.895h252.824c2.693,0,4.893,2.203,4.893,4.895v3.262c0,2.691-2.2,4.893-4.893,4.893H78.065c-2.691,0-4.893-2.201-4.893-4.893V182.612z"/></g><path d="M406.909,325.395c-2.585-4.297-5.516-9.163-7.157-15.339c-1.418-5.338-0.261-7.245,2.535-11.855c2.893-4.77,6.853-11.301,6.853-21.899c0-11.024-3.153-16.988-5.687-21.782c-2.058-3.895-3.545-6.708-3.545-13.153c0-6.444,1.487-9.259,3.545-13.153c2.534-4.793,5.687-10.759,5.687-21.781c0-11.023-3.153-16.989-5.687-21.782c-2.058-3.895-3.545-6.709-3.545-13.153c0-6.443,1.487-9.258,3.545-13.153c2.534-4.792,5.687-10.756,5.687-21.78c0-11.021-3.153-16.987-5.687-21.78c-2.058-3.893-3.545-6.706-3.545-13.147c0-4.732,2.796-9.293,5.754-14.121c4.481-7.307,12.818-20.905-2.147-31.951c-5.871-4.332-11.597-6.438-17.51-6.438c-7.513,0-13.437,3.348-19.167,6.586c-5.801,3.28-11.28,6.377-18.868,6.377c-10.094,0-14.826-1.846-20.305-3.984c-6.305-2.46-13.45-5.248-27.019-5.248c-13.565,0-20.71,2.788-27.014,5.25c-5.477,2.137-10.208,3.982-20.299,3.982c-10.092,0-14.824-1.846-20.303-3.984c-6.303-2.46-13.447-5.248-27.014-5.248c-13.567,0-20.711,2.788-27.014,5.25c-5.479,2.137-10.21,3.982-20.301,3.982c-10.091,0-14.823-1.846-20.302-3.984c-6.304-2.46-13.447-5.248-27.013-5.248c-13.565,0-20.707,2.788-27.011,5.25c-5.477,2.137-10.207,3.982-20.297,3.982c-7.587,0-13.066-3.097-18.866-6.377c-5.73-3.238-11.653-6.588-19.166-6.588c-5.912,0-11.64,2.107-17.509,6.44C-6.426,66.619,1.911,80.217,6.391,87.522c2.96,4.83,5.757,9.391,5.757,14.124c0,6.446-1.488,9.261-3.547,13.155c-2.534,4.795-5.686,10.76-5.686,21.786c0,11.022,3.153,16.988,5.686,21.78c2.059,3.896,3.547,6.711,3.547,13.154c0,6.444-1.488,9.258-3.546,13.152c-2.533,4.795-5.687,10.759-5.687,21.783c0,11.023,3.153,16.988,5.686,21.78c2.059,3.895,3.547,6.71,3.547,13.153s-1.488,9.258-3.547,13.153c-2.532,4.793-5.686,10.758-5.686,21.78c0,11.023,3.153,16.988,5.687,21.78c2.058,3.894,3.546,6.707,3.546,13.148c0,4.732-2.796,9.292-5.756,14.12c-4.48,7.308-12.817,20.906,2.148,31.951c5.871,4.333,11.599,6.439,17.512,6.438c7.511,0,13.436-3.35,19.164-6.588c5.802-3.279,11.281-6.376,18.869-6.376c10.092,0,14.826,1.846,20.305,3.984c6.305,2.459,13.45,5.248,27.018,5.248c13.567,0,20.711-2.789,27.013-5.248c5.48-2.139,10.211-3.984,20.302-3.984c10.092,0,14.824,1.846,20.302,3.984c6.305,2.459,13.449,5.248,27.016,5.248s20.711-2.789,27.013-5.248c5.48-2.139,10.211-3.984,20.302-3.984c10.091,0,14.822,1.846,20.302,3.984c6.302,2.459,13.447,5.248,27.013,5.248c13.565,0,20.707-2.789,27.01-5.248c5.478-2.139,10.209-3.984,20.298-3.984c7.587,0,13.064,3.097,18.864,6.376c5.729,3.239,11.654,6.589,19.168,6.589c5.912,0,11.64-2.107,17.508-6.439C419.172,345.762,411.497,333.01,406.909,325.395z M382.45,316.873c0,5.713-4.675,10.387-10.387,10.387H39.991c-5.713,0-10.387-4.674-10.387-10.387V96.013c0-5.713,4.674-10.387,10.387-10.387h332.072c5.712,0,10.387,4.674,10.387,10.387V316.873z"/><path d="M329.782,254.915c0,2.911-4.73,5.252-5.348,7.975c-0.64,2.813,2.591,6.969,1.367,9.506c-1.246,2.579-6.521,2.637-8.291,4.853c-1.777,2.225-0.667,7.381-2.892,9.158c-2.216,1.768-6.993-0.454-9.571,0.791c-2.538,1.224-3.769,6.355-6.581,6.995c-2.723,0.618-6.052-3.457-8.963-3.457s-6.24,4.076-8.963,3.457c-2.813-0.64-4.043-5.772-6.581-6.995c-2.579-1.245-7.356,0.977-9.571-0.791c-2.227-1.777-1.116-6.933-2.893-9.159c-1.769-2.215-7.045-2.272-8.29-4.852c-1.224-2.537,2.007-6.693,1.367-9.506c-0.619-2.723-5.348-5.064-5.348-7.975c0-2.911,4.729-5.252,5.348-7.976c0.64-2.813-2.591-6.969-1.367-9.507c1.245-2.578,6.521-2.637,8.29-4.852c1.778-2.227,0.667-7.381,2.893-9.158c2.215-1.77,6.992,0.453,9.572-0.791c2.537-1.225,3.768-6.355,6.58-6.996c2.723-0.617,6.052,3.458,8.963,3.458s6.24-4.075,8.963-3.458c2.812,0.641,4.043,5.771,6.581,6.997c2.58,1.244,7.357-0.979,9.571,0.79c2.226,1.777,1.116,6.933,2.892,9.159c1.77,2.216,7.046,2.273,8.291,4.851c1.224,2.538-2.007,6.694-1.367,9.507C325.052,249.663,329.782,252.004,329.782,254.915z"/></g></g></g></svg>
+                </div>
+              </div>
+              <span class="backup-domain">Configuración</span>
+            </div>
+            <div class="backup-service">Docker Compose + .env</div>
+            <ul class="backup-policies">
+              <li>Frecuencia: diaria — <strong>4:00 AM</strong></li>
+              <li>Contenido: compose + .env + <strong>certificado .p12</strong></li>
+              <li>Retención: <strong>180 días</strong></li>
+            </ul>
+          </div>
+
+        </div><!-- /backup-grid -->
+      </div>
+      <aside class="notes">
+Al operar On-Premise, la facultad asume la responsabilidad total de continuidad. Diseñé la estrategia en dos dominios.
+Primero, la base de datos: PostgreSQL hace un volcado lógico automático todos los días a las 3 de la mañana, hacia un bucket MinIO aislado. La retención es de 30 días con Object Lock en modo governance — es decir, nadie puede borrar ni modificar esos volcados durante ese período. RPO máximo de 24 horas, y la restauración se hace directamente desde la interfaz de Coolify.
+Segundo, la configuración: un script bash corre cada día a las 4 de la mañana — una hora después del volcado — y empaqueta los docker-compose, las variables de entorno y, fundamentalmente, el certificado de firma .p12 codificado en Base64. Ese certificado es lo que le da identidad institucional a cada firma generada. Sin él, aunque recupere la base de datos, no puedo emitir nuevas firmas. Con este backup, reconstruyo el entorno completo en minutos.
+      </aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE 20 · RENDIMIENTO DEL SISTEMA                          -->
+    <!-- ============================================================ -->
+    <section data-background-color="#0f172a">
+      <div style="padding: 38px 60px 32px;">
+        <p class="section-tag" style="margin-bottom:0.3rem;">Ensayos y Resultados</p>
+        <h2 style="font-size:var(--size-h3); margin-bottom: 0.4rem;">Rendimiento del Sistema</h2>
+        <div class="bar" style="margin-bottom:1.4rem;"></div>
+
+        <div class="perf-slide">
+
+          <!-- ── COLUMNA IZQ: captura Netdata ── -->
+          <div class="perf-image-panel">
+            <img src="figuras/netdata_5firmas.png"
+                 alt="CPU y RAM durante ráfaga de 5 documentos"
+                 class="perf-img">
+            <p class="perf-img-caption">Netdata — ráfaga de 5 documentos concurrentes</p>
+          </div>
+
+          <!-- ── COLUMNA DER: tarjetas de métricas ── -->
+          <div class="perf-stats-panel">
+
+            <!-- RAM -->
+            <div class="perf-card">
+              <div class="perf-card-title">Memoria RAM</div>
+              <div class="perf-metrics-row">
+                <div class="perf-metric">
+                  <span class="perf-metric-label">Asignado</span>
+                  <span class="perf-metric-val">8 GB</span>
+                </div>
+                <div class="perf-metric">
+                  <span class="perf-metric-label">Pico</span>
+                  <span class="perf-metric-val peak">1.33 GB</span>
+                </div>
+                <div class="perf-metric">
+                  <span class="perf-metric-label">Libre</span>
+                  <span class="perf-metric-val free">83.7 %</span>
+                </div>
+              </div>
+              <div class="perf-bar-wrap">
+                <div class="perf-bar-fill" style="width:16.3%; background:var(--accent-3);"></div>
+              </div>
+            </div>
+
+            <!-- CPU -->
+            <div class="perf-card">
+              <div class="perf-card-title">Procesador (CPU)</div>
+              <div class="perf-metrics-row">
+                <div class="perf-metric">
+                  <span class="perf-metric-label">Asignado</span>
+                  <span class="perf-metric-val">8 vCPUs</span>
+                </div>
+                <div class="perf-metric">
+                  <span class="perf-metric-label">Pico</span>
+                  <span class="perf-metric-val peak">12.5 %</span>
+                </div>
+                <div class="perf-metric">
+                  <span class="perf-metric-label">Libre</span>
+                  <span class="perf-metric-val free">87.5 %</span>
+                </div>
+              </div>
+              <div class="perf-bar-wrap">
+                <div class="perf-bar-fill" style="width:12.5%; background:var(--accent-3);"></div>
+              </div>
+            </div>
+
+            <!-- Nota baseline -->
+            <div style="padding:1rem 1.4rem; background:rgba(56,189,248,0.06); border-radius:var(--card-radius); border-left:3px solid #38bdf8;">
+              <p style="font-size:clamp(1.4rem,1.9vw,2.4rem); color:#cbd5e1; margin:0; line-height:1.4;">
+                En reposo, los cuatro contenedores consumen apenas
+                <strong style="color:var(--accent-1);">~500 MB</strong> de RAM.
+              </p>
+            </div>
+
+          </div><!-- /perf-stats-panel -->
+        </div><!-- /perf-slide -->
+      </div>
+      <aside class="notes">
+Para confirmar que el hardware asignado era suficiente, sometí al sistema a una ráfaga de cinco documentos enviados a firmar al mismo tiempo, monitoreada con Netdata. En reposo, el sistema entero consume apenas 400 megas de RAM. Durante la ráfaga, observamos este comportamiento escalonado: ese es Browserless levantando procesos para renderizar los PDFs, alcanzando un pico de 1.33 GB de RAM y usando el 12.5% del procesamiento. El resultado es contundente: tenemos más del 83% libre en memoria y el 87% en CPU. El sistema es sumamente ligero y la facultad tiene margen de crecimiento enorme.
+      </aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION BREAK 05 · VALIDACIÓN Y DEMO  (§4.2)                -->
+    <!-- ============================================================ -->
+    <section class="centered" data-background-color="#0c4a6e" data-transition="zoom">
+      <p class="section-tag text-on-dark">Sección 05</p>
+      <h1 class="section-heading text-on-dark">Demostración en Vivo</h1>
+      <div class="bar bar-accent-3"></div>
+      <aside class="notes">Última sección — lo que construimos funciona. Vamos a verlo. [PAUSE]</aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SLIDE · DEMO EN VIVO                                         -->
+    <!-- ============================================================ -->
+    <section class="slide-demo">
+      <div class="demo-pulse-ring"></div>
+      <div class="demo-pulse-ring"></div>
+      <div class="demo-pulse-ring"></div>
+
+      <div class="demo-badge demo-badge--hero">
+        <span class="demo-badge-dot"></span>
+        Demo en&nbsp;Vivo
+      </div>
+
+      <aside class="notes">
+[ABRIR NAVEGADOR] Acceder a documentos.facet.unt.edu.ar con cuenta UNT. Mostrar el flujo completo: iniciar sesion, cargar un documento PDF, agregar firmante, proceso de firma, y descargar el PDF sellado.
+      </aside>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION BREAK 06 · CONCLUSIONES                             -->
+    <!-- ============================================================ -->
+    <section class="centered" data-background-color="#0a2318" data-transition="zoom">
+      <span class="section-tag">06</span>
+      <h1 class="section-heading" style="color:#34d399">Conclusiones</h1>
+      <div class="bar" style="background:#34d399"></div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION BREAK 07 · PREGUNTAS                                -->
+    <!-- ============================================================ -->
+    <section class="centered" data-background-color="#0b1120" data-transition="zoom">
+      <h1 class="section-heading text-on-dark">¿Preguntas?</h1>
+      <div class="bar bar-accent-3"></div>
+      <aside class="notes">Abro el espacio para preguntas del jurado. [PAUSE]</aside>
+    </section>
+
+    <section class="slide-gracias" data-background-color="transparent">
+
+      <div class="gracias-content">
+        <div class="gracias-card">
+          <h1>¡Gracias!</h1>
+        </div>
+      </div>
+
+      <aside class="notes">
+Muchas gracias. Quedo a disposición del jurado para las preguntas.
+      </aside>
+
+    </section>
+
+  </div><!-- /.slides -->
+</div><!-- /.reveal -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script>
+  // ── SKILL.md §1.1 canonical settings ─────────────────────────
+  Reveal.initialize({
+    hash:                 true,
+    center:               true,
+    transition:           'fade',
+    transitionSpeed:      'fast',
+    backgroundTransition: 'fade',
+    width:                1920,
+    height:               1080,
+    margin:               0.08,
+    minScale:             0.2,
+    maxScale:             2.0,
+    // Presentation-specific
+    slideNumber:          'c/t',
+    controls:             false,
+    controlsTutorial:     false,
+    progress:             true,
+  });
+
+  // Click → next / right-click → prev
+  // ── Confetti for Gracias slide ─────────────────────────────────────────────
+  (function () {
+    var COLORS = ['#4355db','#eb7532','#d23be7','#f7d038','#34bbe6','#a3e048','#38bdf8'];
+    var pieces = [], raf = null;
+
+    function makePiece(w, h) {
+      return {
+        x:     Math.random() * w,
+        y:     Math.random() * h * 1.4 - h * 0.4,
+        wd:    Math.random() * 14 + 6,
+        ht:    Math.random() * 9  + 4,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        speed: Math.random() * 3 + 1.5,
+        angle: Math.random() * Math.PI * 2,
+        spin:  (Math.random() - 0.5) * 0.12,
+        drift: (Math.random() - 0.5) * 0.9
+      };
+    }
+
+    function initConfetti() {
+      var cv = document.getElementById('gracias-canvas');
+      if (!cv) {
+        cv = document.createElement('canvas');
+        cv.id = 'gracias-canvas';
+        cv.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:0;display:none;';
+        document.body.insertBefore(cv, document.body.firstChild);
+      }
+      cv.style.display = 'block';
+      cv.width  = window.innerWidth  || 1920;
+      cv.height = window.innerHeight || 1080;
+      pieces = [];
+      for (var i = 0; i < 180; i++) pieces.push(makePiece(cv.width, cv.height));
+    }
+
+    function drawConfetti() {
+      var cv = document.getElementById('gracias-canvas');
+      if (!cv) return;
+      var ctx = cv.getContext('2d');
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      for (var i = 0; i < pieces.length; i++) {
+        var p = pieces[i];
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.globalAlpha = 0.85;
+        ctx.fillStyle   = p.color;
+        ctx.fillRect(-p.wd / 2, -p.ht / 2, p.wd, p.ht);
+        ctx.restore();
+        p.y += p.speed;
+        p.x += p.drift;
+        p.angle += p.spin;
+        if (p.y > cv.height + 20) { p.y = -20; p.x = Math.random() * cv.width; }
+        if (p.x < -20) p.x = cv.width + 20;
+        if (p.x > cv.width + 20) p.x = -20;
+      }
+      raf = requestAnimationFrame(drawConfetti);
+    }
+
+    function stopConfetti() {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      var cv = document.getElementById('gracias-canvas');
+      if (cv) {
+        cv.getContext('2d').clearRect(0, 0, cv.width, cv.height);
+        cv.style.display = 'none';
+      }
+    }
+
+    Reveal.on('slidechanged', function (e) {
+      if (e.currentSlide.classList.contains('slide-gracias')) {
+        initConfetti(); drawConfetti();
+      } else {
+        stopConfetti();
+      }
+    });
+  })();
+
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('a, button')) return;
+    Reveal.next();
+  });
+  document.addEventListener('contextmenu', function(e) {
+    if (e.target.closest('a, button')) return;
+    e.preventDefault();
+    Reveal.prev();
+  });
+</script>
+</body>
+</html>
