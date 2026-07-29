@@ -28,3 +28,4 @@ skip-link-visible.png
 # agent-tooling generated files
 .atl/
 .codegraph/
+opencode.json
