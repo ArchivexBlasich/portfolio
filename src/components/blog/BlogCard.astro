@@ -22,6 +22,9 @@ const { href, title, description, pubDate, heroImage, locale } = Astro.props;
       <img
         src={heroImage.src}
         alt=""
+        width={heroImage.width}
+        height={heroImage.height}
+        loading="lazy"
         class="mb-4 aspect-video w-full rounded-md object-contain"
       />
     )

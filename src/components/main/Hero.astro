@@ -14,6 +14,8 @@ const { locale } = Astro.props;
     src={profileImg}
     alt={t("hero.image.alt", locale)}
     quality="mid"
+    loading="eager"
+    fetchpriority="high"
     class="size-56 object-cover md:size-65 lg:size-70"
   />
   <h2 class="text-text-muted text-center">Fabricio Blasich</h2>

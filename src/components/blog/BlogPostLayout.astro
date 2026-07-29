@@ -26,6 +26,10 @@ const { locale, title, description, pubDate, updatedDate, heroImage } =
           <img
             src={heroImage.src}
             alt=""
+            width={heroImage.width}
+            height={heroImage.height}
+            loading="eager"
+            fetchpriority="high"
             class="mb-8 aspect-video w-full rounded-lg object-contain"
           />
         )
