@@ -42,24 +42,34 @@ const groups = [...groupMap.entries()]
 
 <section class="mt-12 mb-7 scroll-mt-20" id="projects">
   <div class="prose lg:prose-xl mt-12 mb-8 text-center md:text-left">
-    <h1 id="work" class="text-brand underline">
+    <h1
+      data-scroll-reveal
+      style="--sr-index: 0"
+      id="work"
+      class="text-brand underline"
+    >
       {t("projects.heading", locale)}
     </h1>
   </div>
   <div class="flex flex-col gap-12">
     {
-      standaloneProjects.map((entry) => (
-        <ProjectCard project={entry} locale={locale} />
+      standaloneProjects.map((entry, i) => (
+        <ProjectCard project={entry} locale={locale} srIndex={i + 1} />
       ))
     }
     {
-      groups.map((group) => (
-        <ProjectGroup
-          title={group.name}
-          projects={group.entries}
-          locale={locale}
-        />
-      ))
+      groups.map((group, gi) => {
+        const groupStartIndex = standaloneProjects.length + gi + 1;
+        return (
+          <ProjectGroup
+            title={group.name}
+            projects={group.entries}
+            locale={locale}
+            srIndex={groupStartIndex}
+            srStartIndex={groupStartIndex}
+          />
+        );
+      })
     }
   </div>
 </section>

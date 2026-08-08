@@ -8,13 +8,26 @@ interface Props {
   description?: string;
   projects: CollectionEntry<"projects">[];
   locale: "en" | "es";
+  srIndex?: number;
+  srStartIndex?: number;
 }
 
-const { title, description, projects, locale } = Astro.props;
+const {
+  title,
+  description,
+  projects,
+  locale,
+  srIndex = 0,
+  srStartIndex = 0,
+} = Astro.props;
 const count = projects.length;
 ---
 
-<details class="group/project border-border-subtle rounded-lg border">
+<details
+  data-scroll-reveal
+  style={`--sr-index: ${srIndex}`}
+  class="group/project border-border-subtle rounded-lg border"
+>
   <summary
     class="bg-surface-raised hover:bg-surface-hover flex cursor-pointer items-center justify-between gap-4 rounded-lg p-4 transition-colors md:p-5 [&::-webkit-details-marker]:hidden [&::marker]:hidden"
   >
@@ -50,8 +63,12 @@ const count = projects.length;
     <div class="border-border-subtle mt-2 border-l-2 pl-4 md:pl-6">
       <div class="flex flex-col gap-12 py-4">
         {
-          projects.map((entry) => (
-            <ProjectCard project={entry} locale={locale} />
+          projects.map((entry, i) => (
+            <ProjectCard
+              project={entry}
+              locale={locale}
+              srIndex={srStartIndex + i}
+            />
           ))
         }
       </div>

@@ -10,15 +10,25 @@ const { locale } = Astro.props;
 <section
   class="prose lg:prose-xl mt-1 flex flex-col items-center justify-center self-center"
 >
-  <Image
-    src={profileImg}
-    alt={t("hero.image.alt", locale)}
-    quality="mid"
-    loading="eager"
-    fetchpriority="high"
-    class="size-56 object-cover md:size-65 lg:size-70"
-  />
-  <h2 class="text-text-muted text-center">Fabricio Blasich</h2>
-  <h1 class="text-text text-center">{t("hero.heading", locale)}</h1>
-  <SocialMedia locale={locale} />
+  <div data-scroll-reveal style="--sr-index: 0">
+    <Image
+      src={profileImg}
+      alt={t("hero.image.alt", locale)}
+      quality="mid"
+      loading="eager"
+      fetchpriority="high"
+      class="size-56 object-cover md:size-65 lg:size-70"
+    />
+  </div>
+  <h2
+    data-scroll-reveal
+    style="--sr-index: 1"
+    class="text-text-muted text-center"
+  >
+    Fabricio Blasich
+  </h2>
+  <h1 data-scroll-reveal style="--sr-index: 2" class="text-text text-center">
+    {t("hero.heading", locale)}
+  </h1>
+  <SocialMedia locale={locale} srStartIndex={3} />
 </section>

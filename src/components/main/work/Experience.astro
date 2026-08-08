@@ -16,14 +16,19 @@ const sortedEntries = entries.sort(
 
 <section class="mt-12">
   <div class="prose lg:prose-xl mt-12 mb-8 text-center md:text-left">
-    <h1 id="work" class="text-brand scroll-mt-20 underline">
+    <h1
+      data-scroll-reveal
+      style="--sr-index: 0"
+      id="work"
+      class="text-brand scroll-mt-20 underline"
+    >
       {t("experience.heading", locale)}
     </h1>
   </div>
   <ol class="border-default relative border-s">
     {
-      sortedEntries.map((entry) => (
-        <ExperienceItem experience={entry.data} locale={locale} />
+      sortedEntries.map((entry, i) => (
+        <ExperienceItem experience={entry.data} locale={locale} index={i + 1} />
       ))
     }
   </ol>

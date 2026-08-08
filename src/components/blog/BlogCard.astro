@@ -11,6 +11,7 @@ interface Props {
   heroImage?: ImageMetadata;
   locale: "en" | "es";
   priority?: boolean;
+  srIndex?: number;
 }
 
 const {
@@ -21,11 +22,14 @@ const {
   heroImage,
   locale,
   priority = false,
+  srIndex = 0,
 } = Astro.props;
 ---
 
 <article
-  class="border-border bg-surface-raised group hover:border-brand/40 relative rounded-lg border p-4 transition-all duration-200 hover:shadow-md"
+  data-scroll-reveal
+  style={`--sr-index: ${srIndex}`}
+  class="border-border bg-surface-raised group hover:border-brand/40 card-lift relative rounded-lg border p-4 transition-all duration-200"
 >
   {
     heroImage && (

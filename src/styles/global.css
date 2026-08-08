@@ -279,6 +279,67 @@ details[open] > summary .project-group-chevron {
   transform: rotate(180deg);
 }
 
+/* ─── Scroll-reveal entry animation ─────────────────────────────────────── */
+@keyframes scroll-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+[data-scroll-reveal].scroll-revealed {
+  animation: scroll-enter 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--sr-index, 0) * 80ms);
+}
+
+/* ─── Card lift on hover ────────────────────────────────────────────────── */
+@utility card-lift {
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+}
+
+/* ─── Ambient background blob ──────────────────────────────────────────── */
+@keyframes ambient-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+  75% {
+    transform: translate(10px, -10px) scale(1.02);
+  }
+}
+
+.ambient-blob {
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-brand) 0%, transparent 70%);
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+  animation: ambient-drift 25s ease-in-out infinite;
+}
+
 /* ─── Prose theme — bind --tw-prose-* to existing semantic tokens ───────── */
 /* Base (light) prose variables. Semantic tokens auto-flip under .dark.      */
 .prose {

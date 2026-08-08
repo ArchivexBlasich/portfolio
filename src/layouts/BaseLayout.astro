@@ -162,8 +162,12 @@ const jsonLd = JSON.stringify(
         sessionStorage.removeItem(`scroll:${canonical}`);
       });
     </script>
+    <script>
+      import "../scripts/scroll-reveal";
+    </script>
   </head>
   <body class="bg-surface text-text min-h-dvh font-mono antialiased">
+    <div class="ambient-blob" aria-hidden="true"></div>
     <a href="#main" class="skip-link">{t("skip.text", locale)}</a>
     <Header locale={locale} isHome={isHome} />
     <slot />

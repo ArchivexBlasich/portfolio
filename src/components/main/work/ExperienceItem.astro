@@ -5,11 +5,13 @@ import { t, type Locale } from "../../../i18n/ui";
 type Props = {
   experience: CollectionEntry<"experience">["data"];
   locale: Locale;
+  index?: number;
 };
 
 const { company, role, startDate, endDate, highlights } =
   Astro.props.experience;
 const locale = Astro.props.locale;
+const { index = 0 } = Astro.props;
 
 function formatDate(date: Date, dateLocale: Locale): string {
   const formatted = date.toLocaleDateString(
@@ -34,27 +36,29 @@ const dateRange = formatDateRange(startDate, locale, endDate);
   >
   </div>
 
-  <time
-    class="text-text-muted mb-1 text-sm leading-none font-normal sm:text-base"
-  >
-    {dateRange}
-  </time>
+  <div data-scroll-reveal style={`--sr-index: ${index}`}>
+    <time
+      class="text-text-muted mb-1 text-sm leading-none font-normal sm:text-base"
+    >
+      {dateRange}
+    </time>
 
-  <h3 class="text-brand mt-2 text-lg font-semibold sm:text-xl lg:text-2xl">
-    {role}
-  </h3>
+    <h3 class="text-brand mt-2 text-lg font-semibold sm:text-xl lg:text-2xl">
+      {role}
+    </h3>
 
-  <p class="text-text-muted mt-1 text-sm leading-none sm:text-base">
-    {company}
-  </p>
+    <p class="text-text-muted mt-1 text-sm leading-none sm:text-base">
+      {company}
+    </p>
 
-  <ol class="mt-4 ml-5 list-decimal">
-    {
-      highlights.map((highlight) => (
-        <li class="text-text-subtle mb-4 text-base font-normal text-pretty sm:text-lg">
-          {highlight}
-        </li>
-      ))
-    }
-  </ol>
+    <ol class="mt-4 ml-5 list-decimal">
+      {
+        highlights.map((highlight) => (
+          <li class="text-text-subtle mb-4 text-base font-normal text-pretty sm:text-lg">
+            {highlight}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
 </li>

@@ -6,14 +6,17 @@ interface Props {
   deployHref?: string;
   locale: "en" | "es";
   class?: string;
+  srIndex?: number;
 }
 
-const { deployHref, locale, class: className } = Astro.props;
+const { deployHref, locale, class: className, srIndex = 0 } = Astro.props;
 ---
 
 <article
+  data-scroll-reveal
+  style={`--sr-index: ${srIndex}`}
   class:list={[
-    "border-border bg-surface-raised flex flex-col rounded-lg border p-4",
+    "border-border bg-surface-raised card-lift flex flex-col rounded-lg border p-4 transition-all duration-200",
     className,
   ]}
 >

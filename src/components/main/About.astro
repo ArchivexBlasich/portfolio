@@ -16,22 +16,37 @@ const { locale, deployHref } = Astro.props;
     id="about"
     class="prose lg:prose-xl max-w-none scroll-mt-20 text-center md:text-left lg:col-span-2"
   >
-    <h1 class="text-brand underline">{t("about.heading", locale)}</h1>
+    <h1 data-scroll-reveal style="--sr-index: 0" class="text-brand underline">
+      {t("about.heading", locale)}
+    </h1>
 
     <!-- Paragraph 1 -->
-    <p class="text-text-subtle text-pretty">
+    <p
+      data-scroll-reveal
+      style="--sr-index: 1"
+      class="text-text-subtle text-pretty"
+    >
       {t("about.p1.beforeStrong", locale)}<Strong
         >{t("about.p1.strong", locale)}</Strong
       >{t("about.p1.afterStrong", locale)}
     </p>
 
     <!-- Paragraph 2 -->
-    <p class="text-text-subtle text-pretty">
+    <p
+      data-scroll-reveal
+      style="--sr-index: 2"
+      class="text-text-subtle text-pretty"
+    >
       {t("about.p3.beforeSpan", locale)}<span class="text-brand"
         >{t("about.p3.span", locale)}</span
       >{t("about.p3.afterSpan", locale)} 🐧
     </p>
   </section>
 
-  <DeployCta deployHref={deployHref} locale={locale} class="lg:col-span-1" />
+  <DeployCta
+    deployHref={deployHref}
+    locale={locale}
+    class="lg:col-span-1"
+    srIndex={3}
+  />
 </div>

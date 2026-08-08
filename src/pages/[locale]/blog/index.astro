@@ -45,6 +45,7 @@ const posts = (await getCollection("blog"))
               heroImage={p.data.image}
               locale={locale}
               priority={i === 0}
+              srIndex={i}
             />
           ))}
         </div>

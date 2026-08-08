@@ -2,7 +2,12 @@
 import SocialPill from "./SocialPill.astro";
 import { t } from "../../i18n/ui";
 
-const { locale } = Astro.props;
+interface Props {
+  locale: "en" | "es";
+  srStartIndex?: number;
+}
+
+const { locale, srStartIndex = 0 } = Astro.props;
 ---
 
 <div class="flex flex-wrap items-center justify-center gap-4">
@@ -11,6 +16,8 @@ const { locale } = Astro.props;
     size="size-8"
     svgRef="#github_dark"
     aria_label={t("social.github.aria", locale)}
+    srIndex={srStartIndex}
+    data-scroll-reveal
   >
     {t("social.github", locale)}
   </SocialPill>
@@ -20,6 +27,8 @@ const { locale } = Astro.props;
     size="size-8"
     svgRef="#linkedin"
     aria_label={t("social.linkedin.aria", locale)}
+    srIndex={srStartIndex + 1}
+    data-scroll-reveal
   >
     {t("social.linkedin", locale)}
   </SocialPill>
@@ -29,6 +38,8 @@ const { locale } = Astro.props;
     size="size-8"
     svgRef="#message-2-share"
     aria_label={t("social.mail.aria", locale)}
+    srIndex={srStartIndex + 2}
+    data-scroll-reveal
   >
     fblasich0@gmail.com
   </SocialPill>
