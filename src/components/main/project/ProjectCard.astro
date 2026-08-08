@@ -14,22 +14,51 @@ const {
   project: { data },
   locale,
 } = Astro.props;
-const { title, description, image, tags, githubUrl, liveUrl } = data;
+const { title, description, image, tags, githubUrl, liveUrl, blogSlug } = data;
+
+let imageHref: string | undefined;
+let imageIsExternal = false;
+
+if (blogSlug) {
+  imageHref =
+    locale === "en" ? `/blog/${blogSlug}/` : `/${locale}/blog/${blogSlug}/`;
+} else if (liveUrl) {
+  imageHref = liveUrl;
+  imageIsExternal = true;
+}
 ---
 
 <article class="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-5">
   <div class="rounded-lg md:col-span-2">
     <div class="group relative">
-      <Image
-        src={image}
-        alt={`${t("projectcard.image.altPrefix", locale)}${title}`}
-        loading="lazy"
-        class="bg-surface-raised aspect-video w-full rounded-lg object-contain shadow-lg"
-      />
-      <div
-        class="bg-surface/20 group-hover:bg-surface/40 absolute inset-0 rounded-lg transition-colors"
-      >
-      </div>
+      {
+        imageHref ? (
+          <a
+            href={imageHref}
+            {...(imageIsExternal
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            <Image
+              src={image}
+              alt={`${t("projectcard.image.altPrefix", locale)}${title}`}
+              loading="lazy"
+              class="bg-surface-raised aspect-video w-full rounded-lg object-contain shadow-lg"
+            />
+            <div class="bg-surface/20 group-hover:bg-surface/40 absolute inset-0 rounded-lg transition-colors" />
+          </a>
+        ) : (
+          <>
+            <Image
+              src={image}
+              alt={`${t("projectcard.image.altPrefix", locale)}${title}`}
+              loading="lazy"
+              class="bg-surface-raised aspect-video w-full rounded-lg object-contain shadow-lg"
+            />
+            <div class="bg-surface/20 group-hover:bg-surface/40 absolute inset-0 rounded-lg transition-colors" />
+          </>
+        )
+      }
     </div>
   </div>
   <div class="flex flex-col justify-center md:col-span-3">

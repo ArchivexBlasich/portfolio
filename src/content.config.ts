@@ -13,6 +13,7 @@ const projects = defineCollection({
       tags: z.array(z.string().min(1)).min(1),
       githubUrl: z.url().optional(),
       liveUrl: z.url().optional(),
+      blogSlug: z.string().min(1).optional(),
       featured: z.boolean().default(false),
       order: z.number().int().positive().optional(),
       group: z.string().optional(),

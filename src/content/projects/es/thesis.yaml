@@ -11,5 +11,6 @@ tags:
   - Traefik
   - OAuth 2.0
 liveUrl: "https://documentos.facet.unt.edu.ar"
+blogSlug: thesis-project
 featured: true
 order: 1
