@@ -193,7 +193,7 @@ fblasich@ubuntu:~# sudo systemctl status unattended-upgrades
 
 Por defecto, solo las actualizaciones de seguridad están habilitadas.
 
-![Configuración de unattended-upgrades](/images/blog/deploy-vps/configuring_unattended-upgrades.png)
+![Configuración de unattended-upgrades](../../../assets/blog/deploy-vps/configuring_unattended-upgrades.png)
 
 ## Aislamiento de SSH detrás de una VPN privada con NetBird
 
@@ -263,7 +263,7 @@ Cuando instalé NetBird y ejecuté `netbird up`, el demonio orquestó automátic
 
 **La red de seguridad:** Cerrar el puerto SSH público crea un punto único de fallo. Si NetBird se cae o una actualización rompe el demonio, quedás bloqueado. Solo procedí con esta configuración estricta porque RackNerd provee acceso KVM/VNC fuera de banda a través de su panel de control. Si NetBird falla, puedo abrir la consola del navegador desde el panel de hosting y arreglar el servidor localmente.
 
-![Panel de control de NetBird](/images/blog/deploy-vps/netbird_panel.png)
+![Panel de control de NetBird](../../../assets/blog/deploy-vps/netbird_panel.png)
 
 ### Debugging de fallos de DNS causados por NetBird
 
@@ -302,7 +302,7 @@ sudo systemctl restart docker
 
 Compré `fabricioblasich.com` en [Cloudflare](https://cloudflare.com) y configuré los registros A:
 
-![Registros DNS en Cloudflare](/images/blog/deploy-vps/dns_record_cloudflare.png)
+![Registros DNS en Cloudflare](../../../assets/blog/deploy-vps/dns_record_cloudflare.png)
 
 ### Instalación de Dokploy
 
@@ -332,7 +332,7 @@ En tu proveedor de DNS, creá un registro A apuntando `admin.tudominio` a la IP 
 
 Hacé clic en guardar. Abrí `admin.tudominio` en una nueva pestaña. Carga por HTTPS. Iniciá sesión y empezá a desplegar tus proyectos.
 
-![Configuración de dominio en Dokploy](/images/blog/deploy-vps/domain_config_dokploy.png)
+![Configuración de dominio en Dokploy](../../../assets/blog/deploy-vps/domain_config_dokploy.png)
 
 ## Movimiento de los builds fuera del VPS con GitHub Actions
 

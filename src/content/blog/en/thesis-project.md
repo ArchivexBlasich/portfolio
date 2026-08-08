@@ -88,9 +88,9 @@ The deployment is organized in three layers, and every request from the internet
 | browserless | `browserless/chrome`         | Headless Chromium for PDF generation |
 | socat       | `alpine/socat`               | TCP bridge to physical MinIO storage |
 
-![PaaS internal topology showing Coolify, Traefik, and the Docker host](/images/blog/thesis-project/paas-topology.png)
+![PaaS internal topology showing Coolify, Traefik, and the Docker host](../../../assets/blog/thesis-project/paas-topology.png)
 
-![Docker internal network with all four containers and their connections](/images/blog/thesis-project/docker-network.png)
+![Docker internal network with all four containers and their connections](../../../assets/blog/thesis-project/docker-network.png)
 
 Neither Coolify's template nor the Docker Compose guide in Documenso's documentation resolved the institutional environment on its own. The final configuration came from combining both references with problems discovered during testing — the four decisions below are the ones that actually took time.
 
@@ -159,7 +159,7 @@ socat:
 
 Inside Docker, Traefik routes `minio.facet.unt.edu.ar` to the Socat container's port 9000. And that is Socat's whole job: it forwards the TCP traffic as it arrives, to port 9000 of the real MinIO server on TrueNAS. Since the browser and the backend use the same public domain, both end up talking to the same MinIO instance. I deployed it as an independent project in Coolify, so the tunnel stays reusable for future faculty services.
 
-![MinIO and Socat flow diagram showing browser and backend paths to object storage](/images/blog/thesis-project/minio-flow.png)
+![MinIO and Socat flow diagram showing browser and backend paths to object storage](../../../assets/blog/thesis-project/minio-flow.png)
 
 One additional configuration detail caused a real problem: `client_max_body_size` on Nginx. During initial tests, any upload over 1 MB was rejected with `413 Content Too Large` — the effective limit was imposed by the edge proxy, not by Documenso. The fix was 50 MB for the Documenso app and 75 MB for the MinIO path, because signed PDFs are heavier than the originals: the embedded certificate and the users' signature images add size, and the MinIO path limit applies to the final file, not the upload.
 
@@ -242,9 +242,9 @@ The entire stack runs inside the LXC container with 8 vCPUs and 8 GiB of RAM. I 
 
 **Peak load** (5 concurrent document signing operations): the burst window lasted about 1 minute 12 seconds. Browserless processes the seal jobs sequentially, which shows as a stepped RAM curve — each step is a Chrome process starting. It peaked at 797 MiB of RAM and 100% of one vCPU (12.5% of the 8 vCPUs), and the whole stack hit 1,338 MiB — 16.3% of the LXC's memory.
 
-![CPU usage under load showing Browserless spike during concurrent signing](/images/blog/thesis-project/performance-cpu.png)
+![CPU usage under load showing Browserless spike during concurrent signing](../../../assets/blog/thesis-project/performance-cpu.png)
 
-![RAM usage under load showing peak at 1,338 MiB during concurrent signing](/images/blog/thesis-project/performance-ram.png)
+![RAM usage under load showing peak at 1,338 MiB during concurrent signing](../../../assets/blog/thesis-project/performance-ram.png)
 
 Even in the worst case, the stack consumed 16.3% of available RAM, leaving about 6.7 GiB free.
 

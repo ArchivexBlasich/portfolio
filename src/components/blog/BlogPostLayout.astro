@@ -1,5 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostMeta from "./PostMeta.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
@@ -23,13 +24,12 @@ const { locale, title, description, pubDate, updatedDate, heroImage } =
     <article>
       {
         heroImage && (
-          <img
-            src={heroImage.src}
+          <Image
+            src={heroImage}
             alt=""
-            width={heroImage.width}
-            height={heroImage.height}
-            loading="eager"
-            fetchpriority="high"
+            priority
+            widths={[640, 1024, heroImage.width]}
+            sizes="(max-width: 768px) 100vw, 768px"
             class="mb-8 aspect-video w-full rounded-lg object-contain"
           />
         )

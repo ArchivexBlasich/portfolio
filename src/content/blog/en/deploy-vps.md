@@ -193,7 +193,7 @@ fblasich@ubuntu:~# sudo systemctl status unattended-upgrades
 
 By default, only security updates are enabled.
 
-![Configuring unattended-upgrades](/images/blog/deploy-vps/configuring_unattended-upgrades.png)
+![Configuring unattended-upgrades](../../../assets/blog/deploy-vps/configuring_unattended-upgrades.png)
 
 ## Isolating SSH behind a private VPN with NetBird
 
@@ -263,7 +263,7 @@ When I installed NetBird and ran `netbird up`, the daemon automatically orchestr
 
 **The safety net:** Closing the public SSH port creates a single point of failure. If NetBird crashes or an update breaks the daemon, you are locked out. I only proceeded with this strict setup because RackNerd provides out-of-band KVM/VNC access via their control panel. If NetBird ever fails, I can open the browser console from the hosting panel and fix the server locally.
 
-![NetBird control panel](/images/blog/deploy-vps/netbird_panel.png)
+![NetBird control panel](../../../assets/blog/deploy-vps/netbird_panel.png)
 
 ### Debugging DNS failures caused by NetBird
 
@@ -304,7 +304,7 @@ sudo systemctl restart docker
 
 I bought `fabricioblasich.com` on [Cloudflare](https://cloudflare.com) and configured the A records:
 
-![DNS records on Cloudflare](/images/blog/deploy-vps/dns_record_cloudflare.png)
+![DNS records on Cloudflare](../../../assets/blog/deploy-vps/dns_record_cloudflare.png)
 
 ### Installing Dokploy
 
@@ -334,7 +334,7 @@ On your DNS provider, create an A record pointing `admin.yourdomain` to your ser
 
 Click save. Open `admin.yourdomain` in a new tab. It loads over HTTPS. Log in and start deploying your projects.
 
-![Dokploy domain configuration](/images/blog/deploy-vps/domain_config_dokploy.png)
+![Dokploy domain configuration](../../../assets/blog/deploy-vps/domain_config_dokploy.png)
 
 ## Moving builds off the VPS with GitHub Actions
 

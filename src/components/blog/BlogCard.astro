@@ -1,5 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import PostMeta from "./PostMeta.astro";
 
 interface Props {
@@ -19,12 +20,12 @@ const { href, title, description, pubDate, heroImage, locale } = Astro.props;
 >
   {
     heroImage && (
-      <img
-        src={heroImage.src}
+      <Image
+        src={heroImage}
         alt=""
-        width={heroImage.width}
-        height={heroImage.height}
         loading="lazy"
+        widths={[320, 640, 1024]}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 640px"
         class="mb-4 aspect-video w-full rounded-md object-contain"
       />
     )
