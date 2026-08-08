@@ -17,6 +17,7 @@ Here are the slides from my thesis defense — use the arrow keys to navigate. I
   class="w-full aspect-video rounded-lg border border-gray-700"
   sandbox="allow-scripts allow-same-origin"
   allowfullscreen
+  loading="lazy"
 ></iframe>
 
 ## Context and Problem

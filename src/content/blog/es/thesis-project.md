@@ -17,6 +17,7 @@ Estas son las diapositivas de mi defensa de tesis — usa las flechas del teclad
   class="w-full aspect-video rounded-lg border border-gray-700"
   sandbox="allow-scripts allow-same-origin"
   allowfullscreen
+  loading="lazy"
 ></iframe>
 
 ## Contexto y Problemática
