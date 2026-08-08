@@ -15,7 +15,7 @@ Estas son las diapositivas de mi defensa de tesis — usa las flechas del teclad
   src="/presentacion/index.es.html"
   title="Presentación de defensa — Sistema de Firma Electrónica de Documentos para la FACET"
   class="w-full aspect-video rounded-lg border border-gray-700"
-  sandbox="allow-scripts allow-same-origin"
+  sandbox="allow-scripts"
   allowfullscreen
   loading="lazy"
 ></iframe>

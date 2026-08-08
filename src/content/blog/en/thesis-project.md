@@ -15,7 +15,7 @@ Here are the slides from my thesis defense — use the arrow keys to navigate. I
   src="/presentacion/index.en.html"
   title="Thesis defense presentation — Electronic Document Signing System for FACET"
   class="w-full aspect-video rounded-lg border border-gray-700"
-  sandbox="allow-scripts allow-same-origin"
+  sandbox="allow-scripts"
   allowfullscreen
   loading="lazy"
 ></iframe>
