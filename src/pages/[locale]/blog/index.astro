@@ -33,7 +33,7 @@ const posts = (await getCollection("blog"))
         <p class="text-text-muted mt-4">{t("blog.emptyStateBody", locale)}</p>
       ) : (
         <div class="mt-8 grid gap-6">
-          {posts.map((p) => (
+          {posts.map((p, i) => (
             <BlogCard
               href={getRelativeLocaleUrl(
                 locale,
@@ -44,6 +44,7 @@ const posts = (await getCollection("blog"))
               pubDate={p.data.date}
               heroImage={p.data.image}
               locale={locale}
+              priority={i === 0}
             />
           ))}
         </div>

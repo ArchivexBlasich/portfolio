@@ -10,9 +10,18 @@ interface Props {
   pubDate: Date;
   heroImage?: ImageMetadata;
   locale: "en" | "es";
+  priority?: boolean;
 }
 
-const { href, title, description, pubDate, heroImage, locale } = Astro.props;
+const {
+  href,
+  title,
+  description,
+  pubDate,
+  heroImage,
+  locale,
+  priority = false,
+} = Astro.props;
 ---
 
 <article
@@ -23,7 +32,8 @@ const { href, title, description, pubDate, heroImage, locale } = Astro.props;
       <Image
         src={heroImage}
         alt=""
-        loading="lazy"
+        priority={priority}
+        loading={priority ? "eager" : "lazy"}
         format="png"
         widths={[320, 640, 1024, 1600]}
         sizes="(min-width: 1600px) 1600px, 100vw"
