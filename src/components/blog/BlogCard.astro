@@ -24,8 +24,9 @@ const { href, title, description, pubDate, heroImage, locale } = Astro.props;
         src={heroImage}
         alt=""
         loading="lazy"
-        widths={[320, 640, 1024]}
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 640px"
+        format="png"
+        widths={[320, 640, 1024, 1600]}
+        sizes="(min-width: 1600px) 1600px, 100vw"
         class="mb-4 aspect-video w-full rounded-md object-contain"
       />
     )

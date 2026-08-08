@@ -28,8 +28,9 @@ const { locale, title, description, pubDate, updatedDate, heroImage } =
             src={heroImage}
             alt=""
             priority
+            format="png"
             widths={[640, 1024, heroImage.width]}
-            sizes="(max-width: 768px) 100vw, 768px"
+            sizes="(min-width: 1600px) 1600px, 100vw"
             class="mb-8 aspect-video w-full rounded-lg object-contain"
           />
         )
