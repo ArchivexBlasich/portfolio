@@ -52,19 +52,23 @@ const sectionHref = (id: string) =>
 </div>
 
 <script>
-  const btn = document.getElementById("menu-btn");
-  const nav = document.getElementById("nav-links");
+  // Rebind on every page load: client-side navigation replaces the DOM, so
+  // the button captured at initial load would otherwise lose its listener.
+  document.addEventListener("astro:page-load", () => {
+    const btn = document.getElementById("menu-btn");
+    const nav = document.getElementById("nav-links");
 
-  btn?.addEventListener("click", () => {
-    nav?.classList.toggle("grid-rows-[0fr]");
-    nav?.classList.toggle("grid-rows-[1fr]");
+    btn?.addEventListener("click", () => {
+      nav?.classList.toggle("grid-rows-[0fr]");
+      nav?.classList.toggle("grid-rows-[1fr]");
 
-    nav?.classList.toggle("opacity-0");
-    nav?.classList.toggle("opacity-100");
+      nav?.classList.toggle("opacity-0");
+      nav?.classList.toggle("opacity-100");
 
-    const isExpanded = nav?.classList.contains("grid-rows-[0fr]")
-      ? "false"
-      : "true";
-    btn.setAttribute("aria-expanded", isExpanded);
+      const isExpanded = nav?.classList.contains("grid-rows-[0fr]")
+        ? "false"
+        : "true";
+      btn.setAttribute("aria-expanded", isExpanded);
+    });
   });
 </script>

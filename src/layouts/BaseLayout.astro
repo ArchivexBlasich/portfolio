@@ -2,6 +2,7 @@
 import Header from "../components/header/Header.astro";
 import "../styles/global.css";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { ClientRouter } from "astro:transitions";
 import { t } from "../i18n/ui";
 
 const { locale = "en", title = t("site.title", locale) } = Astro.props;
@@ -109,9 +110,14 @@ const jsonLd = JSON.stringify(
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
 
-    <!-- FOUC prevention — UNCHANGED (theme only, language is URL-based) -->
+    <!-- View Transitions — client-side routing preserves scroll position
+         across navigations (e.g. EN/ES language toggle mid-article) -->
+    <ClientRouter />
+
+    <!-- FOUC prevention — UNCHANGED (theme only, language is URL-based).
+         Re-applies on client-side navigation via astro:after-swap. -->
     <script is:inline>
-      (function () {
+      function applyTheme() {
         const stored = localStorage.getItem("theme");
         let isDark;
         if (stored !== null) {
@@ -120,7 +126,41 @@ const jsonLd = JSON.stringify(
           isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         }
         document.documentElement.classList.toggle("dark", isDark);
-      })();
+      }
+      document.addEventListener("astro:after-swap", applyTheme);
+      applyTheme();
+    </script>
+
+    <!-- Preserve the reading position when toggling between the EN and ES
+         versions of the same page. The router scrolls to the top on every
+         forward navigation by default, so we save the outgoing position
+         before the swap and re-apply it only when the target page is the
+         same canonical path in the other locale. -->
+    <script>
+      const canonicalPath = (pathname: string) =>
+        pathname.replace(/^\/es/, "") || "/";
+
+      let lastCanonical: string | null = null;
+
+      document.addEventListener("astro:before-swap", () => {
+        lastCanonical = canonicalPath(location.pathname);
+        if (window.scrollY > 0) {
+          sessionStorage.setItem(
+            `scroll:${lastCanonical}`,
+            String(window.scrollY),
+          );
+        }
+      });
+
+      document.addEventListener("astro:after-swap", () => {
+        const canonical = canonicalPath(location.pathname);
+        if (canonical !== lastCanonical) return;
+        const saved = sessionStorage.getItem(`scroll:${canonical}`);
+        if (saved !== null) {
+          window.scrollTo({ top: Number(saved), behavior: "instant" });
+        }
+        sessionStorage.removeItem(`scroll:${canonical}`);
+      });
     </script>
   </head>
   <body class="bg-surface text-text min-h-dvh font-mono antialiased">

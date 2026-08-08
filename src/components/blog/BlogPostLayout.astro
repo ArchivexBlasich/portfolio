@@ -57,7 +57,9 @@ const { locale, title, description, pubDate, updatedDate, heroImage } =
     </article>
   </main>
 
-  <script is:inline>
+  <!-- data-astro-rerun: client-side navigation replaces the DOM, so this
+       script must re-execute after every transition to rebind copy buttons -->
+  <script is:inline data-astro-rerun>
     (() => {
       const prose = document.querySelector(".prose");
       if (!prose) return;
