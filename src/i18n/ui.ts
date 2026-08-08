@@ -43,6 +43,7 @@ const en = {
   // Experience
   "experience.heading": "Work",
   "experience.present": "Present",
+  "experience.dateTo": "to",
 
   // Social Media
   "social.github": "Github",
@@ -116,6 +117,7 @@ const es = {
 
   "experience.heading": "Experiencia",
   "experience.present": "Actualidad",
+  "experience.dateTo": "–",
 
   "social.github": "Github",
   "social.linkedin": "Linkedin",

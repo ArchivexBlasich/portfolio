@@ -11,17 +11,21 @@ const { company, role, startDate, endDate, highlights } =
   Astro.props.experience;
 const locale = Astro.props.locale;
 
-function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+function formatDate(date: Date, dateLocale: Locale): string {
+  const formatted = date.toLocaleDateString(
+    dateLocale === "en" ? "en-US" : "es-AR",
+    { month: "long", year: "numeric" },
+  );
+  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 }
 
-function formatDateRange(start: Date, end?: Date): string {
-  const startStr = formatDate(start);
-  if (!end) return `${startStr} – ${t("experience.present", locale)}`;
-  return `${startStr} to ${formatDate(end)}`;
+function formatDateRange(start: Date, dateLocale: Locale, end?: Date): string {
+  const startStr = formatDate(start, dateLocale);
+  if (!end) return `${startStr} – ${t("experience.present", dateLocale)}`;
+  return `${startStr} ${t("experience.dateTo", dateLocale)} ${formatDate(end, dateLocale)}`;
 }
 
-const dateRange = formatDateRange(startDate, endDate);
+const dateRange = formatDateRange(startDate, locale, endDate);
 ---
 
 <li class="ms-6 mb-6 sm:mb-10">
