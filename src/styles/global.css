@@ -385,6 +385,15 @@ details[open] > summary .project-group-chevron {
   --tw-prose-invert-td-borders: var(--color-border-subtle);
 }
 
+/* ─── Tables — horizontal scroll when wider than prose column ────────── */
+/* `display: block` turns the table into a block container so overflow-x
+   applies; cells keep table layout internally. */
+.prose :where(table) {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 /* ─── Heading anchor links — show # on hover for linkable headings ─────── */
 .prose :where(h2, h3, h4, h5, h6)[id] {
   scroll-margin-top: 5rem;
