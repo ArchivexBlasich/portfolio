@@ -51,9 +51,10 @@ bun run format:check     # check formatting
 Data lives in `src/content/` as YAML or Markdown, schemas in `src/content.config.ts`. Uses `glob()` loader (Astro 5+) and `image()` helper via schema context. Query via `getCollection()`.
 
 - `projects/` and `experience/` — structured data in `.yml` (no prose body). See `docs/project-authoring.md` for project card configuration, including grouping, sorting, and `blogSlug` image linking.
+- `project-groups/` — per-locale group metadata (`name` + `description`) for expandable project panels. `Projects.astro` joins groups by matching `name` to the projects' `group` value.
 - `blog/` — prose content in `.md`. EN posts in `src/content/blog/en/<slug>.md`, ES posts in `src/content/blog/es/<slug>.md`. `translationKey` frontmatter pairs the two locales. See `docs/blog-authoring.md` for the authoring workflow. Tag routes and RSS are deferred to future slices.
 
-**Project grouping:** Projects support an optional `group` field (string). Projects without `group` render as standalone cards at the top of the Projects section. Projects with the same `group` value collapse under a `<details>/<summary>` expand via `ProjectGroup.astro`. To add a featured/standalone project (e.g., a thesis), simply omit the `group` field in the YAML.
+**Project grouping:** Projects support an optional `group` field (string). Projects without `group` render as standalone cards at the top of the Projects section. Projects with the same `group` value collapse under a `<details>/<summary>` expand via `ProjectGroup.astro`. Group descriptions live in `src/content/project-groups/{en,es}/<slug>.yaml` and are joined by exact `name` match — never stored on individual projects. To add a featured/standalone project (e.g., a thesis), simply omit the `group` field in the YAML.
 
 **image() helper gotcha:** `image()` is a schema context parameter, NOT an import from `astro:content`. Use `schema: ({ image }) => z.object({ image: image() })`. Importing from `astro:content` causes runtime error in Astro 6.
 

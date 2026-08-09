@@ -57,6 +57,41 @@ const projects = defineCollection({
 
 Use grouping for related projects (e.g., "The Odin Project" for bootcamp-style exercises). Use standalone cards for capstone/featured work (e.g., thesis).
 
+### Group descriptions
+
+An optional group description renders under the panel title inside the `<summary>`. Descriptions live in their own collection — `src/content/project-groups/` — so they are never tied to a specific project or its sort order:
+
+```
+src/content/project-groups/
+├── en/          # English entries: <slug>.yaml
+└── es/          # Spanish entries: <slug>.yaml
+```
+
+Schema (`projectGroups` collection in `src/content.config.ts`):
+
+```ts
+const projectGroups = defineCollection({
+  loader: glob({ base: "./src/content/project-groups", pattern: "**/*.yaml" }),
+  schema: z.object({
+    name: z.string().min(1),
+    description: z.string().min(1),
+  }),
+});
+```
+
+| Field         | Type     | Required | Meaning                                                                           |
+| ------------- | -------- | -------- | --------------------------------------------------------------------------------- |
+| `name`        | `string` | yes      | Group name — must match the projects' `group` value **exactly** (case-sensitive). |
+| `description` | `string` | yes      | Short description shown under the group title in the expandable panel header.     |
+
+`Projects.astro` loads the locale's entries and joins them to groups by `name`. A group without a matching entry simply renders without a description. Example:
+
+```yaml
+# src/content/project-groups/en/odin-project.yaml
+name: "The Odin Project"
+description: "Here I practiced full-stack web development, building every project without AI."
+```
+
 ## Linking projects to blog posts
 
 When a project has a companion blog post (write-up, deep-dive, walkthrough), set the `blogSlug` field to the post's slug. This **takes priority over `liveUrl` for the card image link** — the image navigates to the blog post instead of opening an external demo.
@@ -128,9 +163,10 @@ When `imageHref` is set, both the `<Image>` and its hover overlay are wrapped in
 4. **Create `src/content/projects/es/<slug>.yaml`** with translated `title` and `description`. Keep `tags`, `image`, and URLs identical.
 5. **If a blog post exists** — set `blogSlug` in both locale files. The slug must match the blog post's filename slug.
 6. **Choose grouping** — omit `group` for standalone cards; set the same `group` value across all projects that should collapse together.
-7. **Set order** — lower numbers render first. Unset projects sort after numbered ones.
-8. **Verify** — run `bun run astro check && bun run format:check && bun run build` before committing.
-9. **Commit** — conventional format: `feat(projects): add <slug>` or `chore(projects): update <slug>`.
+7. **Optional group description** — create `src/content/project-groups/{en,es}/<slug>.yaml` with `name` (exactly the `group` value) and a translated `description`.
+8. **Set order** — lower numbers render first. Unset projects sort after numbered ones.
+9. **Verify** — run `bun run astro check && bun run format:check && bun run build` before committing.
+10. **Commit** — conventional format: `feat(projects): add <slug>` or `chore(projects): update <slug>`.
 
 ## Conventions
 
@@ -142,8 +178,9 @@ When `imageHref` is set, both the `<Image>` and its hover overlay are wrapped in
 
 ## Relevant files
 
-- `src/content.config.ts` — the `projects` collection schema.
+- `src/content.config.ts` — the `projects` and `projectGroups` collection schemas.
 - `src/content/projects/{en,es}/` — project YAML entries.
+- `src/content/project-groups/{en,es}/` — group metadata (name + description) joined by `name`.
 - `src/components/main/project/ProjectCard.astro` — standalone card component (image link logic lives here).
 - `src/components/main/project/ProjectGroup.astro` — expandable group panel.
 - `src/components/main/project/Projects.astro` — section orchestrator (sorting + grouping logic).

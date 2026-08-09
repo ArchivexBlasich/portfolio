@@ -10,6 +10,14 @@ const rawProjects = await getCollection("projects", (entry) =>
   entry.id.startsWith(locale + "/"),
 );
 
+const projectGroups = await getCollection("projectGroups", (entry) =>
+  entry.id.startsWith(locale + "/"),
+);
+
+const groupDescriptionMap = new Map(
+  projectGroups.map((group) => [group.data.name, group.data.description]),
+);
+
 const sortByOrder = (
   a: (typeof rawProjects)[number],
   b: (typeof rawProjects)[number],
@@ -63,6 +71,7 @@ const groups = [...groupMap.entries()]
         return (
           <ProjectGroup
             title={group.name}
+            description={groupDescriptionMap.get(group.name)}
             projects={group.entries}
             locale={locale}
             srIndex={groupStartIndex}

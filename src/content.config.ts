@@ -20,6 +20,18 @@ const projects = defineCollection({
     }),
 });
 
+// ─── Project groups ────────────────────────────────────────────────────────────
+const projectGroups = defineCollection({
+  loader: glob({
+    base: "./src/content/project-groups",
+    pattern: "**/*.yaml",
+  }),
+  schema: z.object({
+    name: z.string().min(1),
+    description: z.string().min(1),
+  }),
+});
+
 // ─── Experience ───────────────────────────────────────────────────────────────
 const experience = defineCollection({
   loader: glob({ base: "./src/content/experience", pattern: "**/*.yaml" }),
@@ -48,4 +60,4 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { projects, experience, blog };
+export const collections = { projects, projectGroups, experience, blog };
