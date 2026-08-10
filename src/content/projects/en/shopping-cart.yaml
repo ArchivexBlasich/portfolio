@@ -1,5 +1,5 @@
 title: "Shopping Cart"
-description: "A React-based e-commerce UI featuring dynamic cart management, client-side routing with React Router, and real-time product data fetching via the FakeStore API. State is managed at the router level to persist cart contents across page navigation without a global store."
+description: "Built a React 19 + TypeScript e-commerce SPA with React Router 7. Practiced consuming a REST API from the frontend and client-side routing across multiple pages."
 image: "../../../assets/ShoppingCard.png"
 tags:
   - React

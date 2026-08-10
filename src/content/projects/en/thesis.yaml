@@ -1,5 +1,5 @@
 title: "E-Signature Platform for FACET-UNT"
-description: "Self-hosted electronic document signature system deployed on institutional infrastructure. Designed a 3-layer architecture (Nginx edge, Coolify PaaS on Proxmox LXC, Docker services) integrating Documenso, PostgreSQL, MinIO object storage, and Google OAuth SSO. Eliminated $5,300/year in commercial licensing while achieving full data sovereignty. My university thesis project."
+description: "University thesis: an on-premise electronic document signature system for FACET, the science and technology school of Universidad Nacional de Tucumán (UNT). The infrastructure already existed (Nginx edge, Coolify on Proxmox LXC); the work was analyzing it and building the system on top: Documenso with PostgreSQL, the faculty's MinIO as object storage, and Google OAuth restricted to the institutional domain. In the end, I learned how to deploy and maintain a system in production, and everything that implies: logs and metrics for monitoring, backups and retention policies."
 image: "../../../assets/ThesisProject.png"
 tags:
   - Documenso

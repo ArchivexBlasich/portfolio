@@ -1,5 +1,5 @@
 title: "Plataforma de Firma Electrónica para FACET-UNT"
-description: "Sistema autogestionado de firma electrónica de documentos desplegado en infraestructura institucional. Diseñé una arquitectura de 3 capas (borde Nginx, PaaS Coolify sobre LXC en Proxmox, servicios Docker) integrando Documenso, PostgreSQL, almacenamiento de objetos MinIO y SSO con Google OAuth. Eliminé $5.300/año en licencias comerciales logrando soberanía total de los datos. Mi proyecto de tesis universitaria."
+description: "Tesis de grado: un sistema de firma electrónica de documentos on-premise para la FACET, la Facultad de Ciencias Exactas y Tecnología de la Universidad Nacional de Tucumán (UNT). La infraestructura ya existía (Nginx de borde, Coolify sobre LXC en Proxmox); el trabajo fue analizarla y montar el sistema encima: Documenso con PostgreSQL, el MinIO de la facultad como almacenamiento de objetos y Google OAuth restringido al dominio institucional. Al final, aprendí cómo se despliega y se mantiene un sistema en producción, y todo lo que eso implica: logs y métricas para el monitoreo, backups y políticas de retención."
 image: "../../../assets/ThesisProject.png"
 tags:
   - Documenso

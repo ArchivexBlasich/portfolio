@@ -1,5 +1,5 @@
 title: "CV Builder"
-description: "Un generador de currículums en tiempo real construido con React y TypeScript, con gestión dinámica de estado de formularios y exportación a PDF del lado del cliente mediante html2pdf.js. El desafío principal fue sincronizar los campos del formulario con una vista previa en vivo sin prop-drilling, resuelto elevando el estado a un componente padre compartido y pasando callbacks de actualización atómicos."
+description: "Generador de currículums en tiempo real con React 19, TypeScript y Vite. Elevé el estado del formulario a un componente padre con useState para sincronizar la vista previa, gestioné listas dinámicas con agregar/eliminar, y exporté a PDF en el cliente con html2pdf.js."
 image: "../../../assets/CvBuilder.png"
 tags:
   - React
