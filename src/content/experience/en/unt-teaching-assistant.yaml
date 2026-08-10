@@ -4,5 +4,5 @@ location: "Tucumán, Argentina"
 startDate: 2023-08-01
 endDate: 2025-08-01
 highlights:
-  - "Mentored students during practical labs and weekly office hours, guiding them through core programming concepts in C."
-  - "Maintained laboratory infrastructure, performing hardware upgrades (SSD installation) and managing Linux Mint workstations (OS updates)."
+  - "Mentored students in C programming during practical labs and weekly office hours."
+  - "Maintained laboratory infrastructure, installing SSDs and updating Linux workstations."
