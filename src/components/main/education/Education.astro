@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import EducationItem from "./EducationItem.astro";
+import { t } from "../../../i18n/ui";
+
+const { locale } = Astro.props;
+
+const entries = await getCollection("education", (entry) =>
+  entry.id.startsWith(locale + "/"),
+);
+
+const sortedEntries = entries.sort(
+  (a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
+);
+---
+
+<section class="mt-12">
+  <div class="prose lg:prose-xl mt-12 mb-8 text-center md:text-left">
+    <h1
+      data-scroll-reveal
+      style="--sr-index: 0"
+      id="education"
+      class="text-brand scroll-mt-20 underline"
+    >
+      {t("education.heading", locale)}
+    </h1>
+  </div>
+  <ol class="border-default relative border-s">
+    {
+      sortedEntries.map((entry, i) => (
+        <EducationItem education={entry.data} locale={locale} index={i + 1} />
+      ))
+    }
+  </ol>
+</section>

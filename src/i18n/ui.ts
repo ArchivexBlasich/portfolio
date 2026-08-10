@@ -9,6 +9,7 @@ const en = {
   "nav.about": "About",
   "nav.work": "Work",
   "nav.projects": "Projects",
+  "nav.education": "Education",
   "nav.blog": "Blog",
   "nav.menu.aria": "Open Menu",
   "nav.main.aria": "Main",
@@ -44,6 +45,10 @@ const en = {
   "experience.heading": "Work",
   "experience.present": "Present",
   "experience.dateTo": "to",
+
+  // Education
+  "education.heading": "Education",
+  "education.present": "Present",
 
   // Social Media
   "social.github": "Github",
@@ -89,6 +94,7 @@ const es = {
   "nav.about": "Sobre mí",
   "nav.work": "Experiencia",
   "nav.projects": "Proyectos",
+  "nav.education": "Educación",
   "nav.blog": "Blog",
   "nav.menu.aria": "Abrir menú",
   "nav.main.aria": "Principal",
@@ -118,6 +124,10 @@ const es = {
   "experience.heading": "Experiencia",
   "experience.present": "Actualidad",
   "experience.dateTo": "–",
+
+  // Education
+  "education.heading": "Educación",
+  "education.present": "Actualidad",
 
   "social.github": "Github",
   "social.linkedin": "Linkedin",

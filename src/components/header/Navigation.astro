@@ -42,6 +42,8 @@ const sectionHref = (id: string) =>
       >
         <Link href={sectionHref("about")}>{t("nav.about", locale)}</Link>
         <Link href={sectionHref("work")}>{t("nav.work", locale)}</Link>
+        <Link href={sectionHref("education")}>{t("nav.education", locale)}</Link
+        >
         <Link href={sectionHref("projects")}>{t("nav.projects", locale)}</Link>
         <Link href={getRelativeLocaleUrl(locale, "blog")}>
           {t("nav.blog", locale)}

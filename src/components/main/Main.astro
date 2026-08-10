@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import About from "./About.astro";
 import Hero from "./Hero.astro";
 import Experience from "./work/Experience.astro";
+import Education from "./education/Education.astro";
 import Projects from "./project/Projects.astro";
 
 interface Props {
@@ -36,5 +37,6 @@ const deployHref = match
   <Hero locale={locale} />
   <About locale={locale} deployHref={deployHref} />
   <Experience locale={locale} />
+  <Education locale={locale} />
   <Projects locale={locale} />
 </main>

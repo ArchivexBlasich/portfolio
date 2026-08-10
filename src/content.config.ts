@@ -45,6 +45,21 @@ const experience = defineCollection({
   }),
 });
 
+// ─── Education ────────────────────────────────────────────────────────────────
+const education = defineCollection({
+  loader: glob({ base: "./src/content/education", pattern: "**/*.yaml" }),
+  schema: ({ image }) =>
+    z.object({
+      institution: z.string().min(1),
+      degree: z.string().min(1),
+      image: image(),
+      startDate: z.coerce.date(),
+      endDate: z.coerce.date().optional(),
+      yearOnly: z.boolean().default(false),
+      highlights: z.array(z.string().min(1)).optional(),
+    }),
+});
+
 // ─── Blog ───────────────────────────────────────────────────────────────────
 const blog = defineCollection({
   loader: glob({ base: "./src/content/blog", pattern: "**/[^_]*.md" }),
@@ -60,4 +75,10 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { projects, projectGroups, experience, blog };
+export const collections = {
+  projects,
+  projectGroups,
+  experience,
+  education,
+  blog,
+};
