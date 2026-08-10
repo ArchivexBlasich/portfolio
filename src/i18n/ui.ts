@@ -23,7 +23,7 @@ const en = {
   "about.p1.beforeStrong": "I am a ",
   "about.p1.strong": "Computer Engineer (UNT)",
   "about.p1.afterStrong":
-    " with a strong foundation in networks, embedded systems, and software architecture. Currently, I build technical solutions at Entropy for Dash Solutions (US). My approach goes beyond implementing tools: I investigate their internal mechanics to understand their real behavior and build more efficient, robust systems from the ground up.",
+    " with a strong foundation in networks, embedded systems, and software architecture. Currently, I build technical solutions at Entropy for Dash Solutions (US). My approach goes beyond implementing tools: I'm obsessed with understanding how they work under the hood and building from fundamentals.",
   "about.p3.beforeSpan": "Fun fact: I was born in Río Gallegos, ",
   "about.p3.span": "Argentina",
   "about.p3.afterSpan": ", so my friends call me 'Pingüino'.",
@@ -106,7 +106,7 @@ const es = {
   "about.p1.beforeStrong": "Soy ",
   "about.p1.strong": "Ingeniero en Computación (UNT)",
   "about.p1.afterStrong":
-    " con bases sólidas en redes, sistemas embebidos y arquitectura de software. Actualmente, construyo soluciones técnicas en Entropy para Dash Solutions (EE. UU.). Mi enfoque va más allá de implementar herramientas: investigo su mecánica interna para entender su comportamiento real y construir sistemas más eficientes y robustos desde la base.",
+    " con bases sólidas en redes, sistemas embebidos y arquitectura de software. Actualmente, construyo soluciones técnicas en Entropy para Dash Solutions (EE. UU.). Mi enfoque va más allá de implementar herramientas: me obsesiona saber cómo funciona todo y construir desde los fundamentos.",
   "about.p3.beforeSpan": "Dato curioso: nací en Río Gallegos, ",
   "about.p3.span": "Argentina",
   "about.p3.afterSpan": ", así que mis amigos me llaman 'Pingüino'.",
